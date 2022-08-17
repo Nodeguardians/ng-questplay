@@ -98,7 +98,7 @@ async function queryAndPullQuest(questPath, versionString) {
   });
 
   console.log(questPath);
-  await authDownloader.download('NodeGuardians', 'ng-quests-library', questPath);
+  await authDownloader.download('NodeGuardians', 'ng-quests-public', questPath);
 
   console.log(chalk.green(`Quest downloaded at ${localPath}`));
 
