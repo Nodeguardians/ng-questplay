@@ -1,0 +1,14 @@
+{
+  "name": "@ngquests/test-helpers",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@solidity-parser/parser": "^0.14.3",
+    "chai-exclude": "^2.1.0"
+  }
+}
