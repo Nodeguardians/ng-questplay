@@ -1,0 +1,123 @@
+{
+    "quests": [
+        {
+            "name": "low-level-calls",
+            "version": "1.0.0"
+        },
+        {
+            "name": "merkle-proofs",
+            "version": "1.0.0"
+        },
+        {
+            "name": "unordered-key-set",
+            "version": "1.0.0"
+        },
+        {
+            "name": "unexpected-ether",
+            "version": "1.0.0"
+        },
+        {
+            "name": "bypassing-extcodesize",
+            "version": "1.0.0"
+        },
+        {
+            "name": "clone-factories",
+            "version": "1.0.0"
+        },
+        {
+            "name": "using-signatures",
+            "version": "1.0.0"
+        },
+        {
+            "name": "multicall",
+            "version": "1.0.0"
+        },
+        {
+            "name": "changing-bytecode",
+            "version": "1.0.0"
+        },
+        {
+            "name": "delegate-call-detection",
+            "version": "1.0.0"
+        }
+    ],
+    "campaigns": [
+        {
+            "name": "understanding-storage",
+            "quests": [
+                {
+                    "name": "storage-layout",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "storage-efficiency",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "name": "randomness",
+            "quests": [
+                {
+                    "name": "breaking-rng",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "name": "proxy-contracts",
+            "quests": [
+                {
+                    "name": "breaking-rng",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "proxy-security",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "using-openzeppelin",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "name": "diamonds",
+            "quests": [
+                {
+                    "name": "stateful-libraries",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "building-diamonds",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "using-diamonds",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "name": "learning-assembly",
+            "quests": [
+                {
+                    "name": "basics",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "bits-and-bytes",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "calldata",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "memory",
+                    "version": "1.0.0"
+                }
+            ]
+        }
+    ]
+}
