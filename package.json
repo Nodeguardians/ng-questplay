@@ -5,7 +5,7 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "test": "echo \"No test specified\""
+        "test": "./test/test.sh"
     },
     "author": "",
     "license": "MIT",
