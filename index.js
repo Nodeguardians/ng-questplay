@@ -9,73 +9,77 @@ import inquirer from 'inquirer';
 const commands = process.argv.slice(2);
 
 if (!process.cwd().startsWith(mainPath())) {
-    console.log(TITLE);
-    console.log(WRONG_DIRECTORY_MESSAGE);
-    process.exit();
+  console.log(TITLE);
+  console.log(WRONG_DIRECTORY_MESSAGE);
+  process.exit();
 }
 
 if (commands.length == 0) {
-    console.log(TITLE);
-    console.log(MAIN_HELP_MESSAGE);
-    process.exit();
+  console.log(TITLE);
+  console.log(MAIN_HELP_MESSAGE);
+  process.exit();
 }
 
 switch (commands[0]) {
 
-    case 'test':
+  case '--help':
+    console.log(MAIN_HELP_MESSAGE);
 
-        if (commands.includes("--help")) {
-            console.log(TEST_HELP_MESSAGE);
-            process.exit();
-        }
-        const partIndex = commands[1];
+    break;
+  case 'test':
 
-        if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))
-            || commands.length > 3) {
-            console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
-            console.log(TEST_HELP_MESSAGE);
-            process.exit();
-        }
+    if (commands.includes("--help")) {
+      console.log(TEST_HELP_MESSAGE);
+      process.exit();
+    }
+    const partIndex = commands[1];
 
-        await runTests(commands[1]);
-        break;
+    if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))
+        || commands.length > 3) {
+      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(TEST_HELP_MESSAGE);
+      process.exit();
+    }
 
-    case 'find':
+    await runTests(commands[1]);
+    break;
 
-        if (commands.includes("--help")) {
-            console.log(FIND_HELP_MESSAGE);
-            process.exit();
-        }
+  case 'find':
 
-        if (commands.length > 2) {
-            console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
-            console.log(FIND_HELP_MESSAGE);
-            process.exit();
-        }
+    if (commands.includes("--help")) {
+      console.log(FIND_HELP_MESSAGE);
+      process.exit();
+    }
 
-        console.log();
-        
-        let searchQuery;
-        if (commands.length < 2) {
-          const answers = await inquirer.prompt({
-              name: 'query',
-              type: 'input',
-              message: 'Find a quest:'
-          });
+    if (commands.length > 2) {
+      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(FIND_HELP_MESSAGE);
+      process.exit();
+    }
 
-          searchQuery = answers.query.toLowerCase().trim().replace(" ", "-");
-        } else {
-          searchQuery = commands[1];
-        }
+    console.log();
 
-        findQuest(searchQuery);
+    let searchQuery;
+    if (commands.length < 2) {
+      const answers = await inquirer.prompt({
+        name: 'query',
+        type: 'input',
+        message: 'Find a quest:'
+      });
 
-        break;
+      searchQuery = answers.query.toLowerCase().trim().replace(" ", "-");
+    } else {
+      searchQuery = commands[1];
+    }
 
-    default:
-        console.log(chalk.red('\nERROR: Unrecognized command'));
-        console.log(MAIN_HELP_MESSAGE);
+    findQuest(searchQuery);
 
-        break;
+    break;
+
+  default:
+    console.log(chalk.red('\nERROR: Unrecognized command'));
+    console.log(MAIN_HELP_MESSAGE);
+
+    break;
 
 }
