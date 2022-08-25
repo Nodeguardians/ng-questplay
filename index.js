@@ -57,8 +57,6 @@ switch (commands[0]) {
       process.exit();
     }
 
-    console.log();
-
     let searchQuery;
     if (commands.length < 2) {
       const answers = await inquirer.prompt({

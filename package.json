@@ -13,19 +13,17 @@
         "quest": "./index.js"
     },
     "dependencies": {
-        "lerna": "^5.1.4",
         "@ngquests/contracts": "./@ngquests/contracts",
         "@ngquests/test-helpers": "./@ngquests/test-helpers",
-        "@ngquests/cli": "./@ngquests/cli",
         "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
         "@nomiclabs/hardhat-ethers": "^2.0.6",
-        "@nomiclabs/hardhat-web3": "^2.0.0",
         "@openzeppelin/contracts": "^4.6.0",
         "@openzeppelin/contracts-upgradeable": "^4.6.0",
         "@openzeppelin/hardhat-upgrades": "^1.19.0",
+        "@uniswap/v2-core": "^1.0.1",
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.10.0",
-        "markdown-link-check": "^3.10.2",
+        "lerna": "^5.1.4",
         "merkletreejs": "^0.2.31"
     },
     "workspaces": [

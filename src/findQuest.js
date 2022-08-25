@@ -13,21 +13,7 @@ export async function findQuest(questName) {
   const directoryPath = path.join(mainPath(), './campaigns/directory.json');
   const directory = JSON.parse(fs.readFileSync(directoryPath));
 
-  // Search for quest in 'quests'
-  for (const quest of directory.quests) {
-    if (quest.name != questName) continue;
-
-    const message = chalk.green(
-      chalk.bold(`\n${questName} (${quest.version})`), 'found.\n'
-    );
-    console.log(message);
-    await queryAndPullQuest(`campaigns/standalone-quests/${quest.name}`, quest.version)
-    return;
-
-  }
-
-  // Search for quest in 'campaigns'
-  for (const campaign of directory.campaigns) {
+  for (const campaign of directory) {
     for (const quest of campaign.quests) {
       if (quest.name != questName) continue;
 
@@ -79,13 +65,14 @@ async function queryAndPullQuest(questPath, versionString) {
   });
 
   if (answer.overwrite == 'Cancel') {
+    console.log();
     process.exit();
   }
 
   fs.rmSync(localPath, { recursive: true, force: true });
 
   // Download quest
-  console.log(chalk.green("Downloading quest..."));
+  console.log(chalk.green("\nDownloading quest..."));
 
   if (!fs.existsSync('./.credentials')) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
@@ -97,10 +84,11 @@ async function queryAndPullQuest(questPath, versionString) {
     github: { auth: token }
   });
 
-  console.log(questPath);
   await authDownloader.download('NodeGuardians', 'ng-quests-public', questPath);
 
-  console.log(chalk.green(`Quest downloaded at ${localPath}`));
+  const relativePath = "./" + path.relative(mainPath(), localPath);
+  console.log(chalk.green("Quest downloaded at ", chalk.bold(relativePath)));
+  console.log();
 
 }
 
