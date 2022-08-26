@@ -48,9 +48,9 @@ quest test 2 >> "${TEMP_OUTPUT}"
 
 # TODO: `quest find`
 
-# Test output difference (exclude timing differences)
+# Test output difference (exclude timing differences and compiler downloads)
 diff "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
-    | grep -wv -e "passing ([0-9]\{2,3\}ms)" -e "---" -e "[0-9]\{2,3\}c[0-9]\{2,3\}"
+    | grep -wv -e "passing (*s)" -e "---" -e "[0-9]\{2,3\}c[0-9]\{2,3\}" - e "Downloading compiler"
 
 # Remove temporary folders / files
 rm "${TEMP_OUTPUT}"

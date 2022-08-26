@@ -5,7 +5,7 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "test": "./test/test.sh"
+        "test": "bash test/test.sh"
     },
     "author": "",
     "license": "MIT",
