@@ -5,6 +5,7 @@ import { runTests } from './src/runTests.js';
 import { mainPath } from './src/utils.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import { runSolution } from './src/runSolution.js';
 
 const commands = process.argv.slice(2);
 
@@ -74,6 +75,9 @@ switch (commands[0]) {
 
     break;
 
+  case 'solution':
+    runSolution();
+    break;
   default:
     console.log(chalk.red('\nERROR: Unrecognized command'));
     console.log(MAIN_HELP_MESSAGE);
