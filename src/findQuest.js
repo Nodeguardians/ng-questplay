@@ -3,9 +3,9 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { CREDENTIALS_NOT_FOUND_MESSAGE, QUEST_ALREADY_EXISTS_MESSAGE, QUEST_NOT_FOUND_MESSAGE, UPDATE_QUEST_CONFIRMATION } from './messages.js';
-import { mainPath, navigateToMainDirectory } from './utils.js';
-import Downloader from 'github-download-directory';
+import { CREDENTIALS_NOT_FOUND_MESSAGE, QUEST_ALREADY_EXISTS_MESSAGE, QUEST_NOT_FOUND_MESSAGE, UPDATE_QUEST_CONFIRMATION } from './utils/messages.js';
+import { mainPath, navigateToMainDirectory } from './utils/navigation.js';
+import { QuestDownloader } from './utils/downloader.js';
 
 export async function findQuest(questName) {
 
@@ -80,7 +80,7 @@ async function queryAndPullQuest(questPath, versionString) {
   }
 
   const token = fs.readFileSync(path.join(mainPath(), './.credentials')).toString();
-  const authDownloader = new Downloader.Downloader({
+  const authDownloader = new QuestDownloader({
     github: { auth: token }
   });
 

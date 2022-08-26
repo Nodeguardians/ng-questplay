@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { mainPath } from './utils.js';
+import { mainPath } from './navigation.js';
 
 export const TITLE = "\n\
       ,,\n\

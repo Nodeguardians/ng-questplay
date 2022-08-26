@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
-import { navigateToQuestDirectory } from './utils.js';
+import { navigateToQuestDirectory } from './utils/navigation.js';
 
 export async function runTests(partIndex = undefined) {
 

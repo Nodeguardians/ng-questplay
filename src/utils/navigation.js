@@ -2,11 +2,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 export const mainPath = function() {
-  return path.resolve(fileURLToPath(import.meta.url), "../..");
+  return path.resolve(fileURLToPath(import.meta.url), "../../..");
 };
 
 export const campaignPath = function() {
-  return path.resolve(fileURLToPath(import.meta.url), "../../campaigns");
+  return path.resolve(fileURLToPath(import.meta.url), "../../../campaigns");
 }
 
 export const navigateToQuestDirectory = function() {

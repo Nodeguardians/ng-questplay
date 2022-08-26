@@ -3,9 +3,9 @@ import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 import { cwd } from 'process';
-import { navigateToQuestDirectory, mainPath } from './utils.js';
-import { QuestDownloader } from './questDownloader.js';
-import { CREDENTIALS_NOT_FOUND_MESSAGE } from './messages.js';
+import { navigateToQuestDirectory, mainPath } from './utils/navigation.js';
+import { QuestDownloader } from './utils/downloader.js';
+import { CREDENTIALS_NOT_FOUND_MESSAGE } from './utils/messages.js';
 
 export async function runSolution() {
 
