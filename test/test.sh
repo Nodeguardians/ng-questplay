@@ -13,6 +13,9 @@ cd "$(dirname "$0")"
 touch temp_out.txt
 readonly TEST_DIRECTORY="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 readonly TEMP_OUTPUT="${TEST_DIRECTORY}temp_out.txt"
+readonly TEMP_COMPARE="${TEST_DIRECTORY}temp_cmp.txt"
+
+readonly OS=${1:-""} 
 
 # Test `quest`
 
@@ -49,9 +52,25 @@ quest test 2 >> "${TEMP_OUTPUT}"
 # TODO: `quest find`
 
 # Test output difference (exclude timing differences and compiler downloads)
-diff "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
-    | grep -wv -e "passing (*s)" -e "---" -e "[0-9]\{2,3\}c[0-9]\{2,3\}" - e "Downloading compiler"
+
+if [[ $OS = 'windows-latest' ]]; then
+    fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
+        | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
+        >> "${TEMP_COMPARE}"
+else
+    fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
+        | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
+        >> "${TEMP_COMPARE}"
+fi
+
+cat "${TEMP_COMPARE}"
+num_error=`wc -l < "${TEMP_COMPARE}"`
 
 # Remove temporary folders / files
 rm "${TEMP_OUTPUT}"
+rm "${TEMP_COMPARE}"
 rm -rf "${TEST_DIRECTORY}/../campaigns/test_campaign"
+
+if [ $num_error != 0 ]; then
+    exit 1
+fi
