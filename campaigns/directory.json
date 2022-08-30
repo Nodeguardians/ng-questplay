@@ -4,47 +4,69 @@
         "quests":[
             {
                 "name": "low-level-calls",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
             },
             {
                 "name": "merkle-proofs",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "unordered-key-set",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "unexpected-ether",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "bypassing-extcodesize",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             },
             {
                 "name": "clone-factories",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "using-signatures",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "multicall",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "changing-bytecode",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             },
             {
                 "name": "delegate-call-detection",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
             },
             {
                 "name": "price-oracle-attack",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ] 
     },
@@ -53,11 +75,15 @@
         "quests": [
             {
                 "name": "storage-layout",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 3
             },
             {
                 "name": "storage-efficiency",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ]
     },
@@ -66,7 +92,9 @@
         "quests": [
             {
                 "name": "breaking-rng",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
             }
         ]
     },
@@ -75,15 +103,21 @@
         "quests": [
             {
                 "name": "basic-proxies",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "proxy-security",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 4
             },
             {
-                "name": "using-openzeppelin",
-                "version": "1.0.0"
+                "name": "openzeppelin-upgrades",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ]
     },
@@ -92,15 +126,21 @@
         "quests": [
             {
                 "name": "stateful-libraries",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
             },
             {
                 "name": "building-diamonds",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
             },
             {
                 "name": "using-diamonds",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 3
             }
         ]
     },
@@ -109,20 +149,28 @@
         "quests": [
             {
                 "name": "yul-basics",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 6
             },
             {
                 "name": "bits-and-bytes",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
             },
             {
                 "name": "calldata-manipulation",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             },
             {
                 "name": "memory-manipulation",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
             }
         ]
     }
-] 
+]

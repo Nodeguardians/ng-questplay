@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { mainPath, navigateToMainDirectory } from './utils/navigation.js';
+import { getDirectory, mainPath, navigateToMainDirectory } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 
 import { 
@@ -17,8 +17,7 @@ import {
 export async function findQuest(questName) {
 
   navigateToMainDirectory();
-  const directoryPath = path.join(mainPath(), './campaigns/directory.json');
-  const directory = JSON.parse(fs.readFileSync(directoryPath));
+  const directory = getDirectory();
 
   for (const campaign of directory) {
     for (const quest of campaign.quests) {
@@ -56,7 +55,7 @@ async function queryAndPullQuest(questPath, versionString) {
     if (currentVersionString == versionString) {
       console.log(QUEST_ALREADY_EXISTS_MESSAGE);
       console.log(NavigateToQuestMessage(localPath));
-      process.exit();
+      process.exit(0);
     }
 
     message = UPDATE_QUEST_CONFIRMATION;
@@ -75,7 +74,7 @@ async function queryAndPullQuest(questPath, versionString) {
   if (answer.overwrite == 'Cancel') {
     console.log(chalk.gray("\nDownload cancelled"));
     console.log(NavigateToQuestMessage(localPath));
-    process.exit();
+    process.exit(0);
   }
 
   fs.rmSync(localPath, { recursive: true, force: true });

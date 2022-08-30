@@ -45,7 +45,7 @@ export const UPDATE_QUEST_CONFIRMATION =
   + chalk.bgBlackBright("Any of your existing work will be overwritten\n");
 
 export const QUEST_ALREADY_EXISTS_MESSAGE =
-  chalk.yellow("\nLatest version of  quest already exists in local repo.\n");
+  chalk.yellow("Latest version of quest already exists in local repo.\n");
 
 export const MAIN_HELP_MESSAGE =
   chalk.gray("\nUsage: quest [<command>] [<args>]\n")

@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -23,4 +24,9 @@ export const navigateToQuestDirectory = function() {
 
 export const navigateToMainDirectory = function() {
   process.chdir(mainPath());
+}
+
+export const getDirectory = function() {
+  const directoryPath = path.join(mainPath(), './campaigns/directory.json');
+  return JSON.parse(fs.readFileSync(directoryPath));
 }
