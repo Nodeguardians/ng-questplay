@@ -19,6 +19,12 @@ export async function findQuest(questName) {
   navigateToMainDirectory();
   const directory = getDirectory();
 
+  // These quests are in the directory for testing purposes
+  if (questName == "test-build-quest" || questName == "test-ctf-quest") {
+    console.log(QUEST_NOT_FOUND_MESSAGE);
+    process.exit();
+  }
+
   for (const campaign of directory) {
     for (const quest of campaign.quests) {
       if (quest.name != questName) continue;

@@ -31,8 +31,7 @@ export const WRONG_DIRECTORY_MESSAGE = chalk.red(
 
 export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
   "\nQuest not found. Did you enter the correct name?\n"
-  + "\nQuest not found.\nCheck the name again or pull from upstream"
-  + " to fetch the latest directory of released quests.\n"
+  + "Check the name again or pull from upstream to fetch the latest directory of released quests.\n"
 );
 
 // TODO: Add link to FAQ page

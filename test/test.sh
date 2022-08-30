@@ -29,14 +29,14 @@ quest --help >> "${TEMP_OUTPUT}"
 
 # Test `quest test`
 
-cp -r test_campaign ../campaigns/
-cd ../campaigns/test_campaign
+cp -r test-campaign ../campaigns/
+cd ../campaigns/test-campaign
 
 test_header "Calling \`test\` outside a quest should print error message" >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` inside a quest should work" >> "${TEMP_OUTPUT}"
-cd ./test_quest
+cd ./test-build-quest
 quest test 1 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` without an integer should run all tests" >> "${TEMP_OUTPUT}"
@@ -49,17 +49,24 @@ test_header "Calling \`test\` inside a subfolder in the quest folder should work
 cd contracts
 quest test 2 >> "${TEMP_OUTPUT}"
 
+cd ../.. # Go back to test-campaign directory
+
+test_header "Calling \`test\` in a CTF quest should print error message" >> "${TEMP_OUTPUT}"
+cd test-ctf-quest
+quest test >> "${TEMP_OUTPUT}"
+
 # TODO: `quest find`
+# Find test-campaign for invalid quest
 
 # Test output difference (exclude timing differences and compiler downloads)
 
 if [[ $OS = 'windows-latest' ]]; then
-    fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
+    fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}expected_out.txt" \
         | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
         >> "${TEMP_COMPARE}"
 else
-    fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}/expected_out.txt" \
-        | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
+    diff "${TEMP_OUTPUT}" "${TEST_DIRECTORY}expected_out.txt" \
+       | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
         >> "${TEMP_COMPARE}"
 fi
 
@@ -69,7 +76,7 @@ num_error=`wc -l < "${TEMP_COMPARE}"`
 # Remove temporary folders / files
 rm "${TEMP_OUTPUT}"
 rm "${TEMP_COMPARE}"
-rm -rf "${TEST_DIRECTORY}/../campaigns/test_campaign"
+rm -rf "${TEST_DIRECTORY}/../campaigns/test-campaign"
 
 if [ $num_error != 0 ]; then
     exit 1

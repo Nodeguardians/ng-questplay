@@ -75,7 +75,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (868ms)
+  1 passing (633ms)
 
 ////////////////////////////////////////////////
 //
@@ -87,11 +87,16 @@ Compiled 1 Solidity file successfully
   Contract (Part 1)
     ✔ foo() should work
 
+
+  1 passing (600ms)
+
+
+
   Contract (Part 2)
     ✔ bar() should work
 
 
-  2 passing (838ms)
+  1 passing (36ms)
 
 ////////////////////////////////////////////////
 //
@@ -120,5 +125,13 @@ index:     Part of quest to test (e.g. 1, 2, 3)
     ✔ bar() should work
 
 
-  1 passing (756ms)
+  1 passing (586ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` in a CTF quest should print error message
+//
+////////////////////////////////////////////////
+
+Quest is a CTF quest. No local tests to run.
 

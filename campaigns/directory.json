@@ -172,5 +172,22 @@
                 "parts": 3
             }
         ]
+    },
+    {
+        "name": "test-campaign",
+        "quests": [
+            {
+                "name": "test-build-quest",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "test-ctf-quest",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 0
+            }
+        ]
     }
 ]

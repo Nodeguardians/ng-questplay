@@ -22,7 +22,8 @@ export async function runTests(partIndex = undefined) {
     .quests.find(q => q.name == questName);
 
   if (questInfo.type == "ctf") {
-    console.log(chalk.red("Quest is a CTF quest. No local tests to run."));
+    console.log(chalk.red("\nQuest is a CTF quest. No local tests to run.\n"));
+    process.exit();
   }
 
   const hre = await import('hardhat');
