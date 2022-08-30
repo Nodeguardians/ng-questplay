@@ -1,5 +1,9 @@
 import chalk from 'chalk';
+import path from 'path';
+import { cwd } from 'process';
 import { mainPath } from './navigation.js';
+
+const INITIAL_CWD = cwd();
 
 export const TITLE = "\n\
       ,,\n\
@@ -37,7 +41,8 @@ export const CREDENTIALS_NOT_FOUND_MESSAGE = chalk.red(
 );
 
 export const UPDATE_QUEST_CONFIRMATION =
-  chalk.yellow("Old version of quest detected in local repo. Update current quest? \n(Any of your changes will be overwritten)\n");
+  "Old version of quest detected in local repo. Update to latest version? \n"
+  + chalk.bgBlackBright("Any of your existing work will be overwritten\n");
 
 export const QUEST_ALREADY_EXISTS_MESSAGE =
   chalk.yellow("\nLatest version of  quest already exists in local repo.\n");
@@ -67,3 +72,12 @@ export const FIND_HELP_MESSAGE =
     + "Example: quest find using-signatures\n"
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
   ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
+
+export function NavigateToQuestMessage(questPath) {
+  const relativePath = path.relative(INITIAL_CWD, questPath)
+  return chalk.cyan(
+    "To navigate to quest directory, run",
+    chalk.bold(`cd ${relativePath}`),
+    "\n"
+  );
+}

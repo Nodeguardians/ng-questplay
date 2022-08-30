@@ -3,9 +3,16 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { CREDENTIALS_NOT_FOUND_MESSAGE, QUEST_ALREADY_EXISTS_MESSAGE, QUEST_NOT_FOUND_MESSAGE, UPDATE_QUEST_CONFIRMATION } from './utils/messages.js';
 import { mainPath, navigateToMainDirectory } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
+
+import { 
+  CREDENTIALS_NOT_FOUND_MESSAGE, 
+  NavigateToQuestMessage, 
+  QUEST_ALREADY_EXISTS_MESSAGE, 
+  QUEST_NOT_FOUND_MESSAGE, 
+  UPDATE_QUEST_CONFIRMATION 
+} from './utils/messages.js';
 
 export async function findQuest(questName) {
 
@@ -17,7 +24,7 @@ export async function findQuest(questName) {
     for (const quest of campaign.quests) {
       if (quest.name != questName) continue;
 
-      const message = chalk.green(
+      const message = chalk.cyan(
         chalk.bold(`\n${questName} (${quest.version})`),
         'found in',
         chalk.bold(`${campaign.name}\n`)
@@ -48,6 +55,7 @@ async function queryAndPullQuest(questPath, versionString) {
 
     if (currentVersionString == versionString) {
       console.log(QUEST_ALREADY_EXISTS_MESSAGE);
+      console.log(NavigateToQuestMessage(localPath));
       process.exit();
     }
 
@@ -65,7 +73,8 @@ async function queryAndPullQuest(questPath, versionString) {
   });
 
   if (answer.overwrite == 'Cancel') {
-    console.log();
+    console.log(chalk.gray("\nDownload cancelled"));
+    console.log(NavigateToQuestMessage(localPath));
     process.exit();
   }
 
@@ -84,11 +93,10 @@ async function queryAndPullQuest(questPath, versionString) {
     github: { auth: token }
   });
 
-  await authDownloader.download('NodeGuardians', 'ng-quests-public', questPath);
+  await authDownloader.downloadDirectory('NodeGuardians', 'ng-quests-public', questPath);
 
-  const relativePath = "./" + path.relative(mainPath(), localPath);
-  console.log(chalk.green("Quest downloaded at ", chalk.bold(relativePath)));
   console.log();
+  console.log(NavigateToQuestMessage(localPath));
 
 }
 
