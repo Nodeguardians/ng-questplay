@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
@@ -88,12 +89,13 @@ async function queryAndPullQuest(questPath, versionString) {
   // Download quest
   console.log(chalk.green("\nDownloading quest..."));
 
-  if (!fs.existsSync('./.credentials')) {
+  dotenv.config({ path: './.env' });
+  const token = process.env.GITHUB_TOKEN;
+  if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
     process.exit();
   }
 
-  const token = fs.readFileSync(path.join(mainPath(), './.credentials')).toString();
   const authDownloader = new QuestDownloader({
     github: { auth: token }
   });

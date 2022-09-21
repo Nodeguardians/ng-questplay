@@ -4,4 +4,4 @@
 .vscode
 artifacts
 cache
-.credentials
+.env

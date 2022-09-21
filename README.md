@@ -20,13 +20,14 @@ npm install
 npm link
 ```
 
-Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public repo access** only. Then, add it into a `.credentials` file.
+Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public repo access** only. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
 
-```
-echo {AUTH_TOKEN} > ./credentials
+```bash
+# In .env file
+GITHUB_TOKEN = "ghp_..." # Add token here
 ```
 
-> ⚠️ Take care to not share / upload this file to anyone or anywhere.
+> ⚠️ Take care to not share / upload your `.env` file to anyone or anywhere.
 
 ## Finding a Quest
 
