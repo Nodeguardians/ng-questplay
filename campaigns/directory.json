@@ -67,7 +67,19 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
-            }
+            },
+            {
+                "name": "hardhat-forking",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "stealth-addresses",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            }     
         ] 
     },
     {
@@ -95,6 +107,12 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 2
+            },
+            {
+                "name": "chainlink-vrf",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ]
     },

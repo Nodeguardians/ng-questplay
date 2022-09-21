@@ -15,16 +15,17 @@
     "dependencies": {
         "@ngquests/contracts": "./@ngquests/contracts",
         "@ngquests/test-helpers": "./@ngquests/test-helpers",
-        "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
-        "@nomiclabs/hardhat-ethers": "^2.0.6",
-        "@openzeppelin/contracts": "^4.6.0",
-        "@openzeppelin/contracts-upgradeable": "^4.6.0",
-        "@openzeppelin/hardhat-upgrades": "^1.19.0",
-        "@uniswap/v2-core": "^1.0.1",
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+        "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
+        "@nomiclabs/hardhat-ethers": "^2.1.1",
+        "@openzeppelin/contracts": "^4.7.3",
+        "dotenv": "^16.0.2",
         "github-download-directory": "^3.0.0",
-        "hardhat": "^2.10.0",
-        "lerna": "^5.1.4",
-        "merkletreejs": "^0.2.31"
+        "hardhat": "^2.11.1",
+        "lerna": "^5.5.1"
+    },
+    "overrides": {
+        "parse-url": "^8.1.0"
     },
     "workspaces": [
         "campaigns/**"

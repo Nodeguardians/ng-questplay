@@ -42,6 +42,12 @@ Alternatively, you can immediately specify the quest name (hypenated, no spaces)
 quest find using-signatures
 ```
 
+After downloading a quest, run `npm install` to install any of its additional dependencies.
+
+```
+npm install
+```
+
 ## Running a Local Test
 
 To run a local test in a quest, first make sure you are in the quest folder. Then:
@@ -59,3 +65,5 @@ quest test
 ## Updating CLI
 
 Remember to pull the latest version of this repo to keep yourself up to date with the latest changes.
+
+Afterwhich, run `npm install` to update your dependencies.
