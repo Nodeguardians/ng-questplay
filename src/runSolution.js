@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { cwd } from 'process';
@@ -16,13 +17,13 @@ export async function runSolution() {
     process.exit();
   }
 
-  const credentialsPath = path.join(mainPath(), './.credentials');
-  if (!fs.existsSync(credentialsPath)) {
+  dotenv.config({ path: '../../../.env' });
+  const token = process.env.GITHUB_TOKEN;
+  if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
     process.exit();
   }
 
-  const token = fs.readFileSync(credentialsPath).toString();
   const authDownloader = new QuestDownloader({
     github: { auth: token }
   });
