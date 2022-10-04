@@ -26,7 +26,7 @@ export const TITLE = "\n\
 
 export const WRONG_DIRECTORY_MESSAGE = chalk.red(
   "\n`quest` must be run from the ng-quests directory\n",
-  `Try running: \"cd ${mainPath()}\"\n`
+  `Try running: \"cd ${mainPath().replace(" ", "\\ ")}\"\n`
 );
 
 export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
@@ -73,7 +73,7 @@ export const FIND_HELP_MESSAGE =
   ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
 
 export function NavigateToQuestMessage(questPath) {
-  const relativePath = path.relative(INITIAL_CWD, questPath)
+  const relativePath = path.relative(INITIAL_CWD, questPath);
   return chalk.cyan(
     "To navigate to quest directory, run",
     chalk.bold(`cd ${relativePath}`),

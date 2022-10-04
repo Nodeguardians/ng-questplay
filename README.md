@@ -6,7 +6,9 @@ Welcome guardian. The road out will be treacherous, but remember, fortune favors
 
 ## Getting Started
 
-Clone the repo onto your local device: 
+Fork this repository and install the [NG Validation Github Application](https://github.com/apps/ng-validation) onto it.
+
+Afterwhich, clone the forked repo onto your local device: 
 
 ```
 git clone https://github.com/Nodeguardians/ng-questplay.git`
@@ -20,7 +22,7 @@ npm install
 npm link
 ```
 
-Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public repo access** only. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public and public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
 
 ```bash
 # In .env file
