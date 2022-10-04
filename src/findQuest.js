@@ -80,7 +80,6 @@ async function queryAndPullQuest(questPath, versionString) {
 
   if (answer.overwrite == 'Cancel') {
     console.log(chalk.gray("\nDownload cancelled"));
-    console.log(NavigateToQuestMessage(localPath));
     process.exit(0);
   }
 
@@ -102,6 +101,11 @@ async function queryAndPullQuest(questPath, versionString) {
 
   await authDownloader.downloadDirectory('NodeGuardians', 'ng-quests-public', questPath);
 
+  // Install Quest
+  console.log(chalk.green("\nInstalling quest..."));
+  await authDownloader.installSubpackage();
+
+  // Print Quest Location
   console.log();
   console.log(NavigateToQuestMessage(localPath));
 
