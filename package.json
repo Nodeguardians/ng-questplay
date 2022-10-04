@@ -19,10 +19,10 @@
         "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
         "@nomiclabs/hardhat-ethers": "^2.1.1",
         "@openzeppelin/contracts": "^4.7.3",
-        "dotenv": "^16.0.2",
+        "dotenv": "^16.0.3",
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.11.1",
-        "lerna": "^5.5.1"
+        "lerna": "^5.5.4"
     },
     "overrides": {
         "parse-url": "^8.1.0"

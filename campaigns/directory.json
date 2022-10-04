@@ -78,7 +78,7 @@
                 "name": "stealth-addresses",
                 "version": "1.0.0",
                 "type": "build",
-                "parts": 2
+                "parts": 3
             }     
         ] 
     },
@@ -112,7 +112,7 @@
                 "name": "chainlink-vrf",
                 "version": "1.0.0",
                 "type": "ctf",
-                "parts": 1
+                "parts": 2
             }
         ]
     },
@@ -152,13 +152,13 @@
                 "name": "building-diamonds",
                 "version": "1.0.0",
                 "type": "build",
-                "parts": 1
+                "parts": 2
             },
             {
                 "name": "using-diamonds",
                 "version": "1.0.0",
                 "type": "ctf",
-                "parts": 3
+                "parts": 4
             }
         ]
     },
@@ -169,7 +169,7 @@
                 "name": "yul-basics",
                 "version": "1.0.0",
                 "type": "build",
-                "parts": 6
+                "parts": 7
             },
             {
                 "name": "bits-and-bytes",
@@ -181,13 +181,30 @@
                 "name": "calldata-manipulation",
                 "version": "1.0.0",
                 "type": "build",
-                "parts": 2
+                "parts": 3
             },
             {
                 "name": "memory-manipulation",
                 "version": "1.0.0",
                 "type": "build",
-                "parts": 3
+                "parts": 4
+            }
+        ]
+    },
+    {
+        "name": "tutorial",
+        "quests": [
+            {
+                "name": "build-tutorial",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "ctf-tutorial",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ]
     },
