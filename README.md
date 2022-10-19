@@ -6,7 +6,7 @@ Welcome guardian. The road out will be treacherous, but remember, fortune favors
 
 ## Getting Started
 
-Fork this repository and install the [NG Validation Github Application](https://github.com/apps/ng-validation) onto it.
+Fork this repository and install the [NG Validation Github Application](https://github.com/apps/node-guardians-beta) onto it.
 
 Afterwhich, clone the forked repo onto your local device: 
 
