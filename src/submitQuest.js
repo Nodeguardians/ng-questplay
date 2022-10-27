@@ -43,7 +43,7 @@ export async function submitQuest(isSetUpstream) {
   try {
 
     await git.commit(`#${questName}`, [], ["--allow-empty"]);
-    await git.push(["-u"]);
+    await git.push(["-u", "origin", currentBranch.name]);
 
   } catch (err) {
 
