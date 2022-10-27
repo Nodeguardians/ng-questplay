@@ -6,6 +6,7 @@ import { mainPath } from './src/utils/navigation.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { runSolution } from './src/runSolution.js';
+import { submitQuest } from './src/submitQuest.js';
 
 const commands = process.argv.slice(2);
 
@@ -78,6 +79,11 @@ switch (commands[0]) {
   case 'solution':
     runSolution();
     break;
+    
+  case 'submit':
+    submitQuest();
+    break;
+
   default:
     console.log(chalk.red('\nERROR: Unrecognized command'));
     console.log(MAIN_HELP_MESSAGE);

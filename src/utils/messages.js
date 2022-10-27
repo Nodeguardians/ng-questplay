@@ -52,7 +52,8 @@ export const MAIN_HELP_MESSAGE =
   + chalk.cyan(
     chalk.bold("Commands:\n\n"),
     chalk.bold("  find"), "      Search for a specific quest in the repo\n",
-    chalk.bold("  test"), "      Run local tests for the current quest\n\n")
+    chalk.bold("  test"), "      Run local tests for the current quest\n",
+    chalk.bold("  submit"), "      Submit quest to nodeguardians.io for verification\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
     chalk.bold("  --help"), "    Read the manual\n"
