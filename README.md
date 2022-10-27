@@ -11,7 +11,7 @@ Fork this repository and install the [NG Validation Github Application](https://
 Afterwhich, clone the forked repo onto your local device: 
 
 ```
-git clone https://github.com/Nodeguardians/ng-questplay.git`
+git clone https://github.com/Nodeguardians/ng-questplay.git
 cd ng-questplay
 ```
 
