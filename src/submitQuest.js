@@ -5,10 +5,11 @@ import { cwd } from "process";
 import { navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
+import { NO_UPSTREAM_BRANCH_MESSAGE, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
 
 const git = simpleGit();
 
-export async function submitQuest() {
+export async function submitQuest(isSetUpstream) {
 
   try {
     navigateToQuestDirectory();
@@ -19,32 +20,36 @@ export async function submitQuest() {
   }
 
   console.log();
+
+  const statusSummary = await git.status()
+
+  if (statusSummary.files.length) {
+    console.log(UNCOMMITTED_FILES_MESSAGE);
+    process.exit();
+  }
+
+  const branchSummaryResult = await git.branch()
+  const currentBranch = branchSummaryResult.branches[branchSummaryResult.current]
+
+  if (!isSetUpstream && await git.raw("ls-remote", "--exit-code", "--heads", "origin",  currentBranch.name) == "") {
+    console.log(NO_UPSTREAM_BRANCH_MESSAGE);
+    process.exit();
+  }
+
   const progressBar = new ProgressBar();
   await progressBar.start();
   const questName = path.basename(cwd());
 
-  const statusSummary = await git.status()
-  let unclean = false;
-
-  if (statusSummary.files.length) {
-    await git.stash(["-u"])
-    unclean = true
-  }
-
   try {
+
     await git.commit(`#${questName}`, [], ["--allow-empty"]);
     await git.push(["-u"]);
+
   } catch (err) {
 
-    if (unclean) { await git.stash(["pop"]); }
-
     await progressBar.fail("Submission failed\n");
-    return;
+    process.exit();
 
-  }
-
-  if (unclean) {
-    await git.stash(["pop"])
   }
 
   await progressBar.stop("Pushed to Github");

@@ -73,6 +73,15 @@ export const FIND_HELP_MESSAGE =
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
   ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
 
+export const UNCOMMITTED_FILES_MESSAGE =
+  chalk.yellow(
+    "Questplay cannot push quest because uncommitted files detected.\n",
+    "Try committing or staging all changes first.\n");
+
+export const NO_UPSTREAM_BRANCH_MESSAGE =
+  chalk.red(`Current branch : ${currentBranch.name} doesn't exist in remote\n`)
+  + chalk.yellow("To push branch upstream, try", chalk.bold("quest submit --set-upstream"));
+
 export function NavigateToQuestMessage(questPath) {
   const relativePath = path.relative(INITIAL_CWD, questPath);
   return chalk.cyan(
