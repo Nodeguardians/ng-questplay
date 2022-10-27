@@ -5,7 +5,7 @@ import { cwd } from "process";
 import { navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
-import { NO_UPSTREAM_BRANCH_MESSAGE, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
+import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
 
 const git = simpleGit();
 
@@ -32,7 +32,7 @@ export async function submitQuest(isSetUpstream) {
   const currentBranch = branchSummaryResult.branches[branchSummaryResult.current]
 
   if (!isSetUpstream && await git.raw("ls-remote", "--exit-code", "--heads", "origin",  currentBranch.name) == "") {
-    console.log(NO_UPSTREAM_BRANCH_MESSAGE);
+    console.log(NoUpstreamBranchMessage(currentBranch.name));
     process.exit();
   }
 

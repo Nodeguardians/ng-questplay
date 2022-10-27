@@ -84,9 +84,11 @@ export const UNCOMMITTED_FILES_MESSAGE =
     "Questplay cannot push quest because uncommitted files detected.\n",
     "Try committing or staging all changes first.\n");
 
-export const NO_UPSTREAM_BRANCH_MESSAGE =
-  chalk.red(`Current branch : ${currentBranch.name} doesn't exist in remote\n`)
-  + chalk.yellow("To push branch upstream, try", chalk.bold("quest submit --set-upstream"));
+export function NoUpstreamBranchMessage(branchName) {
+  return chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`)
+    + chalk.yellow("To push branch upstream, try", chalk.bold("quest submit --set-upstream"));
+}
+
 
 export function NavigateToQuestMessage(questPath) {
   const relativePath = path.relative(INITIAL_CWD, questPath);
