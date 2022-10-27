@@ -52,7 +52,8 @@ export const MAIN_HELP_MESSAGE =
   + chalk.cyan(
     chalk.bold("Commands:\n\n"),
     chalk.bold("  find"), "      Search for a specific quest in the repo\n",
-    chalk.bold("  test"), "      Run local tests for the current quest\n\n")
+    chalk.bold("  test"), "      Run local tests for the current quest\n",
+    chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
     chalk.bold("  --help"), "    Read the manual\n"
@@ -71,6 +72,22 @@ export const FIND_HELP_MESSAGE =
     + "Example: quest find using-signatures\n"
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
   ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
+
+export const SUBMIT_HELP_MESSAGE =
+  chalk.gray(
+    "\nUsage: quest submit (--set-upstream)\n"
+    + "\nSubmit a quest to nodeguardians.io for verification\n\n"
+  ) + chalk.cyan(chalk.bold("--set-upstream:"), "    (Optional) Push a new branch upstream\n");
+
+export const UNCOMMITTED_FILES_MESSAGE =
+  chalk.yellow(
+    "Uncommitted files detected. Questplay is unable to push to remote.\n"
+    + "Try committing or staging all changes first.\n");
+
+export function NoUpstreamBranchMessage(branchName) {
+  return chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`)
+    + chalk.yellow("To push branch upstream, try running", chalk.bold("quest submit --set-upstream\n"));
+}
 
 export function NavigateToQuestMessage(questPath) {
   const relativePath = path.relative(INITIAL_CWD, questPath);

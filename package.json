@@ -22,7 +22,8 @@
         "dotenv": "^16.0.3",
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.11.1",
-        "lerna": "^5.5.4"
+        "lerna": "^5.5.4",
+        "simple-git": "3.14.1"
     },
     "overrides": {
         "parse-url": "^8.1.0"

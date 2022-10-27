@@ -6,6 +6,7 @@ const fs = require('fs/promises')
 const NON_ASSEMBLY_ERROR = "Function can only have 1 assembly block only";
 const ASSEMBLY_CREATE_ERROR = "\"create\" keyword detected, contract should no deploy other contracts";
 const EXTERNAL_CODE_ERROR = "External contract detected";
+const MISSING_VARIABLE_ERROR = "Public Variable Missing";
 
 function testAssembly(solutionPath, funcs) {
   describe("Syntax Detection", async function () {
@@ -82,6 +83,35 @@ function testExternalCode(solutionPath) {
       expect(numContracts, EXTERNAL_CODE_ERROR)
         .to.equal(1);
     });
+  });
+}
+
+function testPublicVariables(solutionPath, variables) {
+  describe("Public Variable Test", async function () {
+
+    before(async function () {  
+      const solutionContent = await fs.readFile(solutionPath, { encoding: "utf8"});
+
+      solutionAST = ast.toAst(solutionContent)
+    });
+
+    for (const variable of variables) {
+      
+      it(`Should have public variable ${variable}`, async function () {
+
+        let hasVariable = false;
+        parser.visit(solutionAST, {
+          VariableDeclaration: function(node) {
+            if (node.visibility == 'public' && node.name == variable) {
+              hasVariable = true;
+            }
+          }
+        });
+  
+        assert(hasVariable, MISSING_VARIABLE_ERROR);
+
+      });
+    }
   });
 }
 
@@ -198,6 +228,8 @@ function testFilesSameStateAST(templatePath, solutionPath) {
 module.exports.testAssembly = testAssembly;
 module.exports.testAssemblyAll = testAssemblyAll;
 module.exports.testExternalCode = testExternalCode;
+module.exports.testPublicVariables = testPublicVariables;
+
 module.exports.testFilesModificationAndAssemblyOnly = testFilesModificationAndAssemblyOnly;
 module.exports.testFilesModificationAndSameFunctionsAST = testFilesModificationAndSameFunctionsAST;
 module.exports.testFilesModificationAndSameFunctionsBody = testFilesModificationAndSameFunctionsBody;
