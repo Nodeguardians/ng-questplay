@@ -30,7 +30,7 @@ Commands:
 
    find       Search for a specific quest in the repo
    test       Run local tests for the current quest
-   submit       Submit quest to nodeguardians.io for verification
+   submit     Submit quest to nodeguardians.io for verification
 
 Options:
 
@@ -50,7 +50,7 @@ Commands:
 
    find       Search for a specific quest in the repo
    test       Run local tests for the current quest
-   submit       Submit quest to nodeguardians.io for verification
+   submit     Submit quest to nodeguardians.io for verification
 
 Options:
 
@@ -77,7 +77,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (943ms)
+  1 passing (852ms)
 
 ////////////////////////////////////////////////
 //
@@ -90,7 +90,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (824ms)
+  1 passing (833ms)
 
 
 
@@ -127,7 +127,7 @@ index:     Part of quest to test (e.g. 1, 2, 3)
     ✔ bar() should work
 
 
-  1 passing (792ms)
+  1 passing (801ms)
 
 ////////////////////////////////////////////////
 //

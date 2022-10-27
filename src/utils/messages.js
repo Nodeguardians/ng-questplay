@@ -53,7 +53,7 @@ export const MAIN_HELP_MESSAGE =
     chalk.bold("Commands:\n\n"),
     chalk.bold("  find"), "      Search for a specific quest in the repo\n",
     chalk.bold("  test"), "      Run local tests for the current quest\n",
-    chalk.bold("  submit"), "      Submit quest to nodeguardians.io for verification\n\n")
+    chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
     chalk.bold("  --help"), "    Read the manual\n"
@@ -81,14 +81,13 @@ export const SUBMIT_HELP_MESSAGE =
 
 export const UNCOMMITTED_FILES_MESSAGE =
   chalk.yellow(
-    "Questplay cannot push quest because uncommitted files detected.\n",
-    "Try committing or staging all changes first.\n");
+    "Uncommitted files detected. Questplay is unable to push to remote.\n"
+    + "Try committing or staging all changes first.\n");
 
 export function NoUpstreamBranchMessage(branchName) {
   return chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`)
-    + chalk.yellow("To push branch upstream, try", chalk.bold("quest submit --set-upstream"));
+    + chalk.yellow("To push branch upstream, try running", chalk.bold("quest submit --set-upstream\n"));
 }
-
 
 export function NavigateToQuestMessage(questPath) {
   const relativePath = path.relative(INITIAL_CWD, questPath);
