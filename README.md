@@ -59,6 +59,17 @@ quest test 1
 quest test
 ```
 
+## Submitting a Quest
+
+To submit a quest for verification, first make sure you are in the quest folder.
+Commit all your changes into your local repository. Then run:
+
+```
+quest submit
+```
+
+This command pushes your code to your remote repository in Github for verification.
+
 ## Updating CLI
 
 Remember to pull the latest version of this repo to keep yourself up to date with the latest changes.
