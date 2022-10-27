@@ -2,7 +2,7 @@
 import chalk from "chalk";
 import path from "path";
 import { cwd } from "process";
-import { navigateToQuestDirectory } from './utils/navigation.js';
+import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
 import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
@@ -21,6 +21,19 @@ export async function submitQuest(isSetUpstream) {
 
   console.log();
 
+  const directory = getDirectory();
+  const campaignName = path.basename(path.dirname(cwd()));
+  const questName = path.basename(cwd());
+
+  const questInfo = directory
+    .find(c => c.name == campaignName)
+    .quests.find(q => q.name == questName);
+
+  if (questInfo.type == "ctf") {
+    console.log(chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n"));
+    process.exit();
+  }
+
   const statusSummary = await git.status()
 
   if (statusSummary.files.length) {
@@ -38,7 +51,6 @@ export async function submitQuest(isSetUpstream) {
 
   const progressBar = new ProgressBar();
   await progressBar.start();
-  const questName = path.basename(cwd());
 
   try {
 
