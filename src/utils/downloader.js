@@ -1,12 +1,11 @@
 'use strict';
 
-import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import process from 'process';
 import child_process from 'child_process';
 
 import { Downloader } from 'github-download-directory';
+import { ProgressBar } from './progressbar.js'
 
 const BAR = "■■■■■■■";
 const PAD = "       ";
@@ -19,12 +18,13 @@ export class QuestDownloader extends Downloader {
 
   constructor(options = {}) {
     super(options);
+    this.progressBar = new ProgressBar();
   }
 
   async downloadDirectory(owner, repo, directoryPath, options = {}) {
-    let barLoad = this.startProgressBar();
+    let barLoad = this.progressBar.start();
     await super.download(owner, repo, directoryPath, options);
-    await barLoad.then(() => this.stopProgressBar("Download finished"));
+    await barLoad.then(() => this.progressBar.stop("Download finished"));
   }
 
   async downloadFile(owner, repo, filePath, options = {}) {
@@ -45,23 +45,9 @@ export class QuestDownloader extends Downloader {
   }
 
   async installSubpackage() {
-    await this.startProgressBar()
+    await this.progressBar.start()
       .then(() => child_process.execSync('npm install'))
-      .then(() => this.stopProgressBar("Installation finished"));
+      .then(() => this.progressBar.stop("Installation finished"));
   }
 
-  // Progress bar is superfluous, purely a UI/UX illusion ;)
-  async startProgressBar() {
-    for (let i = 0; i < 4; i++) {
-      const bar = BAR.repeat(i);
-      const pad = PAD.repeat(4 - i);
-      process.stdout.write(chalk.grey(`\r[${bar}${pad}]`));
-      await sleep(150);
-    }
-  }
-
-  async stopProgressBar(endMessage) {
-    console.log(chalk.grey(`\r[${BAR.repeat(4)}] ${endMessage}`));
-    await sleep(200);
-  }
 }
