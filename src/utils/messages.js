@@ -73,6 +73,12 @@ export const FIND_HELP_MESSAGE =
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
   ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
 
+export const SUBMIT_HELP_MESSAGE =
+  chalk.gray(
+    "\nUsage: quest submit (--set-upstream)\n"
+    + "\nSubmit a quest to nodeguardians.io for verification\n\n"
+  ) + chalk.cyan(chalk.bold("--set-upstream:"), "    (Optional) Push a new branch upstream\n");
+
 export const UNCOMMITTED_FILES_MESSAGE =
   chalk.yellow(
     "Questplay cannot push quest because uncommitted files detected.\n",

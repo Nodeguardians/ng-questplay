@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 import { findQuest } from './src/findQuest.js';
-import { FIND_HELP_MESSAGE, MAIN_HELP_MESSAGE, TEST_HELP_MESSAGE, TITLE, WRONG_DIRECTORY_MESSAGE } from './src/utils/messages.js';
+import { 
+  FIND_HELP_MESSAGE, 
+  MAIN_HELP_MESSAGE, 
+  TEST_HELP_MESSAGE, 
+  TITLE, 
+  SUBMIT_HELP_MESSAGE, 
+  WRONG_DIRECTORY_MESSAGE 
+} from './src/utils/messages.js';
 import { runTests } from './src/runTests.js';
 import { mainPath } from './src/utils/navigation.js';
 import chalk from 'chalk';
@@ -81,7 +88,20 @@ switch (commands[0]) {
     break;
     
   case 'submit':
-    submitQuest();
+    
+    if (commands.includes("--help")) {
+      console.log(SUBMIT_HELP_MESSAGE);
+      process.exit();
+    }
+
+    if (commands.length > 1 && commands[1] != "--set-upstream") {
+      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(SUBMIT_HELP_MESSAGE);
+      process.exit();
+    }
+
+    const isSetUpstream = (commands[1] == "--set-upstream");
+    submitQuest(isSetUpstream);
     break;
 
   default:
