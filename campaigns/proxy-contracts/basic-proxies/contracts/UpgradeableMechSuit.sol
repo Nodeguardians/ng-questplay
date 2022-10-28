@@ -14,8 +14,8 @@ contract UpgradeableMechSuit {
     /// @param _implementation Address of new logic contract to be linked
     function upgradeTo(address _implementation) external {
         assembly {
-            if eq(sload(0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103), caller()) { revert(0, 0) }
-            sstore(0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103, _implementation)
+            if eq(eq(sload(0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103), caller()), 0) { revert(0, 0) }
+            sstore(0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc, _implementation)
         }
     }
 
@@ -23,7 +23,7 @@ contract UpgradeableMechSuit {
         assembly {
             calldatacopy(0,  0, calldatasize())
 
-            let result := delegatecall(gas(), sload(0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103), 0, calldatasize(), 0, 0)
+            let result := delegatecall(gas(), sload(0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc), 0, calldatasize(), 0, 0)
 
             returndatacopy(0, 0, returndatasize())
 
