@@ -1,0 +1,9 @@
+{
+    "name": "basic-proxies",
+    "version": "1.0.0",
+    "scripts": {
+        "test": "hardhat test --network hardhat"
+    },
+    "author": "",
+    "license": "MIT"
+}

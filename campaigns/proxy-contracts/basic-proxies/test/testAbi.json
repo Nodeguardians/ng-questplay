@@ -1,0 +1,81 @@
+{
+    "abi": [
+        {
+            "type": "function",
+            "name": "fuel",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "gas": 30000,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint32"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "refuel",
+            "constant": false,
+            "stateMutability": "payable",
+            "payable": true,
+            "gas": 100000,
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "swingHammer",
+            "constant": false,
+            "payable": false,
+            "gas": 100000,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes32"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "ammunition",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "gas": 30000,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "blastCannon",
+            "constant": false,
+            "payable": false,
+            "gas": 100000,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes32"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "upgradeTo",
+            "constant": false,
+            "payable": false,
+            "gas": 100000,
+            "inputs": [ 
+                {
+                    "type": "address"
+                }
+            ],
+            "outputs": []
+        }
+    ]
+}
