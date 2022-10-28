@@ -1,6 +1,6 @@
 const { ethers } = require("hardhat");
 
-const BanditAddress = "0xF569Ff850E0918e1DE1073dCe3562A9a43b1B8cd"
+const BanditAddress = "0xebde34D161332550cb17b52Bd60ab03F4399C54F"
 
 const main = async () => {
     const Bandit = await ethers.getContractAt("BanditCamp", BanditAddress);
