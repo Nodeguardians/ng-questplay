@@ -22,7 +22,8 @@ npm install
 npm link
 ```
 
-Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public and public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public and private repo access**. Then, create a `.env` file in your root folder and add a 
+`GITHUB_TOKEN` variable:
 
 ```bash
 # In .env file
