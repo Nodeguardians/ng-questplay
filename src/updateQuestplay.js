@@ -26,7 +26,7 @@ export async function updateQuestplay() {
   }
 
   // (2) Look for update
-  if (isLatestVersion()) {
+  if (await isLatestVersion()) {
     console.log(chalk.yellow("Questplay is up-to-date.\n"));
     process.exit(0);
   }

@@ -21,7 +21,7 @@ export async function remoteVersion()  {
 }
 
 export async function isLatestVersion() {
-  return localVersion() == remoteVersion();
+  return (await localVersion()) == (await remoteVersion());
 }
 
 async function pullRemoteVersion() {

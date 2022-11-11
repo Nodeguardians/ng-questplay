@@ -15,7 +15,7 @@ import {
   UPDATE_QUEST_CONFIRMATION, 
   UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
-import { isLatestVersion } from './utils/versions.js';
+import { isLatestVersion, localVersion, remoteVersion } from './utils/versions.js';
 
 export async function findQuest(questName) {
 
@@ -110,7 +110,7 @@ async function queryAndPullQuest(questPath, versionString) {
   console.log();
   console.log(NavigateToQuestMessage(localPath));
 
-  if (!isLatestVersion()) {
+  if (!await isLatestVersion()) {
     console.log(UPDATE_REMINDER_MESSAGE);
   }
 
