@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import { findQuest } from './src/findQuest.js';
-import { 
+import {
   FIND_HELP_MESSAGE, 
   MAIN_HELP_MESSAGE, 
   TEST_HELP_MESSAGE, 
-  TITLE, 
   SUBMIT_HELP_MESSAGE, 
+  UPDATE_HELP_MESSAGE,
+  TITLE, 
   WRONG_DIRECTORY_MESSAGE 
 } from './src/utils/messages.js';
 import { runTests } from './src/runTests.js';
@@ -14,6 +15,7 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { runSolution } from './src/runSolution.js';
 import { submitQuest } from './src/submitQuest.js';
+import { updateQuestplay } from './src/updateQuestplay.js';
 
 const commands = process.argv.slice(2);
 
@@ -33,8 +35,8 @@ switch (commands[0]) {
 
   case '--help':
     console.log(MAIN_HELP_MESSAGE);
-
     break;
+
   case 'test':
 
     if (commands.includes("--help")) {
@@ -102,6 +104,22 @@ switch (commands[0]) {
 
     const isSetUpstream = (commands[1] == "--set-upstream");
     submitQuest(isSetUpstream);
+    break;
+
+  case 'update':
+
+    if (commands.includes("--help")) {
+      console.log(UPDATE_HELP_MESSAGE);
+      process.exit();
+    }
+
+    if (commands.length > 1) {
+      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(UPDATE_HELP_MESSAGE);
+      process.exit();
+    }
+    
+    updateQuestplay()
     break;
 
   default:
