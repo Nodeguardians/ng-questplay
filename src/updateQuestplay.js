@@ -46,7 +46,7 @@ async function pullUpdate() {
   const token = process.env.GITHUB_TOKEN;
   if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const authDownloader = new QuestDownloader({
@@ -59,6 +59,6 @@ async function pullUpdate() {
   await authDownloader.installSubpackage();
 
   await git.commit(`Update Questplay to ${remoteVersion()}`);
-  console.log(chalk.green("Update committed\n"));
+  console.log(chalk.green("\nUpdate committed.\n"));
 
 }

@@ -72,7 +72,7 @@ export const FIND_HELP_MESSAGE =
     "\nUsage: quest find [<name>]\n"
     + "Example: quest find using-signatures\n"
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
-  ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
+  ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hyphenated, no spacing]\n");
 
 export const SUBMIT_HELP_MESSAGE =
   chalk.gray(
@@ -93,7 +93,7 @@ export const UNCOMMITTED_FILES_MESSAGE =
 
 export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE =
   chalk.yellow(
-    "Uncommitted files detected. Questplay is unable to update.\n"
+    "Questplay is unable to update when there are still uncommitted files in the repository.\n"
     + "Try committing or stashing all changes first.\n");
 
 export const UPDATE_REMINDER_MESSAGE =
