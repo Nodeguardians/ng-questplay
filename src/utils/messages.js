@@ -96,6 +96,13 @@ export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE =
     "Uncommitted files detected. Questplay is unable to update.\n"
     + "Try committing or stashing all changes first.\n");
 
+export const UPDATE_REMINDER_MESSAGE =
+  chalk.yellow(
+    chalk.bold("\nIMPORTANT:"),
+    "New version of Questplay available.\n"
+    + "Run `quest update` to download update.\n"
+  );
+
 export function NoUpstreamBranchMessage(branchName) {
   return chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`)
     + chalk.yellow("To push branch upstream, try running", chalk.bold("quest submit --set-upstream\n"));

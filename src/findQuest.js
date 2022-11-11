@@ -12,8 +12,10 @@ import {
   NavigateToQuestMessage, 
   QUEST_ALREADY_EXISTS_MESSAGE, 
   QUEST_NOT_FOUND_MESSAGE, 
-  UPDATE_QUEST_CONFIRMATION 
+  UPDATE_QUEST_CONFIRMATION, 
+  UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
+import { isLatestVersion } from './utils/versions.js';
 
 export async function findQuest(questName) {
 
@@ -37,7 +39,6 @@ export async function findQuest(questName) {
       );
 
       console.log(message);
-
       await queryAndPullQuest(`campaigns/${campaign.name}/${quest.name}`, quest.version);
       return;
     }
@@ -108,6 +109,10 @@ async function queryAndPullQuest(questPath, versionString) {
   // Print Quest Location
   console.log();
   console.log(NavigateToQuestMessage(localPath));
+
+  if (!isLatestVersion()) {
+    console.log(UPDATE_REMINDER_MESSAGE);
+  }
 
 }
 
