@@ -25,7 +25,7 @@ export async function findQuest(questName) {
   // These quests are in the directory for testing purposes
   if (questName == "test-build-quest" || questName == "test-ctf-quest") {
     console.log(QUEST_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   for (const campaign of directory) {
@@ -46,7 +46,7 @@ export async function findQuest(questName) {
 
   // Quest not found
   console.log(QUEST_NOT_FOUND_MESSAGE);
-  process.exit();
+  process.exit(1);
 
 };
 
@@ -93,7 +93,7 @@ async function queryAndPullQuest(questPath, versionString) {
   const token = process.env.GITHUB_TOKEN;
   if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const authDownloader = new QuestDownloader({

@@ -22,13 +22,13 @@ const commands = process.argv.slice(2);
 if (!process.cwd().startsWith(mainPath())) {
   console.log(TITLE);
   console.log(WRONG_DIRECTORY_MESSAGE);
-  process.exit();
+  process.exit(1);
 }
 
 if (commands.length == 0) {
   console.log(TITLE);
   console.log(MAIN_HELP_MESSAGE);
-  process.exit();
+  process.exit(0);
 }
 
 switch (commands[0]) {
@@ -41,7 +41,7 @@ switch (commands[0]) {
 
     if (commands.includes("--help")) {
       console.log(TEST_HELP_MESSAGE);
-      process.exit();
+      process.exit(0);
     }
     const partIndex = commands[1];
 
@@ -49,7 +49,7 @@ switch (commands[0]) {
         || commands.length > 3) {
       console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
       console.log(TEST_HELP_MESSAGE);
-      process.exit();
+      process.exit(1);
     }
 
     await runTests(commands[1]);
@@ -59,13 +59,13 @@ switch (commands[0]) {
 
     if (commands.includes("--help")) {
       console.log(FIND_HELP_MESSAGE);
-      process.exit();
+      process.exit(0);
     }
 
     if (commands.length > 2) {
       console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
       console.log(FIND_HELP_MESSAGE);
-      process.exit();
+      process.exit(1);
     }
 
     let searchQuery;
@@ -93,13 +93,13 @@ switch (commands[0]) {
     
     if (commands.includes("--help")) {
       console.log(SUBMIT_HELP_MESSAGE);
-      process.exit();
+      process.exit(0);
     }
 
     if (commands.length > 1 && commands[1] != "--set-upstream") {
       console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
       console.log(SUBMIT_HELP_MESSAGE);
-      process.exit();
+      process.exit(1);
     }
 
     const isSetUpstream = (commands[1] == "--set-upstream");
@@ -110,13 +110,13 @@ switch (commands[0]) {
 
     if (commands.includes("--help")) {
       console.log(UPDATE_HELP_MESSAGE);
-      process.exit();
+      process.exit(0);
     }
 
     if (commands.length > 1) {
       console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
       console.log(UPDATE_HELP_MESSAGE);
-      process.exit();
+      process.exit(1);
     }
     
     updateQuestplay()

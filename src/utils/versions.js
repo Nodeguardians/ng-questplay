@@ -30,7 +30,7 @@ async function pullRemoteVersion() {
   const token = process.env.GITHUB_TOKEN;
   if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const octokit = new Octokit({ auth: token });

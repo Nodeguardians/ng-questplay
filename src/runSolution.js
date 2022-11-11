@@ -14,14 +14,14 @@ export async function runSolution() {
     navigateToQuestDirectory();
   } catch (error) {
     console.log(chalk.red(error));
-    process.exit();
+    process.exit(1);
   }
 
   dotenv.config({ path: '../../../.env' });
   const token = process.env.GITHUB_TOKEN;
   if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const authDownloader = new QuestDownloader({

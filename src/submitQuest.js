@@ -16,7 +16,7 @@ export async function submitQuest(isSetUpstream) {
   } 
   catch (error) {
     console.log(chalk.red(error));
-    process.exit();
+    process.exit(1);
   }
 
   console.log();
@@ -31,14 +31,14 @@ export async function submitQuest(isSetUpstream) {
 
   if (questInfo.type == "ctf") {
     console.log(chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n"));
-    process.exit();
+    process.exit(0);
   }
 
   const statusSummary = await git.status()
 
   if (statusSummary.files.length) {
     console.log(UNCOMMITTED_FILES_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const branchSummaryResult = await git.branch()
@@ -46,7 +46,7 @@ export async function submitQuest(isSetUpstream) {
 
   if (!isSetUpstream && await git.raw("ls-remote", "--exit-code", "--heads", "origin",  currentBranch.name) == "") {
     console.log(NoUpstreamBranchMessage(currentBranch.name));
-    process.exit();
+    process.exit(1);
   }
 
   const progressBar = new ProgressBar();
@@ -60,7 +60,7 @@ export async function submitQuest(isSetUpstream) {
   } catch (err) {
 
     await progressBar.fail("Submission failed\n");
-    process.exit();
+    process.exit(1);
 
   }
 
