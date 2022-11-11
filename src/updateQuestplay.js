@@ -58,7 +58,17 @@ async function pullUpdate() {
   console.log(chalk.green("\nInstalling Questplay..."));
   await authDownloader.installSubpackage();
 
-  await git.commit(`Update Questplay to ${remoteVersion()}`);
-  console.log(chalk.green("\nUpdate committed.\n"));
+  try {
+
+    await git.push("./*");
+    await git.commit(`Update Questplay to ${remoteVersion()}`);
+    console.log(chalk.green("\nUpdate committed.\n"));
+
+  } catch (err) {
+
+    console.log(chalk.grey("git commit failed. Try manually committing the the Questplay update."));
+    process.exit(0);
+
+  }
 
 }
