@@ -60,7 +60,7 @@ async function pullUpdate() {
 
   try {
 
-    await git.push("./*");
+    await git.push(["./*"]);
     await git.commit(`Update Questplay to ${remoteVersion()}`);
     console.log(chalk.green("\nUpdate committed.\n"));
 
