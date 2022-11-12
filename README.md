@@ -2,13 +2,13 @@
 
 Welcome guardian. The road out will be treacherous, but remember, fortune favors the brave.
 
-`ng-questplay` is a lightweight CLI-based application that helps you manage your quests as you venture out into [the wilderness](https://nodeguardians.io/) to complete quests and fulfill your duty as a **Node Guardian**.
+`ng-questplay` is a lightweight CLI-based application that helps you manage your quests as you venture out into [the wilderness](https://nodeguardians.io/) to complete quests and fulfill your duty as a _Node Guardian_.
 
 ## Getting Started
 
-Fork this repository and install the [NG Validation Github Application](https://github.com/apps/node-guardians-beta) onto it.
+Fork this repository and install[our Github Application](https://github.com/apps/node-guardians-beta) onto it.
 
-Afterwhich, clone the forked repo onto your local device: 
+After which, clone the forked repo onto your local device: 
 
 ```
 git clone https://github.com/Nodeguardians/ng-questplay.git`
@@ -18,11 +18,10 @@ cd ng-questplay
 Then install the necessary packages and symlink:
 
 ```
-npm install
-npm link
+npm install && npm link
 ```
 
-Create a [Github authentication token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with **public and public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+Create a [Github authentication token](https://staging.nodeguardians.com/?s=home-faq) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
 
 ```bash
 # In .env file
@@ -39,7 +38,7 @@ Run the following command to find and download a specific quest into your repo.
 quest find
 ```
 
-Alternatively, you can immediately specify the quest name (hypenated, no spaces).
+Alternatively, you can immediately specify the quest name (hyphenated, no spaces).
 
 ```
 quest find using-signatures
@@ -72,6 +71,8 @@ This command pushes your code to your remote repository in Github for verificati
 
 ## Updating CLI
 
-Remember to pull the latest version of this repo to keep yourself up to date with the latest changes.
+To update the CLI, run:
 
-Afterwhich, run `npm install` to update your dependencies.
+```
+quest update
+```
