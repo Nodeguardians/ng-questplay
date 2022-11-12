@@ -15,13 +15,13 @@
     "dependencies": {
         "@ngquests/contracts": "./@ngquests/contracts",
         "@ngquests/test-helpers": "./@ngquests/test-helpers",
-        "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.4",
         "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
-        "@nomiclabs/hardhat-ethers": "^2.1.1",
-        "@openzeppelin/contracts": "^4.7.3",
+        "@nomiclabs/hardhat-ethers": "^2.2.1",
+        "@openzeppelin/contracts": "^4.8.0",
         "dotenv": "^16.0.3",
         "github-download-directory": "^3.0.0",
-        "hardhat": "^2.11.1",
+        "hardhat": "^2.12.2",
         "lerna": "^5.5.4",
         "simple-git": "3.14.1"
     },

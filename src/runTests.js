@@ -10,7 +10,7 @@ export async function runTests(partIndex = undefined) {
     navigateToQuestDirectory();
   } catch (error) {
     console.log(chalk.red(error));
-    process.exit();
+    process.exit(1);
   }
 
   const directory = getDirectory();
@@ -23,7 +23,7 @@ export async function runTests(partIndex = undefined) {
 
   if (questInfo.type == "ctf") {
     console.log(chalk.red("\nQuest is a CTF quest. No local tests to run.\n"));
-    process.exit();
+    process.exit(0);
   }
 
   const hre = await import('hardhat');

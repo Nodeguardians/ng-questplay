@@ -1,6 +1,9 @@
+const { ethers } = require("hardhat");
+
 function closeTo(expected, threshold) {
   return function (x) {
-    return x >= expected - threshold && x <= expected + threshold;
+    const bigX = ethers.BigNumber.from(x);
+    return bigX.sub(expected).abs().lte(threshold);
   }
 }
 

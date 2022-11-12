@@ -12,8 +12,10 @@ import {
   NavigateToQuestMessage, 
   QUEST_ALREADY_EXISTS_MESSAGE, 
   QUEST_NOT_FOUND_MESSAGE, 
-  UPDATE_QUEST_CONFIRMATION 
+  UPDATE_QUEST_CONFIRMATION, 
+  UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
+import { isLatestVersion, localVersion, remoteVersion } from './utils/versions.js';
 
 export async function findQuest(questName) {
 
@@ -23,7 +25,7 @@ export async function findQuest(questName) {
   // These quests are in the directory for testing purposes
   if (questName == "test-build-quest" || questName == "test-ctf-quest") {
     console.log(QUEST_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   for (const campaign of directory) {
@@ -37,7 +39,6 @@ export async function findQuest(questName) {
       );
 
       console.log(message);
-
       await queryAndPullQuest(`campaigns/${campaign.name}/${quest.name}`, quest.version);
       return;
     }
@@ -45,7 +46,7 @@ export async function findQuest(questName) {
 
   // Quest not found
   console.log(QUEST_NOT_FOUND_MESSAGE);
-  process.exit();
+  process.exit(1);
 
 };
 
@@ -92,7 +93,7 @@ async function queryAndPullQuest(questPath, versionString) {
   const token = process.env.GITHUB_TOKEN;
   if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
   const authDownloader = new QuestDownloader({
@@ -108,6 +109,10 @@ async function queryAndPullQuest(questPath, versionString) {
   // Print Quest Location
   console.log();
   console.log(NavigateToQuestMessage(localPath));
+
+  if (!await isLatestVersion()) {
+    console.log(UPDATE_REMINDER_MESSAGE);
+  }
 
 }
 

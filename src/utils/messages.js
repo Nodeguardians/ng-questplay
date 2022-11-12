@@ -53,7 +53,8 @@ export const MAIN_HELP_MESSAGE =
     chalk.bold("Commands:\n\n"),
     chalk.bold("  find"), "      Search for a specific quest in the repo\n",
     chalk.bold("  test"), "      Run local tests for the current quest\n",
-    chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n\n")
+    chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n",
+    chalk.bold("  update"), "    Updates Questplay to the latest version\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
     chalk.bold("  --help"), "    Read the manual\n"
@@ -71,7 +72,7 @@ export const FIND_HELP_MESSAGE =
     "\nUsage: quest find [<name>]\n"
     + "Example: quest find using-signatures\n"
     + "\nFind a quest in the repository. Queries for a name if name is unspecified.\n\n"
-  ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hypenated, no spacing]\n");
+  ) + chalk.cyan(chalk.bold("name:"), "    (Optional) Name of quest to find. [hyphenated, no spacing]\n");
 
 export const SUBMIT_HELP_MESSAGE =
   chalk.gray(
@@ -79,10 +80,28 @@ export const SUBMIT_HELP_MESSAGE =
     + "\nSubmit a quest to nodeguardians.io for verification\n\n"
   ) + chalk.cyan(chalk.bold("--set-upstream:"), "    (Optional) Push a new branch upstream\n");
 
+export const UPDATE_HELP_MESSAGE =
+  chalk.gray(
+    "\nUsage: quest update \n"
+    + "\nUpdates Questplay to the latest version.\n"
+  );
+
 export const UNCOMMITTED_FILES_MESSAGE =
   chalk.yellow(
     "Uncommitted files detected. Questplay is unable to push to remote.\n"
-    + "Try committing or staging all changes first.\n");
+    + "Try committing or stashing all changes first.\n");
+
+export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE =
+  chalk.yellow(
+    "Questplay is unable to update when there are still uncommitted files in the repository.\n"
+    + "Try committing or stashing all changes first.\n");
+
+export const UPDATE_REMINDER_MESSAGE =
+  chalk.yellow(
+    chalk.bold("\nIMPORTANT:"),
+    "New version of Questplay available.\n"
+    + "Run `quest update` to download update.\n"
+  );
 
 export function NoUpstreamBranchMessage(branchName) {
   return chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`)
