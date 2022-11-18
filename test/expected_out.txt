@@ -1,0 +1,141 @@
+////////////////////////////////////////////////
+//
+// Calling `quest` only should print banner + help
+//
+////////////////////////////////////////////////
+
+      ,,
+        ╙█▓,
+          └██▄      ╙██▌    ▄██▀╙──╙▀██▄    ███▀╙╙╙▀██▄    └███╙╙╙╙▀
+          ████▄     ██▌   ███        ███   ╫██─     ╙██▄   ███
+          ███ ▀█▄   ██▌  ███▌        ▐██▌  ╫██─      ███   ███   ▄
+          ███   ▀█▄ ██▌  ███▌        ▐██▌  ╫██─      ███   ███└└└╙
+          ███     ▀███▌   ███        ███   ╫██─     ▄██▀   ███
+          ███       ▀██    ╙▀█▄╓ ,╓▄█▀▀    ███▄╓╓▄▄██▀    ,███╓╓▄▄▓▌
+                      ╙█▄       ──
+                        └╙▀▀`
+
+▄▓▀╙└`▀▓   ██    j▌    ▓▄     ██`▀█▌   ██└└▀▀▄   ██─    ▄▄     █,    ██  ╓█╙└▀─
+▓█─        ██    j▌   ▓▀█▄    ██  ██   ██    ╟█µ ╫█    ▄▀█▄    ███▄  ██  ╙█▓▄
+██     ▐█▌ ██    j▌  ▄▌,██▄   ██ ██,   ██    ╟█▌ ╫█   ▄▌,██▄   █▌ └▀▄██    ╙▀██
+▀█▄   ▓█▌  ▀█▄  ,▓─ ▄▀   ██▄  ██  ██▌  ██   ▄█▀  ╫█─ ▄▌   ██▄  █▌    ▀█  █   ╟█
+──  ▀█▄    ──                                                           ──
+
+
+Usage: quest [<command>] [<args>]
+
+Manage your Node Guardians's quest repo using the `quest` command.
+
+Commands:
+
+   find       Search for a specific quest in the repo
+   test       Run local tests for the current quest
+   submit     Submit quest to nodeguardians.io for verification
+   update     Updates Questplay to the latest version
+
+Options:
+
+   --help     Read the manual
+
+////////////////////////////////////////////////
+//
+// Calling `quest --help` should print help
+//
+////////////////////////////////////////////////
+
+Usage: quest [<command>] [<args>]
+
+Manage your Node Guardians's quest repo using the `quest` command.
+
+Commands:
+
+   find       Search for a specific quest in the repo
+   test       Run local tests for the current quest
+   submit     Submit quest to nodeguardians.io for verification
+   update     Updates Questplay to the latest version
+
+Options:
+
+   --help     Read the manual
+
+////////////////////////////////////////////////
+//
+// Calling `test` outside a quest should print error message
+//
+////////////////////////////////////////////////
+
+ERROR: Not in a quest directory
+Try `cd` to a valid quest directory first.
+
+////////////////////////////////////////////////
+//
+// Calling `test` inside a quest should work
+//
+////////////////////////////////////////////////
+Compiled 1 Solidity file successfully
+
+
+  Contract (Part 1)
+    ✔ foo() should work
+
+
+  1 passing (852ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` without an integer should run all tests
+//
+////////////////////////////////////////////////
+
+
+  Contract (Part 1)
+    ✔ foo() should work
+
+
+  1 passing (833ms)
+
+
+
+  Contract (Part 2)
+    ✔ bar() should work
+
+
+  1 passing (39ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` with an invalid integer should print error message
+//
+////////////////////////////////////////////////
+
+ERROR: Unrecognized parameter(s)
+
+Usage: quest test [<index>]
+Example: quest test 1
+
+Run a quest's local test(s). If the index is unspecified, test all parts.
+Must be ran in a valid quest directory.
+
+index:     Part of quest to test (e.g. 1, 2, 3)
+
+////////////////////////////////////////////////
+//
+// Calling `test` inside a subfolder in the quest folder should work
+//
+////////////////////////////////////////////////
+
+
+  Contract (Part 2)
+    ✔ bar() should work
+
+
+  1 passing (801ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` in a CTF quest should print error message
+//
+////////////////////////////////////////////////
+
+Quest is a CTF quest. No local tests to run.
+

@@ -1,44 +1,44 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { CREDENTIALS_NOT_FOUND_MESSAGE, QUEST_ALREADY_EXISTS_MESSAGE, QUEST_NOT_FOUND_MESSAGE, UPDATE_QUEST_CONFIRMATION } from './messages.js';
-import { mainPath, navigateToMainDirectory } from './utils.js';
-import Downloader from 'github-download-directory';
+import { getDirectory, mainPath, navigateToMainDirectory } from './utils/navigation.js';
+import { QuestDownloader } from './utils/downloader.js';
+
+import { 
+  CREDENTIALS_NOT_FOUND_MESSAGE, 
+  NavigateToQuestMessage, 
+  QUEST_ALREADY_EXISTS_MESSAGE, 
+  QUEST_NOT_FOUND_MESSAGE, 
+  UPDATE_QUEST_CONFIRMATION, 
+  UPDATE_REMINDER_MESSAGE
+} from './utils/messages.js';
+import { isLatestVersion, localVersion, remoteVersion } from './utils/versions.js';
 
 export async function findQuest(questName) {
 
   navigateToMainDirectory();
-  const directoryPath = path.join(mainPath(), './campaigns/directory.json');
-  const directory = JSON.parse(fs.readFileSync(directoryPath));
+  const directory = getDirectory();
 
-  // Search for quest in 'quests'
-  for (const quest of directory.quests) {
-    if (quest.name != questName) continue;
-
-    const message = chalk.green(
-      chalk.bold(`\n${questName} (${quest.version})`), 'found.\n'
-    );
-    console.log(message);
-    await queryAndPullQuest(`campaigns/standalone-quests/${quest.name}`, quest.version)
-    return;
-
+  // These quests are in the directory for testing purposes
+  if (questName == "test-build-quest" || questName == "test-ctf-quest") {
+    console.log(QUEST_NOT_FOUND_MESSAGE);
+    process.exit(1);
   }
 
-  // Search for quest in 'campaigns'
-  for (const campaign of directory.campaigns) {
+  for (const campaign of directory) {
     for (const quest of campaign.quests) {
       if (quest.name != questName) continue;
 
-      const message = chalk.green(
+      const message = chalk.cyan(
         chalk.bold(`\n${questName} (${quest.version})`),
         'found in',
         chalk.bold(`${campaign.name}\n`)
       );
 
       console.log(message);
-
       await queryAndPullQuest(`campaigns/${campaign.name}/${quest.name}`, quest.version);
       return;
     }
@@ -46,7 +46,7 @@ export async function findQuest(questName) {
 
   // Quest not found
   console.log(QUEST_NOT_FOUND_MESSAGE);
-  process.exit();
+  process.exit(1);
 
 };
 
@@ -62,7 +62,8 @@ async function queryAndPullQuest(questPath, versionString) {
 
     if (currentVersionString == versionString) {
       console.log(QUEST_ALREADY_EXISTS_MESSAGE);
-      process.exit();
+      console.log(NavigateToQuestMessage(localPath));
+      process.exit(0);
     }
 
     message = UPDATE_QUEST_CONFIRMATION;
@@ -79,28 +80,39 @@ async function queryAndPullQuest(questPath, versionString) {
   });
 
   if (answer.overwrite == 'Cancel') {
-    process.exit();
+    console.log(chalk.gray("\nDownload cancelled"));
+    process.exit(0);
   }
 
   fs.rmSync(localPath, { recursive: true, force: true });
 
   // Download quest
-  console.log(chalk.green("Downloading quest..."));
+  console.log(chalk.green("\nDownloading quest..."));
 
-  if (!fs.existsSync('./.credentials')) {
+  dotenv.config({ path: './.env' });
+  const token = process.env.GITHUB_TOKEN;
+  if (token == undefined) {
     console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit();
+    process.exit(1);
   }
 
-  const token = fs.readFileSync(path.join(mainPath(), './.credentials')).toString();
-  const authDownloader = new Downloader.Downloader({
+  const authDownloader = new QuestDownloader({
     github: { auth: token }
   });
 
-  console.log(questPath);
-  await authDownloader.download('NodeGuardians', 'ng-quests-library', questPath);
+  await authDownloader.downloadDirectory('NodeGuardians', 'ng-quests-public', questPath);
 
-  console.log(chalk.green(`Quest downloaded at ${localPath}`));
+  // Install Quest
+  console.log(chalk.green("\nInstalling quest..."));
+  await authDownloader.installSubpackage();
+
+  // Print Quest Location
+  console.log();
+  console.log(NavigateToQuestMessage(localPath));
+
+  if (!await isLatestVersion()) {
+    console.log(UPDATE_REMINDER_MESSAGE);
+  }
 
 }
 

@@ -1,123 +1,228 @@
-{
-    "quests": [
-        {
-            "name": "low-level-calls",
-            "version": "1.0.0"
-        },
-        {
-            "name": "merkle-proofs",
-            "version": "1.0.0"
-        },
-        {
-            "name": "unordered-key-set",
-            "version": "1.0.0"
-        },
-        {
-            "name": "unexpected-ether",
-            "version": "1.0.0"
-        },
-        {
-            "name": "bypassing-extcodesize",
-            "version": "1.0.0"
-        },
-        {
-            "name": "clone-factories",
-            "version": "1.0.0"
-        },
-        {
-            "name": "using-signatures",
-            "version": "1.0.0"
-        },
-        {
-            "name": "multicall",
-            "version": "1.0.0"
-        },
-        {
-            "name": "changing-bytecode",
-            "version": "1.0.0"
-        },
-        {
-            "name": "delegate-call-detection",
-            "version": "1.0.0"
-        }
-    ],
-    "campaigns": [
-        {
-            "name": "understanding-storage",
-            "quests": [
-                {
-                    "name": "storage-layout",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "storage-efficiency",
-                    "version": "1.0.0"
-                }
-            ]
-        },
-        {
-            "name": "randomness",
-            "quests": [
-                {
-                    "name": "breaking-rng",
-                    "version": "1.0.0"
-                }
-            ]
-        },
-        {
-            "name": "proxy-contracts",
-            "quests": [
-                {
-                    "name": "breaking-rng",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "proxy-security",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "using-openzeppelin",
-                    "version": "1.0.0"
-                }
-            ]
-        },
-        {
-            "name": "diamonds",
-            "quests": [
-                {
-                    "name": "stateful-libraries",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "building-diamonds",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "using-diamonds",
-                    "version": "1.0.0"
-                }
-            ]
-        },
-        {
-            "name": "learning-assembly",
-            "quests": [
-                {
-                    "name": "basics",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "bits-and-bytes",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "calldata",
-                    "version": "1.0.0"
-                },
-                {
-                    "name": "memory",
-                    "version": "1.0.0"
-                }
-            ]
-        }
-    ]
-}
+[
+    {
+        "name": "standalone-quests",
+        "quests":[
+            {
+                "name": "low-level-calls",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "merkle-proofs",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "unordered-key-set",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "unexpected-ether",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "bypassing-extcodesize",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "clone-factories",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "using-signatures",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "multicall",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "changing-bytecode",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "delegate-call-detection",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "price-oracle-attack",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "hardhat-forking",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "stealth-addresses",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            }     
+        ] 
+    },
+    {
+        "name": "understanding-storage",
+        "quests": [
+            {
+                "name": "storage-layout",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 3
+            },
+            {
+                "name": "storage-efficiency",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "randomness",
+        "quests": [
+            {
+                "name": "breaking-rng",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "chainlink-vrf",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "proxy-contracts",
+        "quests": [
+            {
+                "name": "basic-proxies",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "proxy-security",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 4
+            },
+            {
+                "name": "openzeppelin-upgrades",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "diamonds",
+        "quests": [
+            {
+                "name": "stateful-libraries",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "building-diamonds",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "using-diamonds",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 4
+            }
+        ]
+    },
+    {
+        "name": "learning-assembly",
+        "quests": [
+            {
+                "name": "yul-basics",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 7
+            },
+            {
+                "name": "bits-and-bytes",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "calldata-manipulation",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "memory-manipulation",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            }
+        ]
+    },
+    {
+        "name": "tutorial",
+        "quests": [
+            {
+                "name": "build-tutorial",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "ctf-tutorial",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "test-campaign",
+        "quests": [
+            {
+                "name": "test-build-quest",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "test-ctf-quest",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 0
+            }
+        ]
+    }
+]
