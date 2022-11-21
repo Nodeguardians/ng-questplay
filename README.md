@@ -21,7 +21,7 @@ Then install the necessary packages and symlink:
 npm install && npm link
 ```
 
-Create a [Github authentication token](https://staging.nodeguardians.com/?s=home-faq) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+Create a [Github authentication token](https://nodeguardians.io/?s=home-faq&sf=devhub--why-and-how-do-i-create-a-github-token) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
 
 ```bash
 # In .env file
