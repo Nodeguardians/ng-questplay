@@ -6,7 +6,7 @@ Welcome guardian. The road out will be treacherous, but remember, fortune favors
 
 ## Getting Started
 
-Fork this repository and install[our Github Application](https://github.com/apps/node-guardians-beta) onto it.
+Fork this repository and install [our Github Application](https://github.com/apps/node-guardians) onto it.
 
 After which, clone the forked repo onto your local device: 
 
