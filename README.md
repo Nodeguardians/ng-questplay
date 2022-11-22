@@ -12,7 +12,7 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
 
     > ⚠ Your repository must be private!
 
-2. Download [Questplay on Github](https://github.com/Nodeguardians/ng-questplay) onto your local device, and push it to the Github repository you have created.
+2. Download this repository onto your local device, and push it to the Github repository you have created.
 
     ```
     git clone https://github.com/Nodeguardians/ng-questplay.git
