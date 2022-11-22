@@ -6,29 +6,37 @@ Welcome guardian. The road out will be treacherous, but remember, fortune favors
 
 ## Getting Started
 
-Fork this repository and install [our Github Application](https://github.com/apps/node-guardians) onto it.
+We **highly recommend** that you set up Questplay by following [our tutorial](https://nodeguardians.io/dev-hub?s=devhub-campaigns&sc=tutorial). But here are the brief steps anyways.
 
-After which, clone the forked repo onto your local device: 
+1. Create a new private repository `ng-questplay` on Github and leave it empty for now. Then, install [our Github application](https://github.com/apps/node-guardians) on it.
 
-```
-git clone https://github.com/Nodeguardians/ng-questplay.git`
-cd ng-questplay
-```
+    > ⚠ Your repository must be private!
 
-Then install the necessary packages and symlink:
+2. Download [Questplay on Github](https://github.com/Nodeguardians/ng-questplay) onto your local device, and push it to the Github repository you have created.
 
-```
-npm install && npm link
-```
+    ```
+    git clone https://github.com/Nodeguardians/ng-questplay.git
+    cd ng-questplay
+    git remote set-url origin https://github.com/{GITHUB_USERNAME}/ng-questplay.git
+    git push -u origin main
+    ```
 
-Create a [Github authentication token](https://nodeguardians.io/?s=home-faq&sf=devhub--why-and-how-do-i-create-a-github-token) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+    > 💡 Replace `GITHUB_USERNAME` with your Github username!
 
-```bash
-# In .env file
-GITHUB_TOKEN = "ghp_..." # Add token here
-```
+3. Next, install the required dependencies.
 
-> ⚠️ Take care to not share / upload your `.env` file to anyone or anywhere.
+    ```
+    npm install && npm link
+    ```
+
+4. Create a [Github authentication token](https://nodeguardians.io/?s=home-faq&sf=devhub--why-and-how-do-i-create-a-github-token) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
+
+    ```bash
+    # In .env file
+    GITHUB_TOKEN = "ghp_..." # Add token here
+    ```
+
+    > ⚠️ Take care to not share / upload your `.env` file to anyone or anywhere.
 
 ## Finding a Quest
 
