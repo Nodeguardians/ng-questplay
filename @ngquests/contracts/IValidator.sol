@@ -15,4 +15,7 @@ interface IValidator {
     /// Returns true if contract "captured", false otherwise.
     function test(address user, uint k) external view returns (bool);
 
+    /// @dev Returns name of contract to be deployed for part `k`.
+    function contractName(uint k) external pure returns (string memory);
+
 }

@@ -22,7 +22,7 @@
             },
             {
                 "name": "unexpected-ether",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 2
             },
@@ -104,7 +104,7 @@
         "quests": [
             {
                 "name": "breaking-rng",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "ctf",
                 "parts": 2
             },
@@ -121,7 +121,7 @@
         "quests": [
             {
                 "name": "basic-proxies",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 2
             },
@@ -150,7 +150,7 @@
             },
             {
                 "name": "building-diamonds",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 2
             },
@@ -167,7 +167,7 @@
         "quests": [
             {
                 "name": "yul-basics",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 7
             },
@@ -205,23 +205,6 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
-            }
-        ]
-    },
-    {
-        "name": "test-campaign",
-        "quests": [
-            {
-                "name": "test-build-quest",
-                "version": "1.0.0",
-                "type": "build",
-                "parts": 2
-            },
-            {
-                "name": "test-ctf-quest",
-                "version": "1.0.0",
-                "type": "ctf",
-                "parts": 0
             }
         ]
     }
