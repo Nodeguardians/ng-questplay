@@ -1,0 +1,8 @@
+[
+    "contracts/Arithmetic.sol",
+    "contracts/Comparisons.sol",
+    "contracts/For.sol",
+    "contracts/If.sol",
+    "contracts/SafeMath.sol",
+    "contracts/Switch.sol"
+]
