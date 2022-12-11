@@ -96,6 +96,11 @@ export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE =
     "Questplay is unable to update when there are still uncommitted files in the repository.\n"
     + "Try committing or stashing all changes first.\n");
 
+export const UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE =
+  chalk.yellow(
+    "Questplay is unable to download a quest when there are still uncommitted files in the repository.\n"
+    + "Try committing or stashing all changes first.\n");
+
 export const UPDATE_REMINDER_MESSAGE =
   chalk.yellow(
     chalk.bold("\nIMPORTANT:"),
@@ -115,4 +120,25 @@ export function NavigateToQuestMessage(questPath) {
     chalk.bold(`cd ${relativePath}`),
     "\n"
   );
+}
+
+export function UnexpectedContractsWarning(newContracts, modifiedContracts) {
+
+  let msg = chalk.yellow(
+    `\n${chalk.bold("WARNING:")} Questplay has detected unexpectedly added/modified .sol files.\n`
+    + `Only files listed in ${chalk.bold("`/files-to-test.json`")} can be safely submitted.\n\n`
+  );
+    
+  for (const newContract of newContracts)
+    msg += chalk.gray(`     Added: ${newContract}\n`);
+
+  for (const modifiedContract of modifiedContracts)
+    msg += chalk.gray(`  Modified: ${modifiedContract}\n`);
+    
+  msg += chalk.yellow(
+    "\nIf your solution is dependent on any of these changes,"
+    + ` consider moving the code to any of the files listed in ${chalk.bold("`/files-to-test.json`")}.`
+  );
+
+  return msg;
 }

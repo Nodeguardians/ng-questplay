@@ -12,6 +12,7 @@ import {
   NavigateToQuestMessage, 
   QUEST_ALREADY_EXISTS_MESSAGE, 
   QUEST_NOT_FOUND_MESSAGE, 
+  UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE, 
   UPDATE_QUEST_CONFIRMATION, 
   UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
@@ -84,9 +85,16 @@ async function queryAndPullQuest(questPath, versionString) {
     process.exit(0);
   }
 
+  // (1) Ensure all changes saved
+  const statusSummary = await git.status()
+  if (statusSummary.files.length) {
+    console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
+    process.exit(1);
+  }
+
   fs.rmSync(localPath, { recursive: true, force: true });
 
-  // Download quest
+  // (2) Download quest
   console.log(chalk.green("\nDownloading quest..."));
 
   dotenv.config({ path: './.env' });
@@ -102,11 +110,25 @@ async function queryAndPullQuest(questPath, versionString) {
 
   await authDownloader.downloadDirectory('NodeGuardians', 'ng-quests-public', questPath);
 
-  // Install Quest
+  // (3) Install Quest
   console.log(chalk.green("\nInstalling quest..."));
   await authDownloader.installSubpackage();
 
-  // Print Quest Location
+  // (4) Commit new changes
+  try {
+
+    await git.add("./*");
+    await git.commit(`Download quest ${questPath}`);
+    console.log(chalk.green("\nDownload committed.\n"));
+
+  } catch (err) {
+
+    console.log(chalk.grey("\ngit commit failed. Try manually committing the downloaded quest.\n"));
+    process.exit(0);
+
+  }
+
+  // (5) Print Quest Location
   console.log();
   console.log(NavigateToQuestMessage(localPath));
 

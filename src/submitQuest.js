@@ -6,6 +6,7 @@ import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
 import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
+import { checkFilesToTest } from "./utils/fileChecker.js";
 
 const git = simpleGit();
 
@@ -34,8 +35,9 @@ export async function submitQuest(isSetUpstream) {
     process.exit(0);
   }
 
-  const statusSummary = await git.status()
+  checkFilesToTest();
 
+  const statusSummary = await git.status()
   if (statusSummary.files.length) {
     console.log(UNCOMMITTED_FILES_MESSAGE);
     process.exit(1);

@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import path from 'path';
 import { cwd } from 'process';
+import { checkFilesToTest } from './utils/fileChecker.js';
 import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
 
 export async function runTests(partIndex = undefined) {
@@ -26,6 +27,8 @@ export async function runTests(partIndex = undefined) {
     process.exit(0);
   }
 
+  checkFilesToTest();
+  
   const hre = await import('hardhat');
 
   if (partIndex == undefined) {

@@ -36,6 +36,19 @@ export async function updateQuestplay() {
 
   console.log();
 
+  try {
+
+    await git.add("./*");
+    await git.commit(`Update Questplay to ${await remoteVersion()}`);
+    console.log(chalk.green("\nUpdate committed.\n"));
+
+  } catch (err) {
+
+    console.log(chalk.grey("\ngit commit failed. Try manually committing the the Questplay update.\n"));
+    process.exit(0);
+
+  }
+  
 }
 
 async function pullUpdate() {
@@ -57,18 +70,5 @@ async function pullUpdate() {
 
   console.log(chalk.green("\nInstalling Questplay..."));
   await authDownloader.installSubpackage();
-
-  try {
-
-    await git.add("./*");
-    await git.commit(`Update Questplay to ${remoteVersion()}`);
-    console.log(chalk.green("\nUpdate committed.\n"));
-
-  } catch (err) {
-
-    console.log(chalk.grey("\ngit commit failed. Try manually committing the the Questplay update.\n"));
-    process.exit(0);
-
-  }
 
 }
