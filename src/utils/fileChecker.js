@@ -41,11 +41,12 @@ export async function checkFilesToTest() {
     return;
   }
 
+  const filesToTestPath = path.join(questPath, "files-to-test.json");
+
   const warning = UnexpectedContractsWarning(
-    unexpectedNewContracts, unexpectedModifiedContracts, questPath
+    unexpectedNewContracts, unexpectedModifiedContracts, filesToTestPath
   );
 
   console.log(warning);
+  console.log();
 }
-
-checkFilesToTest();

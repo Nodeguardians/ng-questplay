@@ -26,8 +26,6 @@ export async function runTests(partIndex = undefined) {
     console.log(chalk.red("\nQuest is a CTF quest. No local tests to run.\n"));
     process.exit(0);
   }
-
-  checkFilesToTest();
   
   const hre = await import('hardhat');
 
@@ -40,4 +38,6 @@ export async function runTests(partIndex = undefined) {
     hre.default.run("test", { grep: `Part ${partIndex}` });
   }
   
+  checkFilesToTest();
+
 };

@@ -16,7 +16,10 @@ import {
   UPDATE_QUEST_CONFIRMATION, 
   UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
-import { isLatestVersion, localVersion, remoteVersion } from './utils/versions.js';
+import { isLatestVersion } from './utils/versions.js';
+import simpleGit from 'simple-git';
+
+const git = simpleGit();
 
 export async function findQuest(questName) {
 
@@ -85,6 +88,8 @@ async function queryAndPullQuest(questPath, versionString) {
     process.exit(0);
   }
 
+  console.log();
+
   // (1) Ensure all changes saved
   const statusSummary = await git.status()
   if (statusSummary.files.length) {
@@ -95,7 +100,7 @@ async function queryAndPullQuest(questPath, versionString) {
   fs.rmSync(localPath, { recursive: true, force: true });
 
   // (2) Download quest
-  console.log(chalk.green("\nDownloading quest..."));
+  console.log(chalk.green("Downloading quest..."));
 
   dotenv.config({ path: './.env' });
   const token = process.env.GITHUB_TOKEN;
@@ -118,7 +123,7 @@ async function queryAndPullQuest(questPath, versionString) {
   try {
 
     await git.add("./*");
-    await git.commit(`Download quest ${questPath}`);
+    await git.commit(`Download quest ${path.basename(questPath)}`);
     console.log(chalk.green("\nDownload committed.\n"));
 
   } catch (err) {
@@ -129,7 +134,6 @@ async function queryAndPullQuest(questPath, versionString) {
   }
 
   // (5) Print Quest Location
-  console.log();
   console.log(NavigateToQuestMessage(localPath));
 
   if (!await isLatestVersion()) {

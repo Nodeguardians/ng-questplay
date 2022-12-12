@@ -6,7 +6,6 @@ import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
 import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
-import { checkFilesToTest } from "./utils/fileChecker.js";
 
 const git = simpleGit();
 
@@ -34,8 +33,6 @@ export async function submitQuest(isSetUpstream) {
     console.log(chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n"));
     process.exit(0);
   }
-
-  checkFilesToTest();
 
   const statusSummary = await git.status()
   if (statusSummary.files.length) {

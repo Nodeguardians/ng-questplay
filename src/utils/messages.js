@@ -89,17 +89,17 @@ export const UPDATE_HELP_MESSAGE =
 export const UNCOMMITTED_FILES_MESSAGE =
   chalk.yellow(
     "Uncommitted files detected. Questplay is unable to push to remote.\n"
-    + "Try committing or stashing all changes first.\n");
+    + "Try committing or stashing all changes with git first.\n");
 
 export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE =
   chalk.yellow(
     "Questplay is unable to update when there are still uncommitted files in the repository.\n"
-    + "Try committing or stashing all changes first.\n");
+    + "Try committing or stashing all changes with git first.\n");
 
 export const UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE =
   chalk.yellow(
     "Questplay is unable to download a quest when there are still uncommitted files in the repository.\n"
-    + "Try committing or stashing all changes first.\n");
+    + "Try committing or stashing all changes with git first.\n");
 
 export const UPDATE_REMINDER_MESSAGE =
   chalk.yellow(
@@ -122,23 +122,21 @@ export function NavigateToQuestMessage(questPath) {
   );
 }
 
-export function UnexpectedContractsWarning(newContracts, modifiedContracts) {
+export function UnexpectedContractsWarning(newContracts, modifiedContracts, filesToTestPath=undefined) {
 
-  let msg = chalk.yellow(
-    `\n${chalk.bold("WARNING:")} Questplay has detected unexpectedly added/modified .sol files.\n`
-    + `Only files listed in ${chalk.bold("`/files-to-test.json`")} can be safely submitted.\n\n`
-  );
+  let msg = chalk.yellow("WARNING: ")
+    + "Questplay has detected unexpectedly added/modified .sol files.\n\n";
     
   for (const newContract of newContracts)
-    msg += chalk.gray(`     Added: ${newContract}\n`);
+    msg += chalk.bold(`     Added: ${newContract}\n`);
 
   for (const modifiedContract of modifiedContracts)
-    msg += chalk.gray(`  Modified: ${modifiedContract}\n`);
+    msg += chalk.bold(`  Modified: ${modifiedContract}\n`);
     
-  msg += chalk.yellow(
-    "\nIf your solution is dependent on any of these changes,"
-    + ` consider moving the code to any of the files listed in ${chalk.bold("`/files-to-test.json`")}.`
-  );
+  msg += "\nIf your solution is dependent on any these changes, consider moving them.";
 
-  return msg;
+  if (filesToTestPath) 
+    msg += `\nSee ${chalk.bold(filesToTestPath)} for the .sol files you can safely modify.`;
+
+  return chalk.gray(msg);
 }
