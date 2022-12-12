@@ -38,6 +38,9 @@ export async function runTests(partIndex = undefined) {
     hre.default.run("test", { grep: `Part ${partIndex}` });
   }
   
-  checkFilesToTest();
+  checkFilesToTest().catch((_) => {
+    console.log(chalk.gray("WARNING: Check for files-to-test.json failed.\n"
+      +  "Help report this via Discord! https://discord.com/invite/DxvUzcQe"));
+  });
 
 };

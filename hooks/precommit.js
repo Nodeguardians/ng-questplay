@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 import simpleGit from "simple-git";
@@ -39,15 +40,22 @@ function findUnexpected(contractFiles) {
 
 }
 
-const git = simpleGit();
+async function main() {
+  const git = simpleGit();
 
-const statusSummary = await git.status();
+  const statusSummary = await git.status();
 
-const unexpectedAdded = findUnexpected(statusSummary.created);
-const unexpectedModded = findUnexpected(statusSummary.modified);
+  const unexpectedAdded = findUnexpected(statusSummary.created);
+  const unexpectedModded = findUnexpected(statusSummary.modified);
 
-if (unexpectedAdded.length > 0 || unexpectedModded.length > 0) {
-    console.log();
-    console.log(UnexpectedContractsWarning(unexpectedAdded, unexpectedModded));
-    console.log();
+  if (unexpectedAdded.length > 0 || unexpectedModded.length > 0) {
+      console.log();
+      console.log(UnexpectedContractsWarning(unexpectedAdded, unexpectedModded));
+      console.log();
+  }
 }
+
+main().catch((_) => {
+  console.log(chalk.gray("WARNING: Check for files-to-test.json failed.\n"
+    +  "Help report this via Discord! https://discord.com/invite/DxvUzcQe"));
+});
