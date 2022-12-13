@@ -5,7 +5,8 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "test": "bash test/test.sh"
+        "test": "bash test/test.sh",
+        "start-adventure": "npm install && npm link && node hooks/install.js"
     },
     "author": "",
     "license": "MIT",
