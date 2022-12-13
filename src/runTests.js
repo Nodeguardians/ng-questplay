@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import path from 'path';
 import { cwd } from 'process';
+import { checkFilesToTest } from './utils/fileChecker.js';
 import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
 
 export async function runTests(partIndex = undefined) {
@@ -25,7 +26,7 @@ export async function runTests(partIndex = undefined) {
     console.log(chalk.red("\nQuest is a CTF quest. No local tests to run.\n"));
     process.exit(0);
   }
-
+  
   const hre = await import('hardhat');
 
   if (partIndex == undefined) {
@@ -34,7 +35,12 @@ export async function runTests(partIndex = undefined) {
       if (numFailed > 0) break;
     }
   } else {
-    hre.default.run("test", { grep: `Part ${partIndex}` });
+    await hre.default.run("test", { grep: `Part ${partIndex}` });
   }
   
+  checkFilesToTest().catch((_) => {
+    console.log(chalk.gray("WARNING: Check for files-to-test.json failed.\n"
+      +  "Help report this via Discord! https://discord.com/invite/DxvUzcQe"));
+  });
+
 };
