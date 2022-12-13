@@ -23,10 +23,10 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
 
     > 💡 Replace `GITHUB_USERNAME` with your Github username!
 
-3. Next, install the required dependencies.
+3. Next, run the following command to install the required dependencies.
 
     ```
-    npm install && npm link
+    npm run start-adventure
     ```
 
 4. Create a [Github authentication token](https://nodeguardians.io/?s=home-faq&sf=devhub--why-and-how-do-i-create-a-github-token) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:

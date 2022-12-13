@@ -12,10 +12,14 @@ import {
   NavigateToQuestMessage, 
   QUEST_ALREADY_EXISTS_MESSAGE, 
   QUEST_NOT_FOUND_MESSAGE, 
+  UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE, 
   UPDATE_QUEST_CONFIRMATION, 
   UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
-import { isLatestVersion, localVersion, remoteVersion } from './utils/versions.js';
+import { isLatestVersion } from './utils/versions.js';
+import simpleGit from 'simple-git';
+
+const git = simpleGit();
 
 export async function findQuest(questName) {
 
@@ -84,10 +88,19 @@ async function queryAndPullQuest(questPath, versionString) {
     process.exit(0);
   }
 
+  console.log();
+
+  // (1) Ensure all changes saved
+  const statusSummary = await git.status()
+  if (statusSummary.files.length) {
+    console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
+    process.exit(1);
+  }
+
   fs.rmSync(localPath, { recursive: true, force: true });
 
-  // Download quest
-  console.log(chalk.green("\nDownloading quest..."));
+  // (2) Download quest
+  console.log(chalk.green("Downloading quest..."));
 
   dotenv.config({ path: './.env' });
   const token = process.env.GITHUB_TOKEN;
@@ -102,12 +115,25 @@ async function queryAndPullQuest(questPath, versionString) {
 
   await authDownloader.downloadDirectory('NodeGuardians', 'ng-quests-public', questPath);
 
-  // Install Quest
+  // (3) Install Quest
   console.log(chalk.green("\nInstalling quest..."));
   await authDownloader.installSubpackage();
 
-  // Print Quest Location
-  console.log();
+  // (4) Commit new changes
+  try {
+
+    await git.add("./*");
+    await git.commit(`Download quest ${path.basename(questPath)}`);
+    console.log(chalk.green("\nDownload committed.\n"));
+
+  } catch (err) {
+
+    console.log(chalk.grey("\ngit commit failed. Try manually committing the downloaded quest.\n"));
+    process.exit(0);
+
+  }
+
+  // (5) Print Quest Location
   console.log(NavigateToQuestMessage(localPath));
 
   if (!await isLatestVersion()) {

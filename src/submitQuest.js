@@ -35,7 +35,6 @@ export async function submitQuest(isSetUpstream) {
   }
 
   const statusSummary = await git.status()
-
   if (statusSummary.files.length) {
     console.log(UNCOMMITTED_FILES_MESSAGE);
     process.exit(1);

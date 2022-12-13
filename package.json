@@ -1,11 +1,12 @@
 {
     "private": true,
     "name": "ng-questplay",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "",
     "type": "module",
     "scripts": {
-        "test": "bash test/test.sh"
+        "test": "bash test/test.sh",
+        "start-adventure": "npm install && npm link && node hooks/install.js"
     },
     "author": "",
     "license": "MIT",
@@ -23,7 +24,7 @@
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.12.2",
         "lerna": "^5.5.4",
-        "simple-git": "3.14.1"
+        "simple-git": "^3.15.1"
     },
     "overrides": {
         "parse-url": "^8.1.0"
