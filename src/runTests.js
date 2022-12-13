@@ -35,7 +35,7 @@ export async function runTests(partIndex = undefined) {
       if (numFailed > 0) break;
     }
   } else {
-    hre.default.run("test", { grep: `Part ${partIndex}` });
+    await hre.default.run("test", { grep: `Part ${partIndex}` });
   }
   
   checkFilesToTest().catch((_) => {
