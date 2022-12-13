@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 import { navigateToMainDirectory } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 import { simpleGit } from 'simple-git';
@@ -34,6 +36,13 @@ export async function updateQuestplay() {
   // (3) Pull update
   await pullUpdate();
 
+  // (4) If git hook not installed, install pre-commit hook
+  // Required for legacy reasons. Early versions of Questplay doesn't require installing our pre-commit hook.
+  if (!fs.existsSync("./.git/hooks/pre-commit")) {
+    const hookFile = path.join(process.cwd(), "hooks", "precommit.js");
+    fs.symlinkSync(hookFile, "./.git/hooks/pre-commit");
+  }
+
   console.log();
 
   try {
@@ -48,7 +57,7 @@ export async function updateQuestplay() {
     process.exit(0);
 
   }
-  
+
 }
 
 async function pullUpdate() {
@@ -70,5 +79,4 @@ async function pullUpdate() {
 
   console.log(chalk.green("\nInstalling Questplay..."));
   await authDownloader.installSubpackage();
-
 }
