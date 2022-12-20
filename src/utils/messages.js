@@ -54,7 +54,8 @@ export const MAIN_HELP_MESSAGE =
     chalk.bold("  find"), "      Search for a specific quest in the repo\n",
     chalk.bold("  test"), "      Run local tests for the current quest\n",
     chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n",
-    chalk.bold("  update"), "    Updates Questplay to the latest version\n\n")
+    chalk.bold("  update"), "    Update Questplay to the latest version\n",
+    chalk.bold("  bridge"), "    Query the bridge signer for a signature\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
     chalk.bold("  --help"), "    Read the manual\n"
@@ -83,8 +84,14 @@ export const SUBMIT_HELP_MESSAGE =
 export const UPDATE_HELP_MESSAGE =
   chalk.gray(
     "\nUsage: quest update \n"
-    + "\nUpdates Questplay to the latest version.\n"
+    + "\nUpdate Questplay to the latest version.\n"
   );
+
+export const BRIDGE_HELP_MESSAGE =
+  chalk.gray(
+    "\nUsage: quest bridge <bridge-hash> \n"
+    + "\nQuery bridge signer for a signature.\n\n"
+  ) + chalk.cyan(chalk.bold("bridge-hash:"), "    32-byte bridge hash obtained from quest's contract\n");
 
 export const UNCOMMITTED_FILES_MESSAGE =
   chalk.yellow(

@@ -21,7 +21,7 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
     git push -u origin main
     ```
 
-    > 💡 Replace `GITHUB_USERNAME` with your Github username!
+    > 💡 Replace `{GITHUB_USERNAME}` with your Github username!
 
 3. Next, run the following command to install the required dependencies.
 
@@ -76,6 +76,14 @@ quest submit
 ```
 
 This command pushes your code to your remote repository in Github for verification.
+
+## Running the Cross-Chain Bridge
+
+Certain quests require you to run a cross-chain bridge from **Avalanche Fuji** to **Ethereum Goerli**. These quests will provide you a way to obtain a 32-byte bridge hash. Then, run the following command.
+
+> 💡 Replace `{BRIDGE_HASH}` with your 32-byte bridge hash!
+
+If the bridge hash is valid, you will be given a signature required to process any cross-chain transaction.
 
 ## Updating CLI
 

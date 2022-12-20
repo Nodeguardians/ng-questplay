@@ -31,7 +31,8 @@ Commands:
    find       Search for a specific quest in the repo
    test       Run local tests for the current quest
    submit     Submit quest to nodeguardians.io for verification
-   update     Updates Questplay to the latest version
+   update     Update Questplay to the latest version
+   bridge     Query the bridge signer for a signature
 
 Options:
 
@@ -52,7 +53,8 @@ Commands:
    find       Search for a specific quest in the repo
    test       Run local tests for the current quest
    submit     Submit quest to nodeguardians.io for verification
-   update     Updates Questplay to the latest version
+   update     Update Questplay to the latest version
+   bridge     Query the bridge signer for a signature
 
 Options:
 
@@ -79,7 +81,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (852ms)
+  1 passing (854ms)
 
 ////////////////////////////////////////////////
 //
@@ -92,7 +94,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (833ms)
+  1 passing (760ms)
 
 
 
@@ -100,7 +102,7 @@ Compiled 1 Solidity file successfully
     ✔ bar() should work
 
 
-  1 passing (39ms)
+  1 passing (38ms)
 
 ////////////////////////////////////////////////
 //
@@ -129,7 +131,7 @@ index:     Part of quest to test (e.g. 1, 2, 3)
     ✔ bar() should work
 
 
-  1 passing (801ms)
+  1 passing (733ms)
 
 ////////////////////////////////////////////////
 //
