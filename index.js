@@ -6,6 +6,7 @@ import {
   TEST_HELP_MESSAGE, 
   SUBMIT_HELP_MESSAGE, 
   UPDATE_HELP_MESSAGE,
+  BRIDGE_HELP_MESSAGE,
   TITLE, 
   WRONG_DIRECTORY_MESSAGE 
 } from './src/utils/messages.js';
@@ -16,6 +17,7 @@ import inquirer from 'inquirer';
 import { runSolution } from './src/runSolution.js';
 import { submitQuest } from './src/submitQuest.js';
 import { updateQuestplay } from './src/updateQuestplay.js';
+import { bridge } from './src/bridge.js';
 
 const commands = process.argv.slice(2);
 
@@ -120,6 +122,22 @@ switch (commands[0]) {
     }
     
     updateQuestplay()
+    break;
+
+  case 'bridge':
+
+    if (commands.includes("--help")) {
+      console.log(BRIDGE_HELP_MESSAGE);
+      process.exit(0);
+    }
+
+    if (commands.length != 2) {
+      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(BRIDGE_HELP_MESSAGE);
+      process.exit(1);
+    }
+    
+    bridge(commands[1]);
     break;
 
   default:
