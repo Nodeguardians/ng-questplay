@@ -3,7 +3,7 @@ import ethers from 'ethers';
 import { ProgressBar } from './utils/progressbar.js'
 
 const FUJI_ENDPOINT = "https://api.avax-test.network/ext/bc/C/rpc";
-const BRIDGE_REGISTRY = "0x4f78f2b0dae962E3246e1D9b8018bB9C2c88b59C";
+const BRIDGE_REGISTRY = "0xCDB6dea15633bC05D4A1d63ECe97eE9C6Fb9c9CB";
 const BRIDGE_REGISTRY_ABI = ["function bridgeHashes(bytes32) view returns (bool)"];
 
 const PK = "0x48b291fba855b6f79b690eccaf0caa253ee99163dfad74857f2daf7a0e52cff0";
