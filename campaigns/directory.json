@@ -133,7 +133,7 @@
             },
             {
                 "name": "openzeppelin-upgrades",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 2
             }
@@ -167,7 +167,7 @@
         "quests": [
             {
                 "name": "yul-basics",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "build",
                 "parts": 7
             },
