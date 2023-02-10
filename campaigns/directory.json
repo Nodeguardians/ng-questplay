@@ -192,6 +192,23 @@
         ]
     },
     {
+        "name": "gas-optimization",
+        "quests": [
+            {
+                "name": "solidity-optimization",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "assembly-optimization",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            }
+        ]
+    },
+    {
         "name": "tutorial",
         "quests": [
             {
