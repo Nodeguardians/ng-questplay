@@ -24,7 +24,8 @@
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.12.2",
         "lerna": "^5.5.4",
-        "simple-git": "^3.15.1"
+        "simple-git": "^3.15.1",
+        "command-exists": "^1.2.9"
     },
     "overrides": {
         "parse-url": "^8.1.0"

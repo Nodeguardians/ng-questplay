@@ -147,3 +147,8 @@ export function UnexpectedContractsWarning(newContracts, modifiedContracts, file
 
   return chalk.gray(msg);
 }
+
+export const INSTALL_FOUNDRY_MESSAGE =
+    chalk.grey("\nThis quest uses Foundry to run tests.\n")
+    + chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\n\n")
+    + chalk.cyan(`To install Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
