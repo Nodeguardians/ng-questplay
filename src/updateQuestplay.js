@@ -53,7 +53,7 @@ export async function updateQuestplay() {
 
   } catch (err) {
 
-    console.log(chalk.grey("\ngit commit failed. Try manually committing the the Questplay update.\n"));
+    console.log(chalk.grey("\ngit commit failed. Try manually committing the Questplay update.\n"));
     process.exit(0);
 
   }
