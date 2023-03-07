@@ -1,0 +1,11 @@
+{
+    "name": "test-build-foundry",
+    "version": "1.0.0",
+    "description": "",
+    "framework": "foundry",
+    "scripts": {
+        "test": "echo \"No test specified\""
+    },
+    "author": "",
+    "license": "MIT"
+}

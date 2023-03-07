@@ -215,6 +215,7 @@
                 "name": "build-tutorial",
                 "version": "1.0.0",
                 "type": "build",
+                "framework": "hardhat",
                 "parts": 4
             },
             {
@@ -252,7 +253,36 @@
         "name": "test-campaign",
         "quests": [
             {
-                "name": "test-build-quest",
+                "name": "test-build-hardhat",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "test-build-foundry",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "test-ctf-quest",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 0
+            }
+        ]
+    },
+    {
+        "name": "test-campaign",
+        "quests": [
+            {
+                "name": "test-build-hardhat",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "test-build-foundry",
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 2
