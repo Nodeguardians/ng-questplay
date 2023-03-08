@@ -81,7 +81,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (854ms)
+  1 passing (844ms)
 
 ////////////////////////////////////////////////
 //
@@ -94,7 +94,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (760ms)
+  1 passing (766ms)
 
 
 
@@ -102,7 +102,7 @@ Compiled 1 Solidity file successfully
     ✔ bar() should work
 
 
-  1 passing (38ms)
+  1 passing (40ms)
 
 ////////////////////////////////////////////////
 //
@@ -131,7 +131,43 @@ index:     Part of quest to test (e.g. 1, 2, 3)
     ✔ bar() should work
 
 
-  1 passing (733ms)
+  1 passing (728ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` should work for Foundry tests
+//
+////////////////////////////////////////////////
+
+Running Foundry tests...
+  [⠿] Compiling 2 files with 0.8.19
+  [⠿] Solc 0.8.19 finished in 13.66ms
+  [⠿] Compiler run successful
+
+  Contract (Part 1)
+     Public Test 1
+      ✔ TestFoo
+
+  Contract (Part 2)
+     Public Test 1
+      ✔ TestFoo
+
+  2 passing
+
+////////////////////////////////////////////////
+//
+// Calling `test` with index should work for Foundry tests
+//
+////////////////////////////////////////////////
+
+Running Foundry tests...
+  [⠿] No files changed, compilation skipped
+
+  Contract (Part 2)
+     Public Test 1
+      ✔ TestFoo
+
+  1 passing
 
 ////////////////////////////////////////////////
 //

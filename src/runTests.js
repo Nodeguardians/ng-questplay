@@ -35,9 +35,9 @@ export async function runTests(partIndex = undefined) {
 
   const framework = JSON.parse(fs.readFileSync("./package.json")).framework;
   if (framework == "foundry") {
-    await runFoundryTests(partIndex);
+    await runFoundryTests( partIndex);
   } else {
-    await runHardhatTests(partIndex);
+    await runHardhatTests(questInfo.parts, partIndex);
   }
 
   checkFilesToTest().catch((_) => {
@@ -47,12 +47,12 @@ export async function runTests(partIndex = undefined) {
 
 };
 
-async function runHardhatTests(partIndex) {
+async function runHardhatTests(numParts, partIndex) {
 
   const hre = await import('hardhat');
 
   if (partIndex == undefined) {
-    for (let i = 1; i <= questInfo.parts; i++) {
+    for (let i = 1; i <= numParts; i++) {
       const numFailed = await hre.default.run("test", { grep: `Part ${i}` });
       if (numFailed > 0) break;
     }
