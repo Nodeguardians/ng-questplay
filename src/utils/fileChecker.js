@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-// import chalk from 'chalk';
 import fs from 'fs';
 import { mainPath, navigateToQuestDirectory } from './navigation.js';
 import { simpleGit } from 'simple-git';

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import fs from 'fs';
