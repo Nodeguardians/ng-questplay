@@ -2,5 +2,6 @@
 src = 'contracts_'
 out = 'artifacts'
 libs = ['lib', '../../../lib', '../../../node_modules']
+remappings = [ 'test/=test' ]
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -35,30 +35,35 @@ cd ../campaigns/test-campaign
 test_header "Calling \`test\` outside a quest should print error message" >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
 
-test_header "Calling \`test\` inside a quest should work" >> "${TEMP_OUTPUT}"
-cd ./test-build-hardhat
+test_header "Calling \`test\` with an invalid integer should print error message" >> "${TEMP_OUTPUT}"
+quest test abc >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` inside a quest should work (Hardhat)" >> "${TEMP_OUTPUT}"
+cd ./test-build-quest
+quest test --hardhat >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` without an integer should run all tests (Hardhat)" >> "${TEMP_OUTPUT}"
+quest test >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` inside a subfolder in the quest folder should work (Hardhat)" >> "${TEMP_OUTPUT}"
+cd contracts
+quest test 2 >> "${TEMP_OUTPUT}"
+
+cd .. # Go back to quest directory
+
+test_header "Calling \`test\` inside a quest should work (Foundry)" >> "${TEMP_OUTPUT}"
+quest test --hardhat >> "${TEMP_OUTPUT}"
+quest test 2 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` without an integer should run all tests" >> "${TEMP_OUTPUT}"
 quest test >> "${TEMP_OUTPUT}"
 
-test_header "Calling \`test\` with an invalid integer should print error message" >> "${TEMP_OUTPUT}"
-quest test abc >> "${TEMP_OUTPUT}"
-
-test_header "Calling \`test\` inside a subfolder in the quest folder should work" >> "${TEMP_OUTPUT}"
+test_header "Calling \`test\` inside a subfolder in the quest folder should work (Foundry)" >> "${TEMP_OUTPUT}"
 cd contracts
 quest test 2 >> "${TEMP_OUTPUT}"
 
 cd ../.. # Go back to test-campaign directory
-
-test_header "Calling \`test\` should work for Foundry tests" >> "${TEMP_OUTPUT}"
-cd test-build-foundry
-quest test >> "${TEMP_OUTPUT}"
-
-test_header "Calling \`test\` with index should work for Foundry tests" >> "${TEMP_OUTPUT}"
-quest test 2 >> "${TEMP_OUTPUT}"
-
-cd .. # Go back to test-campaign directory
 
 test_header "Calling \`test\` in a CTF quest should print error message" >> "${TEMP_OUTPUT}"
 cd test-ctf-quest

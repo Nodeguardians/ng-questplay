@@ -252,13 +252,7 @@
         "name": "test-campaign",
         "quests": [
             {
-                "name": "test-build-hardhat",
-                "version": "1.0.0",
-                "type": "build",
-                "parts": 2
-            },
-            {
-                "name": "test-build-foundry",
+                "name": "test-build-quest",
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 2

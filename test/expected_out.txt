@@ -71,9 +71,32 @@ Try `cd` to a valid quest directory first.
 
 ////////////////////////////////////////////////
 //
-// Calling `test` inside a quest should work
+// Calling `test` with an invalid integer should print error message
 //
 ////////////////////////////////////////////////
+
+ERROR: Unrecognized parameter(s)
+
+Usage: quest test [<index>]
+Example: quest test 1
+
+Run a quest's local test(s). If the index is unspecified, test all parts.
+Must be ran in a valid quest directory.
+
+index:     Part of quest to test (e.g. 1, 2, 3)
+Options:
+
+   --foundry     Configure Foundry as the preferred testing framework.
+   --hardhat     Configure Hardhat as the preferred testing framework.
+
+////////////////////////////////////////////////
+//
+// Calling `test` inside a quest should work (Hardhat)
+//
+////////////////////////////////////////////////
+
+Preferred framework set to hardhat.
+
 Compiled 1 Solidity file successfully
 
 
@@ -81,7 +104,57 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (844ms)
+  1 passing (852ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` without an integer should run all tests (Hardhat)
+//
+////////////////////////////////////////////////
+
+
+  Contract (Part 1)
+    ✔ foo() should work
+
+
+  1 passing (764ms)
+
+
+
+  Contract (Part 2)
+    ✔ bar() should work
+
+
+  1 passing (40ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` inside a subfolder in the quest folder should work (Hardhat)
+//
+////////////////////////////////////////////////
+
+
+  Contract (Part 2)
+    ✔ bar() should work
+
+
+  1 passing (744ms)
+
+////////////////////////////////////////////////
+//
+// Calling `test` inside a quest should work (Foundry)
+//
+////////////////////////////////////////////////
+
+Preferred framework set to hardhat.
+
+
+
+  Contract (Part 2)
+    ✔ bar() should work
+
+
+  1 passing (737ms)
 
 ////////////////////////////////////////////////
 //
@@ -102,27 +175,11 @@ Compiled 1 Solidity file successfully
     ✔ bar() should work
 
 
-  1 passing (40ms)
+  1 passing (39ms)
 
 ////////////////////////////////////////////////
 //
-// Calling `test` with an invalid integer should print error message
-//
-////////////////////////////////////////////////
-
-ERROR: Unrecognized parameter(s)
-
-Usage: quest test [<index>]
-Example: quest test 1
-
-Run a quest's local test(s). If the index is unspecified, test all parts.
-Must be ran in a valid quest directory.
-
-index:     Part of quest to test (e.g. 1, 2, 3)
-
-////////////////////////////////////////////////
-//
-// Calling `test` inside a subfolder in the quest folder should work
+// Calling `test` inside a subfolder in the quest folder should work (Foundry)
 //
 ////////////////////////////////////////////////
 
@@ -131,43 +188,7 @@ index:     Part of quest to test (e.g. 1, 2, 3)
     ✔ bar() should work
 
 
-  1 passing (728ms)
-
-////////////////////////////////////////////////
-//
-// Calling `test` should work for Foundry tests
-//
-////////////////////////////////////////////////
-
-Running Foundry tests...
-  [⠿] Compiling 2 files with 0.8.19
-  [⠿] Solc 0.8.19 finished in 13.66ms
-  [⠿] Compiler run successful
-
-  Contract (Part 1)
-     Public Test 1
-      ✔ TestFoo
-
-  Contract (Part 2)
-     Public Test 1
-      ✔ TestFoo
-
-  2 passing
-
-////////////////////////////////////////////////
-//
-// Calling `test` with index should work for Foundry tests
-//
-////////////////////////////////////////////////
-
-Running Foundry tests...
-  [⠿] No files changed, compilation skipped
-
-  Contract (Part 2)
-     Public Test 1
-      ✔ TestFoo
-
-  1 passing
+  1 passing (741ms)
 
 ////////////////////////////////////////////////
 //
