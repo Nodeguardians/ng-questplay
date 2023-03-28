@@ -65,8 +65,13 @@ export const TEST_HELP_MESSAGE =
   chalk.gray("\nUsage: quest test [<index>]\n"
     + "Example: quest test 1\n\n"
     + "Run a quest's local test(s). If the index is unspecified, test all parts.\n"
-    + "Must be ran in a valid quest directory.\n\n"
-  ) + chalk.cyan(chalk.bold("index:"), "    Part of quest to test (e.g. 1, 2, 3)\n");
+    + "Must be ran in a valid quest directory.\n\n") 
+  + chalk.cyan(chalk.bold("index:"), "    Part of quest to test (e.g. 1, 2, 3)\n")
+  + chalk.cyan(
+      chalk.bold("Options:\n\n"),
+      chalk.bold("  --foundry"), "    Configure Foundry as the preferred testing framework.\n",
+      chalk.bold("  --hardhat"), "    Configure Hardhat as the preferred testing framework.\n"
+  );
 
 export const FIND_HELP_MESSAGE =
   chalk.gray(
