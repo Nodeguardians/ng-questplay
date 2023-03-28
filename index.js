@@ -10,7 +10,7 @@ import {
   TITLE, 
   WRONG_DIRECTORY_MESSAGE 
 } from './src/utils/messages.js';
-import { runTests } from './src/runTests.js';
+import { runTests, setFramework } from './src/runTests.js';
 import { mainPath } from './src/utils/navigation.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
@@ -45,6 +45,15 @@ switch (commands[0]) {
       console.log(TEST_HELP_MESSAGE);
       process.exit(0);
     }
+
+    if (commands.includes("--foundry")) {
+      await setFramework("foundry");
+      process.exit(0);
+    } else if (commands.includes("--hardhat")) {
+      await setFramework("hardhat");
+      process.exit(0);
+    }
+
     const partIndex = commands[1];
 
     if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))

@@ -30,3 +30,19 @@ export const getDirectory = function() {
   const directoryPath = path.join(mainPath(), './campaigns/directory.json');
   return JSON.parse(fs.readFileSync(directoryPath));
 }
+
+export const readSettings = function() {
+  const settingsPath = path.join(mainPath(), '.settings/prefs.json');
+
+  if (!fs.existsSync(settingsPath)) { 
+    fs.mkdirSync(path.join(mainPath(), '.settings'));
+    return {}; 
+  }
+
+  return JSON.parse(fs.readFileSync(settingsPath));
+}
+
+export const writeSettings = function(settingsJson) {
+  const settingsPath = path.join(mainPath(), '.settings/prefs.json');
+  fs.writeFileSync(settingsPath, JSON.stringify(settingsJson, null, 2));
+}
