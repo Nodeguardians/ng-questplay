@@ -7,6 +7,7 @@ import {
   SUBMIT_HELP_MESSAGE, 
   UPDATE_HELP_MESSAGE,
   BRIDGE_HELP_MESSAGE,
+  SET_FRAMEWORK_HELP_MESSAGE,
   TITLE, 
   WRONG_DIRECTORY_MESSAGE 
 } from './src/utils/messages.js';
@@ -46,14 +47,6 @@ switch (commands[0]) {
       process.exit(0);
     }
 
-    if (commands.includes("--foundry")) {
-      await setFramework("foundry");
-      process.exit(0);
-    } else if (commands.includes("--hardhat")) {
-      await setFramework("hardhat");
-      process.exit(0);
-    }
-
     const partIndex = commands[1];
 
     if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))
@@ -64,6 +57,22 @@ switch (commands[0]) {
     }
 
     await runTests(commands[1]);
+    break;
+
+  case 'set-framework':
+
+    if (commands.length != 2) {
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
+      console.log(SET_FRAMEWORK_HELP_MESSAGE);
+      process.exit(1);
+    }
+    const framework = commands[1];
+    if (framework != "foundry" && framework != "hardhat") {
+      console.log(chalk.red("\nERROR: Unrecognized framework"));
+      console.log(SET_FRAMEWORK_HELP_MESSAGE);
+      process.exit(1)
+    }
+    await setFramework(framework);
     break;
 
   case 'find':

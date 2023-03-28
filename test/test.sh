@@ -40,7 +40,7 @@ quest test abc >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` inside a quest should work (Hardhat)" >> "${TEMP_OUTPUT}"
 cd ./test-build-quest
-quest test --hardhat >> "${TEMP_OUTPUT}"
+quest set-framework hardhat >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` without an integer should run all tests (Hardhat)" >> "${TEMP_OUTPUT}"
@@ -53,7 +53,7 @@ quest test 2 >> "${TEMP_OUTPUT}"
 cd .. # Go back to quest directory
 
 test_header "Calling \`test\` inside a quest should work (Foundry)" >> "${TEMP_OUTPUT}"
-quest test --hardhat >> "${TEMP_OUTPUT}"
+quest set-framework foundry >> "${TEMP_OUTPUT}"
 quest test 2 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` without an integer should run all tests" >> "${TEMP_OUTPUT}"

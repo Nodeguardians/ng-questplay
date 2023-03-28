@@ -28,15 +28,16 @@ Manage your Node Guardians's quest repo using the `quest` command.
 
 Commands:
 
-   find       Search for a specific quest in the repo
-   test       Run local tests for the current quest
-   submit     Submit quest to nodeguardians.io for verification
-   update     Update Questplay to the latest version
-   bridge     Query the bridge signer for a signature
+   find           Search for a specific quest in the repo
+   test           Run local tests for the current quest
+   submit         Submit quest to nodeguardians.io for verification
+   update         Update Questplay to the latest version
+   bridge         Query the bridge signer for a signature
+   set-framework  Set default framework for local tests
 
 Options:
 
-   --help     Read the manual
+   --help         Read the manual
 
 ////////////////////////////////////////////////
 //
@@ -50,15 +51,16 @@ Manage your Node Guardians's quest repo using the `quest` command.
 
 Commands:
 
-   find       Search for a specific quest in the repo
-   test       Run local tests for the current quest
-   submit     Submit quest to nodeguardians.io for verification
-   update     Update Questplay to the latest version
-   bridge     Query the bridge signer for a signature
+   find           Search for a specific quest in the repo
+   test           Run local tests for the current quest
+   submit         Submit quest to nodeguardians.io for verification
+   update         Update Questplay to the latest version
+   bridge         Query the bridge signer for a signature
+   set-framework  Set default framework for local tests
 
 Options:
 
-   --help     Read the manual
+   --help         Read the manual
 
 ////////////////////////////////////////////////
 //
@@ -84,10 +86,6 @@ Run a quest's local test(s). If the index is unspecified, test all parts.
 Must be ran in a valid quest directory.
 
 index:     Part of quest to test (e.g. 1, 2, 3)
-Options:
-
-   --foundry     Configure Foundry as the preferred testing framework.
-   --hardhat     Configure Hardhat as the preferred testing framework.
 
 ////////////////////////////////////////////////
 //
@@ -104,7 +102,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (852ms)
+  1 passing (865ms)
 
 ////////////////////////////////////////////////
 //
@@ -117,7 +115,7 @@ Compiled 1 Solidity file successfully
     ✔ foo() should work
 
 
-  1 passing (764ms)
+  1 passing (765ms)
 
 
 
@@ -138,7 +136,7 @@ Compiled 1 Solidity file successfully
     ✔ bar() should work
 
 
-  1 passing (744ms)
+  1 passing (741ms)
 
 ////////////////////////////////////////////////
 //
@@ -146,15 +144,24 @@ Compiled 1 Solidity file successfully
 //
 ////////////////////////////////////////////////
 
-Preferred framework set to hardhat.
+Preferred framework set to foundry.
 
 
+Quest tests in Foundry is still currently in beta.
+If you notice any issues, consider reporting them on Discord!
+https://discord.gg/hBDXhQry
+
+Running Foundry tests...
+  [⠿] Compiling 2 files with 0.8.19
+  [⠿] Solc 0.8.19 finished in 12.85ms
+  [⠿] Compiler run successful
+     
 
   Contract (Part 2)
-    ✔ bar() should work
+    Public Test 1
+      ✔ TestFoo
 
-
-  1 passing (737ms)
+  1 passing
 
 ////////////////////////////////////////////////
 //
@@ -162,20 +169,23 @@ Preferred framework set to hardhat.
 //
 ////////////////////////////////////////////////
 
+Quest tests in Foundry is still currently in beta.
+If you notice any issues, consider reporting them on Discord!
+https://discord.gg/hBDXhQry
+
+Running Foundry tests...
+  [⠿] No files changed, compilation skipped
+     
 
   Contract (Part 1)
-    ✔ foo() should work
-
-
-  1 passing (766ms)
-
-
+    Public Test 1
+      ✔ TestFoo
 
   Contract (Part 2)
-    ✔ bar() should work
+    Public Test 1
+      ✔ TestFoo
 
-
-  1 passing (39ms)
+  2 passing
 
 ////////////////////////////////////////////////
 //
@@ -183,12 +193,19 @@ Preferred framework set to hardhat.
 //
 ////////////////////////////////////////////////
 
+Quest tests in Foundry is still currently in beta.
+If you notice any issues, consider reporting them on Discord!
+https://discord.gg/hBDXhQry
+
+Running Foundry tests...
+  [⠿] No files changed, compilation skipped
+     
 
   Contract (Part 2)
-    ✔ bar() should work
+    Public Test 1
+      ✔ TestFoo
 
-
-  1 passing (741ms)
+  1 passing
 
 ////////////////////////////////////////////////
 //
