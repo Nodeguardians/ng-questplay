@@ -154,8 +154,8 @@ export function UnexpectedContractsWarning(newContracts, modifiedContracts, file
 }
 
 export const INSTALL_FOUNDRY_MESSAGE =
-    + chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\n\n")
-    + chalk.cyan(`To install Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
+    chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\nRunning Foundry tests requires additional installation.\n\n")
+    + chalk.cyan(`To install and use Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
 
 export const FOUNDRY_BETA_MESSAGE =
   chalk.cyan(chalk.bold("Quest tests in Foundry is still currently in beta.\n"))
