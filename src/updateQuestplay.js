@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import child_process from 'child_process';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -41,6 +42,10 @@ export async function updateQuestplay() {
     const hookFile = path.join(process.cwd(), "hooks", "precommit.js");
     fs.symlinkSync(hookFile, "./.git/hooks/pre-commit");
   }
+
+  // (5) Install dependencies and forge-std submodule
+  child_process.execSync('npm install');
+  await git.submoduleUpdate(["--init", "--recursive"]);
 
   console.log();
 
