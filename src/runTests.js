@@ -10,10 +10,12 @@ import { checkFilesToTest } from './utils/fileChecker.js';
 import { 
   FOUNDRY_BETA_MESSAGE, 
   INSTALL_FOUNDRY_MESSAGE,
+  INSTALL_FORGE_LIB_MESSAGE,
   FOUNDRY_NOT_SUPPORTED_MESSAGE
 } from './utils/messages.js';
 import { 
   getDirectory, 
+  mainPath, 
   navigateToQuestDirectory, 
   readSettings, 
   writeSettings 
@@ -32,6 +34,13 @@ export async function setFramework(framework) {
   writeSettings(settings);
 
   console.log(chalk.gray(`\nPreferred framework set to ${framework}.\n`));
+
+  if (framework == "foundry") {
+    const forgeLibPath = path.join(mainPath(), "lib", "forge-std", "README.md");
+    if (!fs.existsSync(forgeLibPath)) {
+      console.log(INSTALL_FORGE_LIB_MESSAGE);
+    }
+  }
 }
 
 export async function runTests(partIndex = undefined) {

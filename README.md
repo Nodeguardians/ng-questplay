@@ -17,7 +17,7 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
     - **If Using GitHub HTTPS:**
 
         ```
-        git clone --recurse-submodules https://github.com/Nodeguardians/ng-questplay.git
+        git clone https://github.com/Nodeguardians/ng-questplay.git
         cd ng-questplay
         git remote set-url origin https://github.com/{GITHUB_USERNAME}/ng-questplay.git
         git push -u origin main
@@ -26,7 +26,7 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
     - **If Using Github SSH**
 
         ```
-        git clone --recurse-submodules git@github.com:github.com/Nodeguardians/ng-questplay.git
+        git clone git@github.com:github.com/Nodeguardians/ng-questplay.git
         cd ng-questplay
         git remote set-url origin git@github.com:{GITHUB_USERNAME}/ng-questplay.git
         git push -u origin main

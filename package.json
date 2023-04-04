@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "test": "bash test/test.sh",
-        "start-adventure": "npm install && npm link && node hooks/install.js"
+        "start-adventure": "npm install && npm link && node hooks/install.js && git submodule update --init --recursive"
     },
     "author": "",
     "license": "MIT",
