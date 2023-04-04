@@ -157,15 +157,37 @@ export function UnexpectedContractsWarning(newContracts, modifiedContracts, file
 
 export const INSTALL_FOUNDRY_MESSAGE =
     chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\nRunning Foundry tests requires additional installation.\n\n")
-    + chalk.cyan(`To install and use Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
+    + chalk.cyan(`To install Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
 
 export const INSTALL_FORGE_LIB_MESSAGE =
-  chalk.yellow("Foundry tests require the Forge-std submodule to be initialized.\nRun", chalk.bold("`git submodule update --init --recursive`"), "to initialize.\n\n");
+  chalk.yellow(
+    "Foundry tests require the forge-std submodule to be initialized. Run the following:\n\n",
+    chalk.bold("    git submodule add  https://github.com/foundry-rs/forge-std lib/forge-std\n"), 
+    chalk.bold("    git submodule update --init --recursive\n")
+  );
+
+export const UPDATE_FOUNDRY_MESSAGE =
+  chalk.yellow(
+    "Outdated version of Forge detected. To update, run:\n",
+    chalk.bold("    foundryup\n")
+  );
+
+export const UPDATE_FORGE_LIB_MESSAGE =
+  chalk.yellow("Outdated version of forge-std detected. To update, run:\n",
+    chalk.bold("    git submodule update --remote --merge\n")
+  );
 
 export const FOUNDRY_BETA_MESSAGE =
   chalk.cyan(chalk.bold("Quest tests in Foundry is still currently in beta.\n"))
     + chalk.grey("If you notice any issues, consider reporting them on Discord!\n")
     + chalk.grey(chalk.underline("https://discord.gg/hBDXhQry"));
+
+export const FORGE_VERSION_FAIL = 
+  chalk.yellow(
+    "WARNING: Failed to detect Forge version.\n",
+    "Consider reporting this on Discord!\n",
+    chalk.underline("https://discord.gg/hBDXhQry\n")
+  );
 
 export const FOUNDRY_NOT_SUPPORTED_MESSAGE =
   chalk.yellow("This quest does not support Foundry, running Hardhat instead...\n");

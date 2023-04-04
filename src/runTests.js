@@ -1,7 +1,5 @@
 import chalk from 'chalk';
 import path from 'path';
-import commandExists from 'command-exists';
-import fs from 'fs';
 import { cwd } from 'process';
 import { spawnSync } from 'child_process';
 
@@ -9,17 +7,14 @@ import TestHelpers from '@ngquests/test-helpers';
 import { checkFilesToTest } from './utils/fileChecker.js';
 import { 
   FOUNDRY_BETA_MESSAGE, 
-  INSTALL_FOUNDRY_MESSAGE,
-  INSTALL_FORGE_LIB_MESSAGE,
-  FOUNDRY_NOT_SUPPORTED_MESSAGE
 } from './utils/messages.js';
 import { 
   getDirectory, 
-  mainPath, 
   navigateToQuestDirectory, 
   readSettings, 
   writeSettings 
 } from './utils/navigation.js';
+import { checkForgeVersion } from './utils/versions.js';
 
 const { FoundryReport } = TestHelpers;
 
@@ -33,14 +28,13 @@ export async function setFramework(framework) {
   settings.framework = framework;
   writeSettings(settings);
 
-  console.log(chalk.gray(`\nPreferred framework set to ${framework}.\n`));
-
-  if (framework == "foundry") {
-    const forgeLibPath = path.join(mainPath(), "lib", "forge-std", "README.md");
-    if (!fs.existsSync(forgeLibPath)) {
-      console.log(INSTALL_FORGE_LIB_MESSAGE);
-    }
+  console.log();
+  if (!checkForgeVersion()) {
+    console.log(chalk.cyan("Then, run `quest set-framework foundry` to try again.\n"));
+    return;
   }
+
+  console.log(chalk.cyan(`Preferred framework set to ${framework}.\n`));
 }
 
 export async function runTests(partIndex = undefined) {
@@ -101,16 +95,7 @@ async function runHardhatTests(numParts, partIndex) {
 async function runFoundryTests(numParts, partIndex) {
 
   console.log();
-  if (!fs.existsSync("./foundry.toml")) {
-    console.log(FOUNDRY_NOT_SUPPORTED_MESSAGE);
-    runHardhatTests(numParts, partIndex);
-    return;
-  }
-
-  if (!commandExists.sync("forge")) {
-    console.log(INSTALL_FOUNDRY_MESSAGE);
-    process.exit(1);
-  }
+  if (!checkForgeVersion()) process.exit(1);
 
   console.log(FOUNDRY_BETA_MESSAGE);
   console.log(chalk.grey("\nRunning Foundry tests..."));

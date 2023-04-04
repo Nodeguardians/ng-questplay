@@ -1,12 +1,13 @@
 {
     "private": true,
     "name": "ng-questplay",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "",
     "type": "module",
     "scripts": {
         "test": "bash test/test.sh",
-        "start-adventure": "npm install && npm link && node hooks/install.js && git submodule update --init --recursive"
+        "start-adventure": "npm install && npm link && node hooks/install.js && npm run start-adventure:get-forge",
+        "start-adventure:get-forge": "git submodule add https://github.com/foundry-rs/forge-std lib/forge-std && git submodule update --init --recursive"
     },
     "author": "",
     "license": "MIT",
@@ -33,5 +34,9 @@
     },
     "workspaces": [
         "campaigns/**"
-    ]
+    ],
+    "foundryDependencies": {
+        "forge": "0.2.0",
+        "forgeStd": "1.5.2"
+    }
 }
