@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import inquirer from 'inquirer';
@@ -122,7 +121,7 @@ async function queryAndPullQuest(questPath, versionString) {
   // (4) Commit new changes
   try {
 
-    await git.add("./*");
+    await git.add(mainPath());
     await git.commit(`Download quest ${path.basename(questPath)}`);
     console.log(chalk.green("\nDownload committed.\n"));
 

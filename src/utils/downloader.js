@@ -22,9 +22,14 @@ export class QuestDownloader extends Downloader {
   }
 
   async downloadDirectory(owner, repo, directoryPath, options = {}) {
-    let barLoad = this.progressBar.start();
-    await super.download(owner, repo, directoryPath, options);
-    await barLoad.then(() => this.progressBar.stop("Download finished"));
+    this.progressBar.start();
+    try {
+      await super.download(owner, repo, directoryPath, options);
+    } catch (err) {
+      this.progressBar.fail("Download failed");
+      throw err;
+    }
+    await this.progressBar.stop("Download finished");
   }
 
   async downloadFile(owner, repo, filePath, options = {}) {

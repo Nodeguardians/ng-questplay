@@ -51,22 +51,29 @@ export const MAIN_HELP_MESSAGE =
   + chalk.gray("\nManage your Node Guardians's quest repo using the `quest` command.\n\n")
   + chalk.cyan(
     chalk.bold("Commands:\n\n"),
-    chalk.bold("  find"), "      Search for a specific quest in the repo\n",
-    chalk.bold("  test"), "      Run local tests for the current quest\n",
-    chalk.bold("  submit"), "    Submit quest to nodeguardians.io for verification\n",
-    chalk.bold("  update"), "    Update Questplay to the latest version\n",
-    chalk.bold("  bridge"), "    Query the bridge signer for a signature\n\n")
+    chalk.bold("  find"), "          Search for a specific quest in the repo\n",
+    chalk.bold("  test"), "          Run local tests for the current quest\n",
+    chalk.bold("  submit"), "        Submit quest to nodeguardians.io for verification\n",
+    chalk.bold("  update"), "        Update Questplay to the latest version\n",
+    chalk.bold("  bridge"), "        Query the bridge signer for a signature\n",
+    chalk.bold("  set-framework"), " Set default framework for local tests\n\n")
   + chalk.cyan(
     chalk.bold("Options:\n\n"),
-    chalk.bold("  --help"), "    Read the manual\n"
+    chalk.bold("  --help"), "        Read the manual\n"
   );
 
 export const TEST_HELP_MESSAGE =
   chalk.gray("\nUsage: quest test [<index>]\n"
     + "Example: quest test 1\n\n"
     + "Run a quest's local test(s). If the index is unspecified, test all parts.\n"
-    + "Must be ran in a valid quest directory.\n\n"
-  ) + chalk.cyan(chalk.bold("index:"), "    Part of quest to test (e.g. 1, 2, 3)\n");
+    + "Must be ran in a valid quest directory.\n\n") 
+  + chalk.cyan(chalk.bold("index:"), "    Part of quest to test (e.g. 1, 2, 3)\n");
+
+export const SET_FRAMEWORK_HELP_MESSAGE =
+  chalk.gray("\nUsage: quest set-framework [hardhat | foundry]\n"
+    + "Example: quest set-framework foundry\n\n"
+    + "Sets default framework for local tests.\n\n")
+  + chalk.cyan(chalk.bold("[hardhat | foundry]:"), "Framework of choice\n");;
 
 export const FIND_HELP_MESSAGE =
   chalk.gray(
@@ -147,3 +154,18 @@ export function UnexpectedContractsWarning(newContracts, modifiedContracts, file
 
   return chalk.gray(msg);
 }
+
+export const INSTALL_FOUNDRY_MESSAGE =
+    chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\nRunning Foundry tests requires additional installation.\n\n")
+    + chalk.cyan(`To install and use Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
+
+export const INSTALL_FORGE_LIB_MESSAGE =
+  chalk.yellow("Foundry tests require the Forge-std submodule to be initialized.\nRun", chalk.bold("`git submodule update --init --recursive`"), "to initialize.\n\n");
+
+export const FOUNDRY_BETA_MESSAGE =
+  chalk.cyan(chalk.bold("Quest tests in Foundry is still currently in beta.\n"))
+    + chalk.grey("If you notice any issues, consider reporting them on Discord!\n")
+    + chalk.grey(chalk.underline("https://discord.gg/hBDXhQry"));
+
+export const FOUNDRY_NOT_SUPPORTED_MESSAGE =
+  chalk.yellow("This quest does not support Foundry, running Hardhat instead...\n");

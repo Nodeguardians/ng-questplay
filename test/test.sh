@@ -11,11 +11,11 @@ test_header() {
 cd "$(dirname "$0")"
 
 touch temp_out.txt
-readonly TEST_DIRECTORY="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
-readonly TEMP_OUTPUT="${TEST_DIRECTORY}temp_out.txt"
-readonly TEMP_COMPARE="${TEST_DIRECTORY}temp_cmp.txt"
+TEST_DIRECTORY="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+TEMP_OUTPUT="${TEST_DIRECTORY}temp_out.txt"
+TEMP_COMPARE="${TEST_DIRECTORY}temp_cmp.txt"
 
-readonly OS=${1:-""} 
+OS=${1:-""} 
 
 # Test `quest`
 
@@ -35,17 +35,31 @@ cd ../campaigns/test-campaign
 test_header "Calling \`test\` outside a quest should print error message" >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
 
-test_header "Calling \`test\` inside a quest should work" >> "${TEMP_OUTPUT}"
+test_header "Calling \`test\` with an invalid integer should print error message" >> "${TEMP_OUTPUT}"
+quest test abc >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` inside a quest should work (Hardhat)" >> "${TEMP_OUTPUT}"
 cd ./test-build-quest
+quest set-framework hardhat >> "${TEMP_OUTPUT}"
 quest test 1 >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` without an integer should run all tests (Hardhat)" >> "${TEMP_OUTPUT}"
+quest test >> "${TEMP_OUTPUT}"
+
+test_header "Calling \`test\` inside a subfolder in the quest folder should work (Hardhat)" >> "${TEMP_OUTPUT}"
+cd contracts
+quest test 2 >> "${TEMP_OUTPUT}"
+
+cd .. # Go back to quest directory
+
+test_header "Calling \`test\` inside a quest should work (Foundry)" >> "${TEMP_OUTPUT}"
+quest set-framework foundry >> "${TEMP_OUTPUT}"
+quest test 2 >> "${TEMP_OUTPUT}"
 
 test_header "Calling \`test\` without an integer should run all tests" >> "${TEMP_OUTPUT}"
 quest test >> "${TEMP_OUTPUT}"
 
-test_header "Calling \`test\` with an invalid integer should print error message" >> "${TEMP_OUTPUT}"
-quest test abc >> "${TEMP_OUTPUT}"
-
-test_header "Calling \`test\` inside a subfolder in the quest folder should work" >> "${TEMP_OUTPUT}"
+test_header "Calling \`test\` inside a subfolder in the quest folder should work (Foundry)" >> "${TEMP_OUTPUT}"
 cd contracts
 quest test 2 >> "${TEMP_OUTPUT}"
 
@@ -62,21 +76,25 @@ quest test >> "${TEMP_OUTPUT}"
 
 if [[ $OS = 'windows-latest' ]]; then
     fc "${TEMP_OUTPUT}" "${TEST_DIRECTORY}expected_out.txt" \
-        | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
+        | grep -wv -e "Downloading compiler" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" \
+        | grep -wv -e "passing (.*s)" -e "finished in .*ms" \
         >> "${TEMP_COMPARE}"
 else
     diff "${TEMP_OUTPUT}" "${TEST_DIRECTORY}expected_out.txt" \
-       | grep -wv -e "passing (.*s)" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" -e "Downloading compiler" \
+        | grep -wv -e "Downloading compiler" -e "---" -e "[0-9]\{2,3\}[c,d][0-9]\{2,3\}" \
+        | grep -wv -e "passing (.*s)" -e "finished in .*ms" \
         >> "${TEMP_COMPARE}"
 fi
 
 cat "${TEMP_COMPARE}"
-num_error=`wc -l < "${TEMP_COMPARE}"`
+num_error=`wc -l < "${TEMP_COMPARE}" | xargs`
 
 # Remove temporary folders / files
 rm "${TEMP_OUTPUT}"
 rm "${TEMP_COMPARE}"
-rm -rf "${TEST_DIRECTORY}/../campaigns/test-campaign"
+rm -rf "${TEST_DIRECTORY}../campaigns/test-campaign"
+
+cd "${TEST_DIRECTORY}.."
 
 if [ $num_error != 0 ]; then
     exit 1
