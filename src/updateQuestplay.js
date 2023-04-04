@@ -1,5 +1,5 @@
-#!/usr/bin/env node
 import chalk from 'chalk';
+import child_process from 'child_process';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
@@ -43,6 +43,10 @@ export async function updateQuestplay() {
     fs.symlinkSync(hookFile, "./.git/hooks/pre-commit");
   }
 
+  // (5) Install dependencies and forge-std submodule
+  child_process.execSync('npm install');
+  await git.submoduleUpdate(["--init", "--recursive"]);
+
   console.log();
 
   try {
@@ -53,7 +57,7 @@ export async function updateQuestplay() {
 
   } catch (err) {
 
-    console.log(chalk.grey("\ngit commit failed. Try manually committing the the Questplay update.\n"));
+    console.log(chalk.grey("\ngit commit failed. Try manually committing the Questplay update.\n"));
     process.exit(0);
 
   }

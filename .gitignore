@@ -5,3 +5,5 @@
 artifacts
 cache
 .env
+
+.settings

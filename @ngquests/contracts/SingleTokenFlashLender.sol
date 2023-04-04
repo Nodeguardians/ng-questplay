@@ -39,7 +39,7 @@ contract SingleTokenFlashLender is IERC3156FlashLender {
         IERC3156FlashBorrower receiver,
         address _token,
         uint256 _amount,
-        bytes calldata /* data */
+        bytes calldata _data
     ) external returns (bool) {
 
         require(address(token) == _token, "FlashLender: Unsupported currency");
@@ -52,7 +52,7 @@ contract SingleTokenFlashLender is IERC3156FlashLender {
             _token, 
             _amount,
             0, 
-            ""
+            _data
         );
         require(callBackResult == CALLBACK_SUCCESS, "FlashLender: Callback failed");
 

@@ -14,12 +14,23 @@ We **highly recommend** that you set up Questplay by following [our tutorial](ht
 
 2. Download this repository onto your local device, and push it to the Github repository you have created.
 
-    ```
-    git clone https://github.com/Nodeguardians/ng-questplay.git
-    cd ng-questplay
-    git remote set-url origin https://github.com/{GITHUB_USERNAME}/ng-questplay.git
-    git push -u origin main
-    ```
+    - **If Using GitHub HTTPS:**
+
+        ```
+        git clone --recurse-submodules https://github.com/Nodeguardians/ng-questplay.git
+        cd ng-questplay
+        git remote set-url origin https://github.com/{GITHUB_USERNAME}/ng-questplay.git
+        git push -u origin main
+        ```
+
+    - **If Using Github SSH**
+
+        ```
+        git clone --recurse-submodules git@github.com:github.com/Nodeguardians/ng-questplay.git
+        cd ng-questplay
+        git remote set-url origin git@github.com:{GITHUB_USERNAME}/ng-questplay.git
+        git push -u origin main
+        ```
 
     > 💡 Replace `{GITHUB_USERNAME}` with your Github username!
 
@@ -65,6 +76,14 @@ quest test 1
 # Run all local tests
 quest test
 ```
+
+If you have Foundry installed, our quests also support local Foundry tests. To configure your preferred framework to Foundry:
+
+```
+quest set-framework foundry
+```
+
+After which, running `quest test` will trigger Foundry tests to run instead. The native command `forge test` also triggers Foundry tests, albeit in a less readable format. However, using `forge` gives you access to Foundry's many features (e.g., `-vvv` flag).
 
 ## Submitting a Quest
 

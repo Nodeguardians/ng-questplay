@@ -7,10 +7,11 @@ import {
   SUBMIT_HELP_MESSAGE, 
   UPDATE_HELP_MESSAGE,
   BRIDGE_HELP_MESSAGE,
+  SET_FRAMEWORK_HELP_MESSAGE,
   TITLE, 
   WRONG_DIRECTORY_MESSAGE 
 } from './src/utils/messages.js';
-import { runTests } from './src/runTests.js';
+import { runTests, setFramework } from './src/runTests.js';
 import { mainPath } from './src/utils/navigation.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
@@ -45,6 +46,7 @@ switch (commands[0]) {
       console.log(TEST_HELP_MESSAGE);
       process.exit(0);
     }
+
     const partIndex = commands[1];
 
     if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))
@@ -55,6 +57,22 @@ switch (commands[0]) {
     }
 
     await runTests(commands[1]);
+    break;
+
+  case 'set-framework':
+
+    if (commands.length != 2) {
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
+      console.log(SET_FRAMEWORK_HELP_MESSAGE);
+      process.exit(1);
+    }
+    const framework = commands[1];
+    if (framework != "foundry" && framework != "hardhat") {
+      console.log(chalk.red("\nERROR: Unrecognized framework"));
+      console.log(SET_FRAMEWORK_HELP_MESSAGE);
+      process.exit(1)
+    }
+    await setFramework(framework);
     break;
 
   case 'find':

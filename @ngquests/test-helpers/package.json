@@ -8,7 +8,6 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.4",
     "@nomiclabs/hardhat-ethers": "^2.2.1",
-    "@solidity-parser/parser": "^0.14.5",
     "chai-exclude": "^2.1.0"
   }
 }
