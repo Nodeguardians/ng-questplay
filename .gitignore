@@ -7,4 +7,3 @@ cache
 .env
 
 .settings
-lib/forge-std
