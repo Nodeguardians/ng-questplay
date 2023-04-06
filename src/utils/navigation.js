@@ -36,6 +36,7 @@ export const readSettings = function() {
 
   if (!fs.existsSync(settingsPath)) { 
     fs.mkdirSync(path.join(mainPath(), '.settings'));
+    fs.writeFileSync(path.join(mainPath(), '.settings/prefs.json'), "{}");
     return {}; 
   }
 
