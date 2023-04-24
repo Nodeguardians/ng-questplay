@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "ng-questplay",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "description": "",
     "type": "module",
     "scripts": {
