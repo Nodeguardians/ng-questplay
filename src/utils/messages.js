@@ -159,12 +159,14 @@ export const INSTALL_FOUNDRY_MESSAGE =
     chalk.grey("Foundry is a lightweight development toolkit, and a rising alternative to Hardhat.\nRunning Foundry tests requires additional installation.\n\n")
     + chalk.cyan(`To install Foundry, refer to ${chalk.bold("https://book.getfoundry.sh/getting-started/installation")}.\n`);
 
-export const INSTALL_FORGE_LIB_MESSAGE =
-  chalk.yellow(
+export function INSTALL_FORGE_LIB_MESSAGE() {
+  return chalk.yellow(
     "Foundry tests require the forge-std submodule to be initialized. Run the following:\n\n",
+    chalk.bold(`    cd ${mainPath()}\n`),
     chalk.bold("    git submodule add  https://github.com/foundry-rs/forge-std lib/forge-std\n"), 
     chalk.bold("    git submodule update --init --recursive\n")
   );
+}
 
 export const UPDATE_FOUNDRY_MESSAGE =
   chalk.yellow(

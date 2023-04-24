@@ -94,7 +94,7 @@ export function checkForgeVersion() {
   }
 
   if (local.forgeStd == "") {
-    console.log(INSTALL_FORGE_LIB_MESSAGE);
+    console.log(INSTALL_FORGE_LIB_MESSAGE());
     isInstalled = false;
   }
 
