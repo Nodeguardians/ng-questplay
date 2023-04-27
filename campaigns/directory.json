@@ -85,6 +85,12 @@
                 "version": "1.0.1",
                 "type": "build",
                 "parts": 3
+            },
+            {
+                "name": "emergency-governance",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ] 
     },
