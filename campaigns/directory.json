@@ -88,7 +88,13 @@
             },
             {
                 "name": "emergency-governance",
-                "version": "1.0.0",
+                "version": "1.0.1",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "flashloan-counterexploit",
+                "version": "0.1.0",
                 "type": "ctf",
                 "parts": 1
             }
