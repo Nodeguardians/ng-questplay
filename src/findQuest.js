@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { getDirectory, mainPath, navigateToMainDirectory } from './utils/navigation.js';
+import { getDirectory, mainPath, navigateToMainDirectory, readSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 
 import { 
@@ -89,14 +89,19 @@ async function queryAndPullQuest(questPath, versionString) {
 
   console.log();
 
-  // (1) Ensure all changes saved
-  const statusSummary = await git.status()
-  if (statusSummary.files.length) {
-    console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
-    process.exit(1);
-  }
+  // Developer Mode: Download file and exit.
+  const isDev = readSettings().devMode;
 
-  fs.rmSync(localPath, { recursive: true, force: true });
+  // (1) Ensure all changes saved (Skip if dev mode)
+  if (!isDev) {
+    const statusSummary = await git.status()
+    if (statusSummary.files.length) {
+      console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
+      process.exit(1);
+    }
+
+    fs.rmSync(localPath, { recursive: true, force: true });
+  }
 
   // (2) Download quest
   console.log(chalk.green("Downloading quest..."));
@@ -118,13 +123,13 @@ async function queryAndPullQuest(questPath, versionString) {
   console.log(chalk.green("\nInstalling quest..."));
   await authDownloader.installSubpackage();
 
-  // (4) Commit new changes
+  // (4) Commit new changes (Skip if dev mode)
   try {
-
-    await git.add(mainPath());
-    await git.commit(`Download quest ${path.basename(questPath)}`);
-    console.log(chalk.green("\nDownload committed.\n"));
-
+    if (!isDev) {
+      await git.add(mainPath());
+      await git.commit(`Download quest ${path.basename(questPath)}`);
+      console.log(chalk.green("\nDownload committed.\n"));
+    }
   } catch (err) {
 
     console.log(chalk.grey("\ngit commit failed. Try manually committing the downloaded quest.\n"));
@@ -135,7 +140,7 @@ async function queryAndPullQuest(questPath, versionString) {
   // (5) Print Quest Location
   console.log(NavigateToQuestMessage(localPath));
 
-  if (!await isLatestVersion()) {
+  if (!isDev && !await isLatestVersion()) {
     console.log(UPDATE_REMINDER_MESSAGE);
   }
 
