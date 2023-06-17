@@ -1,0 +1,36 @@
+[
+    {
+        "name": "cairo-thinking",
+        "quests":[
+            {
+                "name": "skirmishing-scarabs",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "puzzling-pyramids",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "racing-riverboats",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "standalone-quests",
+        "quests": [
+            {
+                "name": "brainfuck",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    }
+]

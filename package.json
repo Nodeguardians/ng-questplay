@@ -27,7 +27,8 @@
         "github-download-directory": "^3.0.0",
         "hardhat": "^2.13.0",
         "inquirer": "^9.1.5",
-        "simple-git": "^3.17.0"
+        "simple-git": "^3.17.0",
+        "toml": "^3.0.0"
     },
     "overrides": {
         "undici": ">=5.19.1"

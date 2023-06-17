@@ -2,6 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+const DIRECTORIES = {
+  "cairo": "campaigns/cairo-directory.json",
+  "solidity": "campaigns/directory.json"
+}
+
 export const mainPath = function() {
   return path.resolve(fileURLToPath(import.meta.url), "../../..");
 };
@@ -24,6 +29,30 @@ export const navigateToQuestDirectory = function() {
 
 export const navigateToMainDirectory = function() {
   process.chdir(mainPath());
+}
+
+// TODO: Refactor this to be multi-protocol friendly
+export const findQuestMetadata = function(questName) {
+
+  for (const lang of Object.keys(DIRECTORIES)) {
+    const dirPath = path.join(mainPath(), DIRECTORIES[lang]);
+    const campaigns = JSON.parse(fs.readFileSync(dirPath));
+
+    for (const campaign of campaigns) {
+      for (const quest of campaign.quests) {
+        if (quest.name != questName) continue;
+
+        return {
+          lang: lang,
+          campaign: campaign.name,
+          ...quest
+        }
+
+      }
+    }
+  }
+
+  return null;
 }
 
 export const getDirectory = function() {

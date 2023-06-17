@@ -3,6 +3,7 @@ import commandExists from 'command-exists';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import toml from 'toml';
 import { Octokit } from '@octokit/rest';
 import { spawnSync } from 'child_process';
 import { mainPath, readSettings } from "./navigation.js";
@@ -119,6 +120,22 @@ export function checkForgeVersion() {
 
   return isInstalled;
 
+}
+
+// TODO: Refactor this to be multi-protocol friendly
+export function localQuestVersion(questPath) {
+  if (!fs.existsSync(questPath)) {
+    // Quest not installed
+    return null
+  }
+
+  const packageJsonPath = path.join(questPath, "package.json");
+  if (fs.existsSync(packageJsonPath)) {
+    return JSON.parse(fs.readFileSync(packageJsonPath)).version;
+  }
+
+  const scarbTomlPath = path.join(questPath, "Scarb.toml");
+  return toml.parse(fs.readFileSync(scarbTomlPath)).package.version;
 }
 
 function compareVersionString(v1, v2) {
