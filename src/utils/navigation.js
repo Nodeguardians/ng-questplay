@@ -55,6 +55,29 @@ export const findQuestMetadata = function(questName) {
   return null;
 }
 
+// TODO: Refactor this to be multi-protocol friendly
+export const getQuestMetadata = function(campaignName, questName) {
+
+  for (const lang of Object.keys(DIRECTORIES)) {
+    const dirPath = path.join(mainPath(), DIRECTORIES[lang]);
+    const campaigns = JSON.parse(fs.readFileSync(dirPath));
+
+    const campaign = campaigns.find(c => c.name == campaignName);
+    if (campaign == undefined) continue;
+
+    const quest = campaign.quests.find(q => q.name == questName);  
+    if (quest == undefined) continue;
+
+    return {
+      lang: lang,
+      campaign: campaignName,
+      ...quest
+    }
+  }
+
+  return null;
+}
+
 export const getDirectory = function() {
   const directoryPath = path.join(mainPath(), './campaigns/directory.json');
   return JSON.parse(fs.readFileSync(directoryPath));
