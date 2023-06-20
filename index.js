@@ -133,13 +133,16 @@ switch (commands[0]) {
       process.exit(0);
     }
 
-    if (commands.length > 1) {
+    if (commands.length == 3 && commands[1] == "--new-remote") {
+      updateQuestplay(commands[2])
+    } else if (commands.length == 1) {
+      updateQuestplay()
+    } else {
       console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
       console.log(UPDATE_HELP_MESSAGE);
       process.exit(1);
     }
     
-    updateQuestplay()
     break;
 
   case 'bridge':

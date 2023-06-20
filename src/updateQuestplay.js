@@ -15,7 +15,7 @@ import { isLatestVersion, remoteVersion } from './utils/versions.js';
 
 const git = simpleGit();
 
-export async function updateQuestplay() {
+export async function updateQuestplay(newRemote = null) {
 
   navigateToMainDirectory();
   console.log();
