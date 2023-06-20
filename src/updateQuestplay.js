@@ -3,7 +3,7 @@ import child_process from 'child_process';
 import dotenv from 'dotenv';
 import fs, { read } from 'fs';
 import path from 'path';
-import { navigateToMainDirectory, readSettings } from './utils/navigation.js';
+import { navigateToMainDirectory, readSettings, writeSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 import { simpleGit } from 'simple-git';
 
@@ -20,6 +20,12 @@ export async function updateQuestplay(newRemote = null) {
   navigateToMainDirectory();
   console.log();
 
+  if (newRemote) {
+    let settings = readSettings();
+    settings.remote = newRemote;
+    writeSettings(settings);
+  }
+  
   // (1) Ensure all changes saved
   const statusSummary = await git.status()
   if (statusSummary.files.length) {
