@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { Octokit } from '@octokit/rest';
 import { spawnSync } from 'child_process';
-import { mainPath } from "./navigation.js";
+import { mainPath, readSettings } from "./navigation.js";
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE ,
   INSTALL_FOUNDRY_MESSAGE,
@@ -42,11 +42,18 @@ async function pullRemoteVersion() {
   }
 
   const octokit = new Octokit({ auth: token });
-  const file = await octokit.repos.getContent({
+  const options = {
     owner: "NodeGuardians",
     repo: "ng-questplay",
     path: "package.json"
-  });
+  }
+  
+  const remoteBranch = readSettings().remote;
+  if(remoteBranch != undefined) {
+    options.ref = remoteBranch;
+  }
+
+  const file = await octokit.repos.getContent(options);
 
   const decodedContent = Buffer.from(file.data.content, file.data.encoding);
   const packageJson = JSON.parse(decodedContent);

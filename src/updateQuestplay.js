@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import child_process from 'child_process';
 import dotenv from 'dotenv';
-import fs from 'fs';
+import fs, { read } from 'fs';
 import path from 'path';
-import { navigateToMainDirectory } from './utils/navigation.js';
+import { navigateToMainDirectory, readSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 import { simpleGit } from 'simple-git';
 
@@ -79,7 +79,10 @@ async function pullUpdate() {
     github: { auth: token }
   });
 
-  await authDownloader.downloadDirectory('NodeGuardians', 'ng-questplay', "");
+  const remoteBranch = readSettings().remote;
+  const options = remoteBranch == undefined ? {} : { sha: remoteBranch };
+
+  await authDownloader.downloadDirectory('NodeGuardians', 'ng-questplay', "", options);
 
   console.log(chalk.green("\nInstalling Questplay..."));
   await authDownloader.installSubpackage();
