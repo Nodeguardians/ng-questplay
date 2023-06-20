@@ -85,8 +85,8 @@ export async function runTests(partIndex = undefined) {
 async function runCairoTests(partIndex) {
 
   const cairoTestParams = (partIndex == undefined)
-  ? ["run", "test"]
-  : ["run", "test", "--", "-f", `test_${partIndex}`]
+  ? ["test"]
+  : ["test", "-f", `test_${partIndex}`]
 
   console.log();
   spawnSync("scarb", cairoTestParams, {stdio: "inherit"});

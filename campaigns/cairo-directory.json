@@ -3,7 +3,7 @@
         "name": "cairo-thinking",
         "quests":[
             {
-                "name": "skirmishing-scarabs",
+                "name": "sparring-sorcerers",
                 "version": "0.1.0",
                 "type": "build",
                 "parts": 3
@@ -30,6 +30,17 @@
                 "version": "0.1.0",
                 "type": "build",
                 "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "starting-cairo",
+        "quests": [
+            {
+                "name": "build-tutorial-cairo",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 4
             }
         ]
     }
