@@ -94,9 +94,15 @@
             },
             {
                 "name": "flashloan-counterexploit",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
+            },
+            {
+                "name": "self-hosted-evm",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 7
             }
         ] 
     },
@@ -260,7 +266,7 @@
             },
             {
                 "name": "wintermute-rekt",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "ctf",
                 "parts": 1
             }
