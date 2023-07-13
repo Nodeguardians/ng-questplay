@@ -4,19 +4,19 @@
         "quests":[
             {
                 "name": "sparring-sorcerers",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "type": "build",
                 "parts": 3
             },
             {
                 "name": "puzzling-pyramids",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "type": "build",
                 "parts": 2
             },
             {
                 "name": "racing-riverboats",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "type": "build",
                 "parts": 2
             }
@@ -30,6 +30,35 @@
                 "version": "0.1.0",
                 "type": "build",
                 "parts": 2
+            },
+            {
+                "name": "vanity-address",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "bad-accounts",
+        "quests": [
+            {
+                "name": "stealing-souls",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "bendy-signatures",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "orderless-hashing",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
             }
         ]
     },
@@ -38,9 +67,15 @@
         "quests": [
             {
                 "name": "build-tutorial-cairo",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "type": "build",
                 "parts": 4
+            },
+            {
+                "name": "ctf-tutorial-cairo",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
             }
         ]
     }
