@@ -4,19 +4,19 @@
         "quests":[
             {
                 "name": "sparring-sorcerers",
-                "version": "0.1.1",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 3
             },
             {
                 "name": "puzzling-pyramids",
-                "version": "0.1.1",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 2
             },
             {
                 "name": "racing-riverboats",
-                "version": "0.1.1",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 2
             }
@@ -27,7 +27,7 @@
         "quests": [
             {
                 "name": "brainfuck",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 2
             },
@@ -44,19 +44,19 @@
         "quests": [
             {
                 "name": "stealing-souls",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 2
             },
             {
                 "name": "bendy-signatures",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "orderless-hashing",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
             }
