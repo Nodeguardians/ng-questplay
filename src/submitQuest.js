@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import path from "path";
 import { cwd } from "process";
-import { getDirectory, navigateToQuestDirectory } from './utils/navigation.js';
+import { campaignPath, getQuestMetadata, navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
 import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
@@ -20,13 +20,9 @@ export async function submitQuest(isSetUpstream) {
 
   console.log();
 
-  const directory = getDirectory();
   const campaignName = path.basename(path.dirname(cwd()));
   const questName = path.basename(cwd());
-
-  const questInfo = directory
-    .find(c => c.name == campaignName)
-    .quests.find(q => q.name == questName);
+  const questInfo = getQuestMetadata(campaignName, questName);
 
   if (questInfo.type == "ctf") {
     console.log(chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n"));

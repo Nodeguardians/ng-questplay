@@ -9,7 +9,7 @@ import {
   FOUNDRY_BETA_MESSAGE, 
 } from './utils/messages.js';
 import { 
-  getDirectory, 
+  getQuestMetadata, 
   navigateToQuestDirectory, 
   readSettings, 
   writeSettings 
@@ -46,28 +46,33 @@ export async function runTests(partIndex = undefined) {
     process.exit(1);
   }
 
-  const directory = getDirectory();
   const campaignName = path.basename(path.dirname(cwd()));
   const questName = path.basename(cwd());
 
-  const questInfo = directory
-    .find(c => c.name == campaignName)
-    .quests.find(q => q.name == questName);
+  const questMetadata = getQuestMetadata(campaignName, questName);
   
-  if (questInfo == undefined) {
+  if (questMetadata == null) {
     console.log(chalk.red("\nQuest not found. Did you rename any quest-level folder?"));
-    process.exit(0);
+    process.exit(1);
   }
 
-  if (questInfo.type == "ctf") {
+  if (partIndex > questMetadata.parts) {
+    console.log(chalk.yellow(`\nPart ${partIndex} does not exist in this quest.\n`));
+    process.exit(1);
+  }
+
+  if (questMetadata.type == "ctf") {
     console.log(chalk.red("\nQuest is a CTF quest. No local tests to run.\n"));
     process.exit(0);
   }
 
-  if (readSettings().framework == "foundry") {
-    await runFoundryTests(questInfo.parts, partIndex);
+  // TODO: Scale this to be multi-protocol friendly
+  if (questMetadata.lang == "cairo") {
+    await runCairoTests(partIndex);
+  } else if (readSettings().framework == "foundry") {
+    await runFoundryTests(partIndex);
   } else {
-    await runHardhatTests(questInfo.parts, partIndex);
+    await runHardhatTests(questMetadata.parts, partIndex);
   }
 
   checkFilesToTest().catch((_) => {
@@ -76,6 +81,17 @@ export async function runTests(partIndex = undefined) {
   });
 
 };
+
+async function runCairoTests(partIndex) {
+
+  const cairoTestParams = (partIndex == undefined)
+  ? ["test"]
+  : ["test", "-f", `test_${partIndex}`]
+
+  console.log();
+  spawnSync("scarb", cairoTestParams, {stdio: "inherit"});
+  console.log();
+}
 
 async function runHardhatTests(numParts, partIndex) {
 
@@ -92,7 +108,7 @@ async function runHardhatTests(numParts, partIndex) {
 
 }
 
-async function runFoundryTests(numParts, partIndex) {
+async function runFoundryTests(partIndex) {
 
   console.log();
   if (!checkForgeVersion()) process.exit(1);

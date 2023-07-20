@@ -1,0 +1,82 @@
+[
+    {
+        "name": "cairo-thinking",
+        "quests":[
+            {
+                "name": "sparring-sorcerers",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "puzzling-pyramids",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "racing-riverboats",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    },
+    {
+        "name": "standalone-quests",
+        "quests": [
+            {
+                "name": "brainfuck",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "vanity-address",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "bad-accounts",
+        "quests": [
+            {
+                "name": "stealing-souls",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "bendy-signatures",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "orderless-hashing",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "starting-cairo",
+        "quests": [
+            {
+                "name": "build-tutorial-cairo",
+                "version": "0.1.1",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "ctf-tutorial-cairo",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
+            }
+        ]
+    }
+]
