@@ -154,7 +154,7 @@ https://discord.gg/hBDXhQry
 Running Foundry tests...
   [⠿] Compiling 2 files with 0.8.19
   [⠿] Solc 0.8.19 finished in 12.85ms
-  [⠿] Compiler run successful
+  [⠿] Compiler run successful!
      
 
   Contract (Part 2)
