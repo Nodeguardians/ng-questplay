@@ -1,14 +1,16 @@
-import fs from 'fs';
+import chalk from 'chalk';
 import path from 'path';
 import { mainPath } from '../utils/navigation.js';
 
 export class BaseQuest {
 
-    constructor(language, campaignName, questInfo) {
+    constructor(language, campaignName, questInfo, runTests) {
         this.info = questInfo;
         this.campaignName = campaignName;
         this.language = language;
         this.fromRepository = `ng-${language}-quests-public`;
+
+        this.runTests = runTests;
     }
 
     downloadPath() {
@@ -19,18 +21,30 @@ export class BaseQuest {
         return path.join(mainPath(), this.downloadPath());
     }
 
-    localVersion() {
-        // Quest not installed
-        if (!fs.existsSync(this.localPath())) {
-            return null;
+    async test(partIndex = undefined) {
+
+        if (this.info.type == "ctf") {
+            console.log(chalk.yellow("\nQuest is a CTF quest. No local tests to run.\n"));
+            return;
+        }
+        
+        if (partIndex > this.info.parts) {
+            console.log(chalk.yellow(`\nPart ${partIndex} does not exist in this quest.\n`));
+            return;
         }
 
-        const packageDataPath = path.join(this.localPath(), "package.json");
-        const packageData = JSON.parse(
-            fs.readFileSync(packageDataPath)
-        );
+        if (partIndex != undefined) {
+            console.log(chalk.bold(`\n== Testing Part ${partIndex} ==`));
+            await this.runTests(partIndex);
+            return;
+        }
 
-        return packageData.version;
+        console.log();
+        for (let i = 1; i <= this.info.parts; i++) {
+            console.log(chalk.bold(`== Testing Part ${i} ==`));
+            await this.runTests(i);
+        }
+
     }
 
 }

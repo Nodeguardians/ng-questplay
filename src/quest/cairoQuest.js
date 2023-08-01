@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import toml from 'toml';
 
 import { BaseQuest } from './baseQuest.js';
 import { mainPath } from '../utils/navigation.js';
+import { spawnSync } from 'child_process';
 
 export class CairoQuest extends BaseQuest {
 
@@ -22,7 +24,31 @@ export class CairoQuest extends BaseQuest {
     }
 
     constructor(campaignName, questInfo) {
-        super("cairo", campaignName, questInfo);
+        super("cairo", campaignName, questInfo, runCairoTests);
     }
 
+    localVersion() {
+        // Quest not installed
+        if (!fs.existsSync(this.localPath())) {
+            return null;
+        }
+
+        const scarbTomlPath = path.join(this.localPath(), "scarb.toml");
+        const scarbTomlData = toml.parse(fs.readFileSync(scarbTomlPath));
+
+        return scarbTomlData.package.version;
+    }
+
+}
+
+async function runCairoTests(partIndex) {
+
+    const cairoTestParams = [
+        "test", "-f", `test_${partIndex}`
+    ];
+
+    console.log();
+    spawnSync("scarb", cairoTestParams, {stdio: "inherit"});
+    console.log();
+    
 }

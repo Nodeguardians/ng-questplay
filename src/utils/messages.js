@@ -179,11 +179,6 @@ export const UPDATE_FORGE_LIB_MESSAGE =
     chalk.bold("    git submodule update --remote --merge\n")
   );
 
-export const FOUNDRY_BETA_MESSAGE =
-  chalk.cyan(chalk.bold("Quest tests in Foundry is still currently in beta.\n"))
-    + chalk.grey("If you notice any issues, consider reporting them on Discord!\n")
-    + chalk.grey(chalk.underline("https://discord.gg/hBDXhQry"));
-
 export const FORGE_VERSION_FAIL = 
   chalk.yellow(
     "WARNING: Failed to detect Forge version.\n",

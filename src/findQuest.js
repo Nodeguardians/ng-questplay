@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { mainPath, navigateToMainDirectory, readSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
-import { findAll } from './quest/index.js';
+import { getQuest } from './quest/index.js';
 
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE, 
@@ -31,7 +31,7 @@ export async function findQuest(questName) {
     process.exit(1);
   }
 
-  const quest = findAll(questName);
+  const quest = getQuest(questName);
   if (quest == null) {
     // Quest not found
     console.log(QUEST_NOT_FOUND_MESSAGE);
