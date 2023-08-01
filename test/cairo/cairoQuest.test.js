@@ -32,7 +32,8 @@ describe("Cairo Quests", function() {
         const gitStatus = await git.status();
         
         let hasUncommitted = gitStatus.staged.length != 0 
-            || gitStatus.not_added.length != 0 || gitStatus.modified.length == 0;
+            || gitStatus.not_added.length != 0 
+            || gitStatus.modified.length != 0;
         assert(!hasUncommitted, "TEST_SHOULDNT_START_W_UNCOMMITTED_CHANGES");
 
         currentBranch = gitStatus.current;
@@ -63,6 +64,16 @@ describe("Cairo Quests", function() {
             assertRegex(outputString, regexString);
         });
 
+        it("Should install and commit quest", async function() {
+            const gitStatus = await git.status();
+            let hasUncommitted = gitStatus.staged.length != 0 
+                || gitStatus.not_added.length != 0 
+                || gitStatus.modified.length != 0;
+
+            assert(!hasUncommitted, "New quest should be committed");
+            const latestCommit = (await git.log({ maxCount: 1 })).latest;
+            assert(latestCommit.message == `Download quest ${TEST_QUEST_SLUG}`);
+        });
 
     });
 
@@ -120,12 +131,15 @@ describe("Cairo Quests", function() {
     });
 
     after(async function() {
-        fs.rmSync(path.join(mainPath(), `campaigns/${TEST_CAMPAIGN_SLUG}`), { recursive: true });
+        fs.rmSync(
+            path.join(mainPath(), `campaigns/${TEST_CAMPAIGN_SLUG}`), 
+            { recursive: true, force: true }
+        );
 
         if (isDev) { return; }
 
         await git.checkout(currentBranch);
-        await git.deleteLocalBranch("temp/test-cairo");
+        await git.deleteLocalBranch("temp/test-cairo", true);
     });
 
 });

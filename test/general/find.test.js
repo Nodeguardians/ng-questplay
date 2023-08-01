@@ -1,5 +1,5 @@
-import { execSync } from "child_process";
 import { assertHasMessage } from "../utils/messages.js";
+import { execSync } from "child_process";
 
 describe("quest find", async function() {
 
@@ -14,14 +14,6 @@ describe("quest find", async function() {
             assertHasMessage(error.stdout.toString(), errorMessage);
         }
         
-    });
-
-    it("Should flag uncommitted changes", async function() {
-        // TODO
-    });
-
-    it("Should commit changes after download", async function() {
-        // TODO
     });
 
 });

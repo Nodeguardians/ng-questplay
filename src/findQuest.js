@@ -87,9 +87,9 @@ async function queryAndPullQuest(quest) {
       console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
       process.exit(1);
     }
-
-    fs.rmSync(localPath, { recursive: true, force: true });
   }
+
+  fs.rmSync(quest.localPath(), { recursive: true, force: true });
 
   // (2) Download quest
   console.log(chalk.green("Downloading quest..."));
@@ -120,7 +120,7 @@ async function queryAndPullQuest(quest) {
   try {
     if (!isDev) {
       await git.add(mainPath());
-      await git.commit(`Download quest ${path.basename(questPath)}`);
+      await git.commit(`Download quest ${quest.info.name}`);
       console.log(chalk.green("\nDownload committed.\n"));
     }
   } catch (err) {
