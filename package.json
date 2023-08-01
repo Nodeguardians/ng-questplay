@@ -5,7 +5,7 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "test": "bash test/test.sh",
+        "test": "mocha --recursive --timeout 60000 --grep 'Public' --invert",
         "start-adventure": "npm install && npm link && node hooks/install.js && npm run start-adventure:get-forge",
         "start-adventure:get-forge": "git submodule add https://github.com/foundry-rs/forge-std lib/forge-std && git submodule update --init --recursive"
     },
