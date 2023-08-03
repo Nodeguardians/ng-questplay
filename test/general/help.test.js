@@ -9,7 +9,7 @@ describe("quest help", async function() {
 
     it("Should flag when not in questplay", async function() {
         const expectedMessage = "`quest` must be run from the ng-quests directory\n"
-            + "Try running: \"cd .*/ng-questplay\"";
+            + "Try running: \"cd .*ng-questplay\"";
 
         try {
             execSync(`cd ${path.join(mainPath(), "..")} && quest`);

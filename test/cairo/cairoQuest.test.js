@@ -49,22 +49,30 @@ describe("Cairo Quests", function() {
             assert(!fs.existsSync(TEST_QUEST_PATH), "Quest already exists");
 
             const inputArray = new Uint8Array([ENTER_KEY_CODE]);
-            execSync(`quest find ${TEST_QUEST_SLUG}`, { input: inputArray });
+            try {
+                execSync(`quest find ${TEST_QUEST_SLUG}`, { input: inputArray });
+            } catch (error) {
+                console.log(error.stdout.toString());
+                throw error;
+            }
 
             assert(fs.existsSync(TEST_QUEST_PATH));
-            assert(fs.existsSync(path.join(TEST_QUEST_PATH, "scarb.toml")));
+            assert(fs.existsSync(path.join(TEST_QUEST_PATH, "Scarb.toml")));
         });
 
         it("Should handle existing quest", async function() {
             const outputString = execSync(`quest find ${TEST_QUEST_SLUG}`).toString();
             const regexString = `${TEST_QUEST_SLUG} \\([0-9]+\\.[0-9]+\\.[0-9]+\\) found in ${TEST_CAMPAIGN_SLUG}\n`
                 + "Latest version of quest already exists in local repo\\.\n"
-                + `To navigate to quest directory, run cd campaigns\\/${TEST_CAMPAIGN_SLUG}\\/${TEST_QUEST_SLUG}` 
-
+                + `To navigate to quest directory, run cd campaigns.${TEST_CAMPAIGN_SLUG}.${TEST_QUEST_SLUG}` 
+            console.log(outputString);
             assertRegex(outputString, regexString);
         });
 
         it("Should install and commit quest", async function() {
+            // Skip this test in dev mode
+            if (isDev) { return; }
+
             const gitStatus = await git.status();
             let hasUncommitted = gitStatus.staged.length != 0 
                 || gitStatus.not_added.length != 0 

@@ -33,7 +33,7 @@ export class CairoQuest extends BaseQuest {
             return null;
         }
 
-        const scarbTomlPath = path.join(this.localPath(), "scarb.toml");
+        const scarbTomlPath = path.join(this.localPath(), "Scarb.toml");
         const scarbTomlData = toml.parse(fs.readFileSync(scarbTomlPath));
 
         return scarbTomlData.package.version;

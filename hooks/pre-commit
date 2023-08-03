@@ -1,2 +1,4 @@
 #!/bin/sh
-node "$(realpath $0)/../../../hooks/precommit.js"
+echo "$(dirname $0)/../../hooks/precommit.js"
+ls $(dirname $0)/../../hooks/
+node "$(dirname $0)/../../hooks/precommit.js"
