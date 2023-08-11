@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         node-version: [16.x]
@@ -24,11 +25,26 @@ jobs:
       uses: foundry-rs/foundry-toolchain@v1
       with:
         version: nightly
+    - name: Install Scarb
+      uses: software-mansion/setup-scarb@v1
+      with:
+        scarb-version: "0.5.0"
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm link
-    - run: npm run test -- ${{ matrix.os }}
+    - name: Configure git
+      run: |
+        git checkout -b new-branch
+        git config user.name "someone"
+        git config user.email "someone@nodeguardians.io"
+    - name: Install dependencies
+      run: |
+        npm run start-adventure
+        git commit -a -m "Install dependencies"
+    - name: Create .env file
+      run: |
+        touch .env
+        echo GITHUB_TOKEN="${{ secrets.PUBLIC_TOKEN }}" >> .env
+    - run: npm run test

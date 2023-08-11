@@ -1,10 +1,11 @@
 import chalk from "chalk";
 import path from "path";
 import { cwd } from "process";
-import { campaignPath, getQuestMetadata, navigateToQuestDirectory } from './utils/navigation.js';
+import { navigateToQuestDirectory } from './utils/navigation.js';
 import { ProgressBar } from './utils/progressbar.js'
 import { simpleGit } from 'simple-git';
 import { NoUpstreamBranchMessage, UNCOMMITTED_FILES_MESSAGE } from "./utils/messages.js";
+import { currentWorkingQuest } from "./quest/index.js";
 
 const git = simpleGit();
 
@@ -12,19 +13,16 @@ export async function submitQuest(isSetUpstream) {
 
   try {
     navigateToQuestDirectory();
-  } 
-  catch (error) {
+  } catch (error) {
     console.log(chalk.red(error));
     process.exit(1);
   }
 
   console.log();
 
-  const campaignName = path.basename(path.dirname(cwd()));
-  const questName = path.basename(cwd());
-  const questInfo = getQuestMetadata(campaignName, questName);
+  const quest = currentWorkingQuest();
 
-  if (questInfo.type == "ctf") {
+  if (quest.info.type == "ctf") {
     console.log(chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n"));
     process.exit(0);
   }
@@ -48,7 +46,7 @@ export async function submitQuest(isSetUpstream) {
 
   try {
 
-    await git.commit(`#${questName}`, [], ["--allow-empty"]);
+    await git.commit(`#${quest.info.name}`, [], ["--allow-empty"]);
     await git.push(["-u", "origin", currentBranch.name]);
 
   } catch (err) {
@@ -60,7 +58,7 @@ export async function submitQuest(isSetUpstream) {
 
   await progressBar.stop("Pushed to Github");
   console.log(
-    chalk.green(`Quest ${questName} submitted, your results will be available on nodeguardians.io in a few seconds.\n`)
+    chalk.green(`Quest ${quest.info.name} submitted, your results will be available on nodeguardians.io in a few seconds.\n`)
   );
 
 }
