@@ -36,6 +36,18 @@
                 "version": "0.1.0",
                 "type": "ctf",
                 "parts": 1
+            },
+            {
+                "name": "unsafe-math",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "calldata-spoofing",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 1
             }
         ]
     },
