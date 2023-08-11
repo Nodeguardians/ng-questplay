@@ -15,7 +15,6 @@ import { runTests, setFramework } from './src/runTests.js';
 import { mainPath } from './src/utils/navigation.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import { runSolution } from './src/runSolution.js';
 import { submitQuest } from './src/submitQuest.js';
 import { updateQuestplay } from './src/updateQuestplay.js';
 import { bridge } from './src/bridge.js';
@@ -49,9 +48,9 @@ switch (commands[0]) {
 
     const partIndex = commands[1];
 
-    if ((partIndex != undefined && !Number.isInteger(Number(partIndex)))
-        || commands.length > 3) {
-      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+    if (partIndex != undefined && !Number.isInteger(Number(partIndex))
+        || commands.length > 2) {
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
       console.log(TEST_HELP_MESSAGE);
       process.exit(1);
     }
@@ -60,6 +59,11 @@ switch (commands[0]) {
     break;
 
   case 'set-framework':
+
+    if (commands.includes("--help")) {
+      console.log(SET_FRAMEWORK_HELP_MESSAGE);
+      process.exit(0);
+    }
 
     if (commands.length != 2) {
       console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
@@ -83,7 +87,7 @@ switch (commands[0]) {
     }
 
     if (commands.length > 2) {
-      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
       console.log(FIND_HELP_MESSAGE);
       process.exit(1);
     }
@@ -104,10 +108,6 @@ switch (commands[0]) {
     findQuest(searchQuery);
 
     break;
-
-  case 'solution':
-    runSolution();
-    break;
     
   case 'submit':
     
@@ -117,7 +117,7 @@ switch (commands[0]) {
     }
 
     if (commands.length > 1 && commands[1] != "--set-upstream") {
-      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
       console.log(SUBMIT_HELP_MESSAGE);
       process.exit(1);
     }
@@ -138,7 +138,7 @@ switch (commands[0]) {
     } else if (commands.length == 1) {
       updateQuestplay()
     } else {
-      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
       console.log(UPDATE_HELP_MESSAGE);
       process.exit(1);
     }
@@ -153,7 +153,7 @@ switch (commands[0]) {
     }
 
     if (commands.length != 2) {
-      console.log(chalk.red("\nERROR: Unrecognized parameter(s)"));
+      console.log(chalk.red("\nERROR: Unexpected parameter(s)"));
       console.log(BRIDGE_HELP_MESSAGE);
       process.exit(1);
     }
@@ -164,7 +164,6 @@ switch (commands[0]) {
   default:
     console.log(chalk.red('\nERROR: Unrecognized command'));
     console.log(MAIN_HELP_MESSAGE);
-
-    break;
+    process.exit(1);
 
 }

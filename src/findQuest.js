@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { findQuestMetadata, mainPath, navigateToMainDirectory, readSettings } from './utils/navigation.js';
+import { mainPath, navigateToMainDirectory, readSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
+import { getQuest } from './quest/index.js';
 
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE, 
@@ -15,7 +16,7 @@ import {
   UPDATE_QUEST_CONFIRMATION, 
   UPDATE_REMINDER_MESSAGE
 } from './utils/messages.js';
-import { isLatestVersion, localQuestVersion } from './utils/versions.js';
+import { isLatestVersion } from './utils/versions.js';
 import simpleGit from 'simple-git';
 
 const git = simpleGit();
@@ -30,33 +31,31 @@ export async function findQuest(questName) {
     process.exit(1);
   }
 
-  const metadata = findQuestMetadata(questName);
-  if (metadata == null) {
+  const quest = getQuest(questName);
+  if (quest == null) {
     // Quest not found
     console.log(QUEST_NOT_FOUND_MESSAGE);
     process.exit(1);
   }
   
   const message = chalk.cyan(
-    chalk.bold(`\n${metadata.name} (${metadata.version})`),
+    chalk.bold(`\n${quest.info.name} (${quest.info.version})`),
     'found in',
-    chalk.bold(`${metadata.campaign}\n`)
+    chalk.bold(`${quest.campaignName}\n`)
   );
 
   console.log(message);
-  await queryAndPullQuest(metadata);
+  await queryAndPullQuest(quest);
 
 };
 
-async function queryAndPullQuest(metadata) {
+async function queryAndPullQuest(quest) {
 
-  const questPath = `campaigns/${metadata.campaign}/${metadata.name}`;
-  const localPath = path.join(mainPath(), questPath);
+  const localVersion = quest.localVersion();
 
-  let localVersion = localQuestVersion(localPath);
-  if (localVersion == metadata.version) {
+  if (localVersion == quest.info.version) {
     console.log(QUEST_ALREADY_EXISTS_MESSAGE);
-    console.log(NavigateToQuestMessage(localPath));
+    console.log(NavigateToQuestMessage(quest.localPath()));
     process.exit(0);
   }
 
@@ -88,9 +87,9 @@ async function queryAndPullQuest(metadata) {
       console.log(UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE);
       process.exit(1);
     }
-
-    fs.rmSync(localPath, { recursive: true, force: true });
   }
+
+  fs.rmSync(quest.localPath(), { recursive: true, force: true });
 
   // (2) Download quest
   console.log(chalk.green("Downloading quest..."));
@@ -106,15 +105,13 @@ async function queryAndPullQuest(metadata) {
     github: { auth: token }
   });
 
-  // TODO: Use ng-solidity-quests when available
-  const fromRepo = metadata.lang == "solidity"
-    ? `ng-quests-public`
-    : `ng-${metadata.lang}-quests-public`;
-  await authDownloader.downloadDirectory('NodeGuardians', fromRepo, questPath);
+  await authDownloader.downloadDirectory(
+    'NodeGuardians', quest.fromRepository, quest.downloadPath()
+  );
 
   // (3) Install Quest
   console.log(chalk.green("\nInstalling quest..."));
-  if (metadata.lang == "solidity") {
+  if (quest.lang == "solidity") {
     // TODO: Refactor this to be multi-protocol friendly
     await authDownloader.installSubpackage();
   }
@@ -123,7 +120,7 @@ async function queryAndPullQuest(metadata) {
   try {
     if (!isDev) {
       await git.add(mainPath());
-      await git.commit(`Download quest ${path.basename(questPath)}`);
+      await git.commit(`Download quest ${quest.info.name}`);
       console.log(chalk.green("\nDownload committed.\n"));
     }
   } catch (err) {
@@ -134,7 +131,7 @@ async function queryAndPullQuest(metadata) {
   }
 
   // (5) Print Quest Location
-  console.log(NavigateToQuestMessage(localPath));
+  console.log(NavigateToQuestMessage(quest.localPath()));
 
   if (!isDev && !await isLatestVersion()) {
     console.log(UPDATE_REMINDER_MESSAGE);

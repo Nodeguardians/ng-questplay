@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import child_process from 'child_process';
 import dotenv from 'dotenv';
-import fs, { read } from 'fs';
+import fs from 'fs';
 import path from 'path';
 import { navigateToMainDirectory, readSettings, writeSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';

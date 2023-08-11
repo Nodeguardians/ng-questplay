@@ -31,7 +31,7 @@ export const WRONG_DIRECTORY_MESSAGE = chalk.red(
 
 export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
   "\nQuest not found. Did you enter the correct name?\n"
-  + "Check the name again or pull from upstream to fetch the latest directory of released quests.\n"
+  + "Check the name again or run `quest update` to fetch the latest directory of released quests.\n"
 );
 
 // TODO: Add link to FAQ page
@@ -178,11 +178,6 @@ export const UPDATE_FORGE_LIB_MESSAGE =
   chalk.yellow("Outdated version of forge-std detected. To update, run:\n",
     chalk.bold("    git submodule update --remote --merge\n")
   );
-
-export const FOUNDRY_BETA_MESSAGE =
-  chalk.cyan(chalk.bold("Quest tests in Foundry is still currently in beta.\n"))
-    + chalk.grey("If you notice any issues, consider reporting them on Discord!\n")
-    + chalk.grey(chalk.underline("https://discord.gg/hBDXhQry"));
 
 export const FORGE_VERSION_FAIL = 
   chalk.yellow(
