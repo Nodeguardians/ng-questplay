@@ -103,6 +103,12 @@
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 7
+            },
+            {
+                "name": "interactive-fraud-proofs",
+                "version": "0.1.0",
+                "type": "ctf",
+                "parts": 2
             }
         ] 
     },
