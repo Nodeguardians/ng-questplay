@@ -37,7 +37,7 @@ async function getNewToken() {
 
     app.get("/", (req, res) => {
       res.set("Connection", "close");
-      res.redirect(AUTH_CLI_URL + "?sucess=true");
+      res.redirect(AUTH_CLI_URL + "?success=true");
       res.send();
       shutdownManager.terminate();
       resolve(req.query.token);
