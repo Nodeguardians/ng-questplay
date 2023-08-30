@@ -5,5 +5,5 @@
 artifacts
 cache
 .env
-
+.cache/*.jwt
 .settings
