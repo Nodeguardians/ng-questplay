@@ -75,8 +75,6 @@ export async function getToken() {
 
   token = await getLocalToken();
 
-  console.log(token);
-
   if (token == null) {
     console.log(chalk.yellow("No token found."));
     renew = true;
