@@ -84,7 +84,7 @@ export async function submitQuest(isSetUpstream) {
     succeedSpinner(spinner, "Connected to Questplay");
     startSpinner(spinner, "Committing files");
 
-    await git.commit(`#${questName}`, [], ["--allow-empty"]);
+    await git.commit(`#${quest.info.name}`, [], ["--allow-empty"]);
 
     succeedSpinner(spinner, "Committed files");
     startSpinner(spinner, "Pushing files");

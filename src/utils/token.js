@@ -5,7 +5,7 @@ import { GracefulShutdownManager } from "@moebius/http-graceful-shutdown";
 import { mainPath } from "./navigation.js";
 import chalk from "chalk";
 
-const AUTH_CLI_URL = "https://nodeguardians.com/auth/cli";
+const AUTH_CLI_URL = "https://nodeguardians.io/auth/cli";
 
 /**
  * Get the local stored in the local cache

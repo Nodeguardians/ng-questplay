@@ -1,10 +1,10 @@
 import { io } from "socket.io-client";
 
-const WEBSOCKET_URL = "https://staging.notification.nodeguardians.com";
+const WEBSOCKET_URL = "https://notification.nodeguardians.io";
 
 /**
  *  Get the websocket client for the notification microservice
- * @param {String} token : the web3 token 
+ * @param {String} token : the web3 token
  * @returns the websocket client
  */
 export async function getWsClient(token) {
@@ -17,14 +17,13 @@ export async function getWsClient(token) {
 
 /**
  * Wait for an topic message from the websocket client
- * @param {Socket.io client} websocket client 
- * @param {String} topic to wait for 
- * @param {Number} timeout in ms until promise is rejected 
+ * @param {Socket.io client} websocket client
+ * @param {String} topic to wait for
+ * @param {Number} timeout in ms until promise is rejected
  * @returns the promise that will be resolved when the message is received or rejected if the timeout is reached
  */
 export function waitTopicMessage(client, topic, timeout = 10000) {
   let promise = new Promise(function (resolve, reject) {
-
     const handler = setTimeout(() => {
       reject(new Error("Timeout"));
     }, timeout);
@@ -40,10 +39,10 @@ export function waitTopicMessage(client, topic, timeout = 10000) {
 
 /**
  * Wait for an event from the websocket client on a specific topic
- * @param {Socket.io client} websocket client 
+ * @param {Socket.io client} websocket client
  * @param {String} topic to wait for
- * @param {String} event to wait for 
- * @param {Number} timeout in ms until promise is rejected 
+ * @param {String} event to wait for
+ * @param {Number} timeout in ms until promise is rejected
  * @returns the promise that will be resolved when the event is received or rejected if the timeout is reached
  */
 export function waitTopicEventMessage(client, topic, event, timeout = 10000) {
@@ -66,24 +65,28 @@ export function waitTopicEventMessage(client, topic, event, timeout = 10000) {
 /**
  * Wait for one of two events from the websocket client on a specific topic
  * @param {Socket.io client} websocket client
- * @param {String} topic to wait for 
+ * @param {String} topic to wait for
  * @param {Array[String]} events to wait for
  * @param {Number} timeout  in ms until promise is rejected
- * @returns 
+ * @returns
  */
-export function waitExclusiveTopicEventsMessage(client, topic, events, timeout = 10000) {
-    let promise = new Promise(function (resolve, reject) {
+export function waitExclusiveTopicEventsMessage(
+  client,
+  topic,
+  events,
+  timeout = 10000
+) {
+  let promise = new Promise(function (resolve, reject) {
+    const handler = setTimeout(() => {
+      reject(new Error("Timeout"));
+    }, timeout);
 
-      const handler = setTimeout(() => {
-        reject(new Error("Timeout"));
-      }, timeout);
-  
-      client.on(topic, (data) => {
-        if (events.includes(data.event)) {
-          clearTimeout(handler);
-          resolve(data);
-        }
-      });
+    client.on(topic, (data) => {
+      if (events.includes(data.event)) {
+        clearTimeout(handler);
+        resolve(data);
+      }
+    });
   });
 
   return promise;
