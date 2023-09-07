@@ -22,7 +22,7 @@ export async function getWsClient(token) {
  * @param {Number} timeout in ms until promise is rejected
  * @returns the promise that will be resolved when the message is received or rejected if the timeout is reached
  */
-export function waitTopicMessage(client, topic, timeout = 10000) {
+export function waitTopicMessage(client, topic, timeout = 30000) {
   let promise = new Promise(function (resolve, reject) {
     const handler = setTimeout(() => {
       reject(new Error("Timeout"));
@@ -45,7 +45,7 @@ export function waitTopicMessage(client, topic, timeout = 10000) {
  * @param {Number} timeout in ms until promise is rejected
  * @returns the promise that will be resolved when the event is received or rejected if the timeout is reached
  */
-export function waitTopicEventMessage(client, topic, event, timeout = 10000) {
+export function waitTopicEventMessage(client, topic, event, timeout = 30000) {
   let promise = new Promise(function (resolve, reject) {
     const handler = setTimeout(() => {
       reject(new Error("Timeout"));

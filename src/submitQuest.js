@@ -26,7 +26,7 @@ import {
 
 const git = simpleGit();
 
-export async function submitQuest(isSetUpstream) {
+export async function submitQuest(isSetUpstream, isListening) {
   try {
     navigateToQuestDirectory();
   } catch (error) {
@@ -113,7 +113,7 @@ export async function submitQuest(isSetUpstream) {
       client,
       "quests",
       ["offChainVerificationFinished", "offChainVerificationFailed"],
-      1000 * 60
+      1000 * 90
     );
     clearInterval(handler);
 
