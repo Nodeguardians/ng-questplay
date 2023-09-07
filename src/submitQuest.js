@@ -75,13 +75,15 @@ export async function submitQuest(isSetUpstream, isListening) {
   try {
     const token = await getToken();
 
-    startSpinner(spinner, "Connecting to Questplay");
+    if (isListening) {
+      startSpinner(spinner, "Connecting to Questplay");
 
-    client = await getWsClient(token);
+      client = await getWsClient(token);
+      await waitTopicMessage(client, "connect");
 
-    await waitTopicMessage(client, "connect");
+      succeedSpinner(spinner, "Connected to Questplay");
+    }
 
-    succeedSpinner(spinner, "Connected to Questplay");
     startSpinner(spinner, "Committing files");
 
     await git.commit(`#${quest.info.name}`, [], ["--allow-empty"]);
@@ -92,52 +94,62 @@ export async function submitQuest(isSetUpstream, isListening) {
     await git.push(["-u", "origin", currentBranch.name]);
 
     succeedSpinner(spinner, "Pushed files");
-    startSpinner(spinner, "Waiting for server to start verification");
 
-    await waitTopicEventMessage(
-      client,
-      "quests",
-      "offChainVerificationStarted"
-    );
+    if (isListening) {
+      startSpinner(spinner, "Waiting for server to start verification");
 
-    succeedSpinner(spinner, "Server started verification");
-    startSpinner(spinner, "Waiting for results: (0s/60s)");
+      await waitTopicEventMessage(
+        client,
+        "quests",
+        "offChainVerificationStarted"
+      );
 
-    let time = 1;
-    const handler = setInterval(() => {
-      spinner.text = "Waiting for results: (" + time + "s" + "/ 60s)";
-      time++;
-    }, 1000);
+      succeedSpinner(spinner, "Server started verification");
+      startSpinner(spinner, "Waiting for results: (0s/60s)");
 
-    const message = await waitExclusiveTopicEventsMessage(
-      client,
-      "quests",
-      ["offChainVerificationFinished", "offChainVerificationFailed"],
-      1000 * 90
-    );
-    clearInterval(handler);
+      let time = 1;
+      const handler = setInterval(() => {
+        spinner.text = "Waiting for results: (" + time + "s" + "/ 60s)";
+        time++;
+      }, 1000);
 
-    succeedSpinner(spinner, "Received results");
-    stopSpinner(spinner);
+      const message = await waitExclusiveTopicEventsMessage(
+        client,
+        "quests",
+        ["offChainVerificationFinished", "offChainVerificationFailed"],
+        1000 * 90
+      );
+      clearInterval(handler);
 
-    if (message.event == "offChainVerificationFailed") {
-      console.log(SUBMISSION_FAILED_BANNER);
-      console.log(chalk.red(message.data.error));
-    } else {
-      if (message.data.result.error) {
-        console.log(SUBMISSION_ERROR_BANNER);
-        console.log(chalk.red(message.data.result.error));
+      succeedSpinner(spinner, "Received results");
+
+      if (message.event == "offChainVerificationFailed") {
+        console.log(SUBMISSION_FAILED_BANNER);
+        console.log(chalk.red(message.data.error));
       } else {
-        console.log(chalk.green("\nSubmission successful"));
-        const report = message.data.result.testReport.sort((a, b) => {
-          return a.part < b.part;
-        });
+        if (message.data.result.error) {
+          console.log(SUBMISSION_ERROR_BANNER);
+          console.log(chalk.red(message.data.result.error));
+        } else {
+          console.log(chalk.green("\nSubmission successful"));
+          const report = message.data.result.testReport.sort((a, b) => {
+            return a.part < b.part;
+          });
 
-        for (const part of report) {
-          await printPart(part);
+          for (const part of report) {
+            await printPart(part);
+          }
         }
       }
+    } else {
+      console.log(
+        chalk.green(
+          `Quest ${quest.info.name} submitted, your results will be available on nodeguardians.io in a few seconds.\n`
+        )
+      );
     }
+
+    stopSpinner(spinner);
   } catch (err) {
     spinner.stop();
     console.log(chalk.red(err));
