@@ -49,7 +49,7 @@ program
 program
   .command("test")
   .description("Run local tests for the current quest")
-  .option("[part]", "Part number of the quest to test", myParseInt)
+  .argument("[part]", "Part number of the quest to test", myParseInt)
   .exitOverride((err) => {
     console.log(TEST_HELP_MESSAGE);
   })
@@ -111,8 +111,8 @@ program
   .exitOverride((err) => {
     console.log(UPDATE_HELP_MESSAGE);
   })
-  .action(async (remote) => {
-    await updateQuestplay(remote);
+  .action(async (options) => {
+    await updateQuestplay(options.newRemote);
   });
 
 program
@@ -123,8 +123,8 @@ program
   .exitOverride((err) => {
     console.log(SUBMIT_HELP_MESSAGE);
   })
-  .action(async (setUpstream, listen) => {
-    await submitQuest(setUpstream, listen);
+  .action(async (options) => {
+    await submitQuest(options.setUpstream, options.listen);
   });
 
 program.parseAsync();
