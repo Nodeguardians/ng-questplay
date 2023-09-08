@@ -49,12 +49,12 @@ program
 program
   .command("test")
   .description("Run local tests for the current quest")
-  .argument("<part>", "Part number of the quest to test", myParseInt)
+  .option("[part]", "Part number of the quest to test", myParseInt)
   .exitOverride((err) => {
     console.log(TEST_HELP_MESSAGE);
   })
-  .action(async (partIndex) => {
-    await runTests(partIndex);
+  .action(async (part) => {
+    await runTests(part);
   });
 
 program
@@ -76,12 +76,11 @@ program
 program
   .command("find")
   .description("Find an download a quest")
-  .argument("<slug>", "Slug of the quest to find")
+  .argument("[slug]", "Slug of the quest to find")
   .exitOverride((err) => {
     console.log(FIND_HELP_MESSAGE);
   })
-  .action(async (options) => {
-    const slug = options.slug;
+  .action(async (slug) => {
     await findQuest(slug);
   });
 
@@ -103,8 +102,7 @@ program
   .exitOverride((err) => {
     console.log(UPDATE_HELP_MESSAGE);
   })
-  .action(async (options) => {
-    const remote = options["new-remote"];
+  .action(async (remote) => {
     await updateQuestplay(remote);
   });
 
@@ -116,10 +114,8 @@ program
   .exitOverride((err) => {
     console.log(SUBMIT_HELP_MESSAGE);
   })
-  .action(async (options) => {
-    const isSetUpstream = options["set-upstream"];
-    const listen = options["listen"];
-    await submitQuest(isSetUpstream, listen);
+  .action(async (setUpstream, listen) => {
+    await submitQuest(setUpstream, listen);
   });
 
 program.parseAsync();
