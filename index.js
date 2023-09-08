@@ -50,6 +50,7 @@ program
   .command("test")
   .description("Run local tests for the current quest")
   .argument("[part]", "Part number of the quest to test", myParseInt)
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(TEST_HELP_MESSAGE);
   })
@@ -61,6 +62,7 @@ program
   .command("set-framework")
   .description("Set the framework for the current quest")
   .argument("<framework>", "Framework to set : foundry or hardhat")
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(SET_FRAMEWORK_HELP_MESSAGE);
   })
@@ -77,6 +79,7 @@ program
   .command("find")
   .description("Find an download a quest")
   .argument("[slug]", "Slug of the quest to find")
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(FIND_HELP_MESSAGE);
   })
@@ -97,6 +100,7 @@ program
   .command("bridge")
   .description("Bridge a quest to the Node Guardians servers")
   .argument("<hash>", "32 bytes hash")
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(BRIDGE_HELP_MESSAGE);
   })
@@ -108,6 +112,7 @@ program
   .command("update")
   .description("Update the questplay repository")
   .option("--new-remote <remote>", "Set a new remote target for the questplay update")
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(UPDATE_HELP_MESSAGE);
   })
@@ -120,6 +125,7 @@ program
   .description("Submit a build quest solution to the Node Guardians servers")
   .option("--set-upstream", "set the upstream branch alongside the submission")
   .option("--listen", "wait for the server response")
+  .allowExcessArguments(false)
   .exitOverride((err) => {
     console.log(SUBMIT_HELP_MESSAGE);
   })
