@@ -81,6 +81,15 @@ program
     console.log(FIND_HELP_MESSAGE);
   })
   .action(async (slug) => {
+    if (slug === undefined) {
+      const answers = await inquirer.prompt({
+        name: 'query',
+        type: 'input',
+        message: 'Find a quest:'
+      });
+
+      slug = answers.query.toLowerCase().trim().replace(" ", "-");
+    }
     await findQuest(slug);
   });
 
