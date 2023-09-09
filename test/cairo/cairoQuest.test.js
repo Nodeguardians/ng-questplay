@@ -65,7 +65,6 @@ describe("Cairo Quests", function() {
             const regexString = `${TEST_QUEST_SLUG} \\([0-9]+\\.[0-9]+\\.[0-9]+\\) found in ${TEST_CAMPAIGN_SLUG}\n`
                 + "Latest version of quest already exists in local repo\\.\n"
                 + `To navigate to quest directory, run cd campaigns.${TEST_CAMPAIGN_SLUG}.${TEST_QUEST_SLUG}` 
-            console.log(outputString);
             assertRegex(outputString, regexString);
         });
 
