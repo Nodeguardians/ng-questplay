@@ -73,9 +73,9 @@ export async function submitQuest(isSetUpstream, isListening) {
   const spinner = createSpinner();
 
   try {
-    const token = await getToken();
 
     if (isListening) {
+      const token = await getToken();
       startSpinner(spinner, "Connecting to Questplay");
 
       client = await getWsClient(token);
@@ -105,13 +105,7 @@ export async function submitQuest(isSetUpstream, isListening) {
       );
 
       succeedSpinner(spinner, "Server started verification");
-      startSpinner(spinner, "Waiting for results: (0s/60s)");
-
-      let time = 1;
-      const handler = setInterval(() => {
-        spinner.text = "Waiting for results: (" + time + "s" + "/ 60s)";
-        time++;
-      }, 1000);
+      startSpinner(spinner, "Waiting for results");
 
       const message = await waitExclusiveTopicEventsMessage(
         client,
@@ -119,7 +113,6 @@ export async function submitQuest(isSetUpstream, isListening) {
         ["offChainVerificationFinished", "offChainVerificationFailed"],
         1000 * 90
       );
-      clearInterval(handler);
 
       succeedSpinner(spinner, "Received results");
 
