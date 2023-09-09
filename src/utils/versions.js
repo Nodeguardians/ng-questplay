@@ -4,15 +4,19 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import toml from 'toml';
+import semver from 'semver';
 import { Octokit } from '@octokit/rest';
 import { spawnSync } from 'child_process';
 import { mainPath, readSettings } from "./navigation.js";
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE ,
   INSTALL_FOUNDRY_MESSAGE,
+  INSTALL_SCARB_MESSAGE,
   INSTALL_FORGE_LIB_MESSAGE,
   UPDATE_FOUNDRY_MESSAGE,
   UPDATE_FORGE_LIB_MESSAGE,
+  UPDATE_CAIRO_MESSAGE,
+  MISMATCH_SCARB_MESSAGE,
   FORGE_VERSION_FAIL
 } from "./messages.js";
 
@@ -75,7 +79,7 @@ export function localForgeVersion() {
   };
   
   if (commandExists.sync("forge")) {
-    const versionPattern = /(?<= )[0-9]+\.[0-9]+\.[0-9]+(?= )/;
+    const versionPattern = /(?<= )[0-9]+\.[0-9]+\.[0-9]+/;
     const match = spawnSync("forge", ["--version"]).stdout
       .toString().match(versionPattern);
 
@@ -95,31 +99,90 @@ export function checkForgeVersion() {
   const remote = remoteForgeVersion();
   const local = localForgeVersion();
 
-  let isInstalled = true;
   if (local.forge == "") {
     console.log(INSTALL_FOUNDRY_MESSAGE);
-    isInstalled = false;
+    return false;
   }
 
   if (local.forgeStd == "") {
     console.log(INSTALL_FORGE_LIB_MESSAGE());
-    isInstalled = false;
+    return false;
   }
-
-  if (!isInstalled) return isInstalled;
 
   if (local.forge == "error") {
     console.log(FORGE_VERSION_FAIL);
-  } else if (compareVersionString(remote.forge, local.forge) > 0) {
+    return true;
+  }
+  
+  if (!semver.satisfies(local.forge, remote.forge)) {
     console.log(UPDATE_FOUNDRY_MESSAGE);
+    return false;
   }
 
-  if (compareVersionString(remote.forgeStd, local.forgeStd) > 0) {
+  if (!semver.satisfies(local.forgeStd, remote.forgeStd)) {
     console.log(UPDATE_FORGE_LIB_MESSAGE);
+    return false;
   }
 
-  return isInstalled;
+  return true;
 
+}
+  
+export function remoteScarbVersion() {
+    const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
+    return JSON.parse(packageFile).cairoDependencies;
+}
+
+export function localScarbVersion() {  
+  let versions = { 
+    scarb: "",
+    cairo: ""
+  };
+
+  if (!commandExists.sync("scarb")) {
+    return ""
+  };
+
+  const versionPattern = /(?<=scarb )[0-9]+\.[0-9]+\.[0-9]+/;
+  const match = spawnSync("scarb", ["--version"]).stdout
+    .toString().match(versionPattern);
+
+  versions.scarb = (match == null) ? "error" : match[0];
+
+  const scarbTomlData = toml.parse(
+    fs.readFileSync(path.join(process.cwd(), "./Scarb.toml"))
+  );
+  
+  versions.cairo = scarbTomlData.package["cairo-version"];
+
+  return versions;
+}
+
+export function checkScarbVersion() {
+  const localVersion = localScarbVersion(); 
+  const remoteVersion = remoteScarbVersion();
+  
+  if (localVersion == "") {
+    console.log(INSTALL_SCARB_MESSAGE(remoteVersion.scarb));
+    return false;
+  };
+
+  if (localVersion == "error") {
+    console.log(SCARB_VERSION_FAIL);
+    return true;
+  }
+
+  if (!semver.satisfies(localVersion.scarb, remoteVersion.scarb)) {
+    console.log(MISMATCH_SCARB_MESSAGE(remoteVersion.scarb));
+    return false;
+  }
+
+  if (!semver.satisfies(localVersion.cairo, remoteVersion.cairo)) {
+    console.log(UPDATE_CAIRO_MESSAGE(localVersion.cairo, remoteVersion.cairo));
+    return false;
+  }
+
+  return true;
 }
 
 // TODO: Refactor this to be multi-protocol friendly
@@ -136,8 +199,4 @@ export function localQuestVersion(questPath) {
 
   const scarbTomlPath = path.join(questPath, "Scarb.toml");
   return toml.parse(fs.readFileSync(scarbTomlPath)).package.version;
-}
-
-function compareVersionString(v1, v2) {
-  return v1.localeCompare(v2, undefined, { numeric: true, sensitivity: 'base' })
 }

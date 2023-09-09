@@ -32,6 +32,7 @@
     "inquirer": "^9.1.5",
     "jwt-check-expiration": "^1.0.5",
     "ora": "^7.0.0",
+    "semver": "^7.5.4",
     "simple-git": "^3.17.0",
     "socket.io-client": "^4.7.1",
     "toml": "^3.0.0"
@@ -43,7 +44,11 @@
     "campaigns/**"
   ],
   "foundryDependencies": {
-    "forge": "0.2.0",
-    "forgeStd": "1.5.2"
+    "forge": ">=0.2.0",
+    "forgeStd": ">=1.5.0"
+  },
+  "cairoDependencies": {
+    "scarb": "^0.7.0",
+    "cairo": "2.0.0"
   }
 }

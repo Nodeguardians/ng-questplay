@@ -228,21 +228,46 @@ export const UPDATE_FORGE_LIB_MESSAGE = chalk.yellow(
 export const FORGE_VERSION_FAIL = chalk.yellow(
   "WARNING: Failed to detect Forge version.\n",
   "Consider reporting this on Discord!\n",
-  chalk.underline("https://discord.gg/hBDXhQry\n")
+  chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );
 
 export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(
   "This quest does not support Foundry, running Hardhat instead...\n"
 );
 
+export function INSTALL_SCARB_MESSAGE(remoteVersion) {
+    return chalk.yellow(
+      `Cairo quests require the installation of Scarb ${remoteVersion}. To install Scarb, check out`,
+      chalk.underline("https://docs.swmansion.com/scarb/")
+    );
+}
+
+export function MISMATCH_SCARB_MESSAGE(remoteVersion) {
+  return chalk.yellow(`Incompatible scarb version detected. Please use scarb ${remoteVersion}!\n`);
+}
+
+export function UPDATE_CAIRO_MESSAGE(localVersion, remoteVersion) {
+    let changes = `${chalk.bgRed(chalk.strikethrough(localVersion))} ${chalk.bgGreenBright(remoteVersion)}`;
+    return chalk.yellow("We have migrated to cairo 2.2.0! Migrate your quest by making the following changes to Scarb.toml:\n")
+    + chalk.grey(`\n    cairo-version = ${changes}`)
+    + chalk.grey(`\n    starknet-version = ${changes} [if applicable]\n`)
+}
+
+export const UPDATE_SCARB_VERSION_FAIL = 
+  chalk.yellow(
+    "WARNING: Failed to detect Scarb version.\n",
+    "Consider reporting this on Discord!\n",
+    chalk.underline("https://discord.gg/EyGQEEzmjx\n")
+  );
+
 export const SUBMISSION_ERROR_BANNER = chalk.yellow(
   "\nWARNING: An error occured during the verification of your submission.\n",
   "Consider reporting this on Discord if this is not linked to your implementation.\n",
-  chalk.underline("https://discord.gg/hBDXhQry\n")
+  chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );
 
 export const SUBMISSION_FAILED_BANNER = chalk.red(
   "\nERROR: We couldn't validate your submission due to the following error\n",
   "Please report this error on Discord: " +
-    chalk.underline("https://discord.gg/hBDXhQry\n")
+    chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );
