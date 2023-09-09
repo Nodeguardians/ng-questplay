@@ -176,7 +176,7 @@ describe("Solidity Quests", function() {
             execSync("quest set-framework foundry");
         });
 
-        it("Should hardhat test all parts (solved)", async function() {
+        it("Should foundry test all parts (solved)", async function() {
             const allPartsRegex =  "== Testing Part 1 =="
                 + "(.|\n)*Running 1 test for test/foundry/Attacker.1.t.sol:PublicTest1"
                 + "(.|\n)*1 passed; 0 failed;"
