@@ -37,7 +37,11 @@ export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
 
 // TODO: Add link to FAQ page
 export const CREDENTIALS_NOT_FOUND_MESSAGE = chalk.red(
-  "\nGithub credentials not found.\n"
+  "\nGithub token not found."
+);
+
+export const BAD_TOKEN_MESSAGE = chalk.red(
+  "\nBad Github token.\n"
 );
 
 export const UPDATE_QUEST_CONFIRMATION =

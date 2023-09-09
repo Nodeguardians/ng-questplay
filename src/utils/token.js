@@ -47,7 +47,9 @@ async function getNewToken() {
       const port = server.address().port;
       console.log(
         chalk.yellow(
-          `Please open: ` + chalk.bold(AUTH_CLI_URL + `?port=${port}`)
+          "Please log into nodeguardians.io to authenticate yourself: ",
+          chalk.underline(AUTH_CLI_URL + `?port=${port}\n`),
+          "You will only need to do this once."
         )
       );
     });
@@ -83,7 +85,7 @@ export async function getToken() {
       await verifyToken(token);
     } catch (e) {
       console.log(e);
-      console.log("invalid token");
+      console.log("Invalid or expired token");
       renew = true;
     }
   }
