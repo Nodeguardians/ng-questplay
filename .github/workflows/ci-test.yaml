@@ -28,7 +28,7 @@ jobs:
     - name: Install Scarb
       uses: software-mansion/setup-scarb@v1
       with:
-        scarb-version: "0.7.0"
+        scarb-version: "0.5.0"
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
