@@ -124,7 +124,7 @@ describe("Solidity Quests", function() {
         it("Should foundry test single part (unsolved)", async function() {
             const part1Regex = "== Testing Part 1 =="
                 + "(.|\n)*Running 1 test for test/foundry/Attacker.1.t.sol:PublicTest1"
-                + "(.|\n)*0 passed; 1 failed;"
+                + `(.|\n)*FAILED`
                 + "(.|\n)*";
 
             const part2Regex = "== Testing Part 2 =="
@@ -176,13 +176,13 @@ describe("Solidity Quests", function() {
             execSync("quest set-framework foundry");
         });
 
-        it("Should hardhat test all parts (solved)", async function() {
+        it("Should foundry test all parts (solved)", async function() {
             const allPartsRegex =  "== Testing Part 1 =="
                 + "(.|\n)*Running 1 test for test/foundry/Attacker.1.t.sol:PublicTest1"
-                + "(.|\n)*1 passed; 0 failed;"
+                + `(.|\n)*ok`
                 + "(.|\n)*== Testing Part 2 =="
                 + "(.|\n)*Running 4 tests for test/foundry/SimpleGameV2.2.t.sol:PublicTest1"
-                + "(.|\n)*4 passed; 0 failed;"
+                + `(.|\n)*ok`
                 + "(.|\n)*";
 
             const resultString = execSync(`cd ${TEST_QUEST_PATH} && quest test`).toString();

@@ -3,6 +3,7 @@ import path from 'path';
 import toml from 'toml';
 
 import { BaseQuest } from './baseQuest.js';
+import { checkScarbVersion } from '../utils/versions.js';
 import { mainPath } from '../utils/navigation.js';
 import { spawnSync } from 'child_process';
 
@@ -43,11 +44,13 @@ export class CairoQuest extends BaseQuest {
 
 async function runCairoTests(partIndex) {
 
+    console.log();
+    if (!checkScarbVersion()) process.exit(1);
+
     const cairoTestParams = [
         "test", "-f", `test_${partIndex}`
     ];
 
-    console.log();
     spawnSync("scarb", cairoTestParams, {stdio: "inherit"});
     console.log();
     

@@ -1,43 +1,54 @@
 {
-    "private": true,
-    "name": "ng-questplay",
-    "version": "1.4.2",
-    "description": "",
-    "type": "module",
-    "scripts": {
-        "test": "mocha --recursive --timeout 60000 --grep 'Public' --invert",
-        "start-adventure": "npm install && npm link && node hooks/install.js && npm run start-adventure:get-forge",
-        "start-adventure:get-forge": "git submodule add https://github.com/foundry-rs/forge-std lib/forge-std && git submodule update --init --recursive"
-    },
-    "author": "",
-    "license": "MIT",
-    "bin": {
-        "quest": "./index.js"
-    },
-    "dependencies": {
-        "@ngquests/contracts": "./@ngquests/contracts",
-        "@ngquests/test-helpers": "./@ngquests/test-helpers",
-        "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
-        "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
-        "@nomiclabs/hardhat-ethers": "^2.2.2",
-        "@openzeppelin/contracts": "^4.8.2",
-        "@solidity-parser/parser": "^0.16.0",
-        "command-exists": "^1.2.9",
-        "dotenv": "^16.0.3",
-        "github-download-directory": "^3.0.0",
-        "hardhat": "^2.13.0",
-        "inquirer": "^9.1.5",
-        "simple-git": "^3.17.0",
-        "toml": "^3.0.0"
-    },
-    "overrides": {
-        "undici": ">=5.19.1"
-    },
-    "workspaces": [
-        "campaigns/**"
-    ],
-    "foundryDependencies": {
-        "forge": "0.2.0",
-        "forgeStd": "1.5.2"
-    }
+  "private": true,
+  "name": "ng-questplay",
+  "version": "1.5.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --recursive --timeout 60000 --grep 'Public' --invert",
+    "start-adventure": "npm install && npm link && node hooks/install.js && npm run start-adventure:get-forge",
+    "start-adventure:get-forge": "git submodule add https://github.com/foundry-rs/forge-std lib/forge-std && git submodule update --init --recursive"
+  },
+  "author": "",
+  "license": "MIT",
+  "bin": {
+    "quest": "./index.js"
+  },
+  "dependencies": {
+    "@moebius/http-graceful-shutdown": "^1.1.0",
+    "@ngquests/contracts": "./@ngquests/contracts",
+    "@ngquests/test-helpers": "./@ngquests/test-helpers",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@openzeppelin/contracts": "^4.8.2",
+    "@solidity-parser/parser": "^0.16.0",
+    "command-exists": "^1.2.9",
+    "commander": "^11.0.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "github-download-directory": "^3.0.0",
+    "hardhat": "^2.13.0",
+    "inquirer": "^9.1.5",
+    "jwt-check-expiration": "^1.0.5",
+    "ora": "^7.0.0",
+    "semver": "^7.5.4",
+    "simple-git": "^3.17.0",
+    "socket.io-client": "^4.7.1",
+    "toml": "^3.0.0"
+  },
+  "overrides": {
+    "undici": ">=5.19.1"
+  },
+  "workspaces": [
+    "campaigns/**"
+  ],
+  "foundryDependencies": {
+    "forge": ">=0.2.0",
+    "forgeStd": ">=1.5.0"
+  },
+  "cairoDependencies": {
+    "scarb": "^0.5.0",
+    "cairo": "2.0.0"
+  }
 }
