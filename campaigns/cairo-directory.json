@@ -42,6 +42,18 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
+            },
+            {
+                "name": "calldata-spoofing",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
+            },
+            {
+                "name": "starknet-storage-layout",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 4
             }
         ]
     },
