@@ -1,0 +1,19 @@
+[
+    {
+        "name": "discovering-noir",
+        "quests": [
+            {
+                "name": "zk-dungeon",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "noir-tornado",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 3
+            }
+        ]
+    }
+]
