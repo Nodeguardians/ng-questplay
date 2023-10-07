@@ -149,12 +149,6 @@ export const UPDATE_FORGE_LIB_MESSAGE = chalk.yellow(
   chalk.bold("    git submodule update --remote --merge\n")
 );
 
-export const FORGE_VERSION_FAIL = chalk.yellow(
-  "WARNING: Failed to detect Forge version.\n",
-  "Consider reporting this on Discord!\n",
-  chalk.underline("https://discord.gg/EyGQEEzmjx\n")
-);
-
 export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(
   "This quest does not support Foundry, running Hardhat instead...\n"
 );
@@ -183,6 +177,17 @@ export const UPDATE_SCARB_VERSION_FAIL =
     "Consider reporting this on Discord!\n",
     chalk.underline("https://discord.gg/EyGQEEzmjx\n")
   );
+
+export function INSTALL_NARGO_MESSAGE(remoteVersion) {
+  return chalk.yellow(
+    `Noir quests require the installation of Nargo ${remoteVersion}. To install Nargo, check out`,
+    chalk.underline("https://noir-lang.org/getting_started/nargo_installation/")
+  );
+}
+
+export function MISMATCH_NARGO_MESSAGE(remoteVersion) {
+  return chalk.yellow(`Incompatible nargo version detected. Please use nargo ${remoteVersion}!\n`);
+}
 
 export const SUBMISSION_ERROR_BANNER = chalk.yellow(
   "\nWARNING: An error occured during the verification of your submission.\n",

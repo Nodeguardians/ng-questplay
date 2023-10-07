@@ -3,6 +3,7 @@ import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
 import { mainPath } from '../utils/navigation.js';
+import { checkNargoVersion } from '../utils/versions.js';
 
 let hre;
 
@@ -53,6 +54,7 @@ export class NoirQuest extends BaseQuest {
  */
 async function runJSTests(partIndex) {
 
+    if (!checkNargoVersion()) process.exit(1);
     const hardhatConfigFile = path.join(this.localPath(), "hardhat.config.js");
 
     if (fs.existsSync(hardhatConfigFile)) {

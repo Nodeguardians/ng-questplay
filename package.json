@@ -50,5 +50,8 @@
   "cairoDependencies": {
     "scarb": "^0.7.0",
     "cairo": "2.2.0"
+  },
+  "nargoDependencies": {
+    "nargo": "0.15.0"
   }
 }
