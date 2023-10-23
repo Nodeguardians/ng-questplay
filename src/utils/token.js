@@ -5,14 +5,31 @@ import { GracefulShutdownManager } from "@moebius/http-graceful-shutdown";
 import { mainPath } from "./navigation.js";
 import chalk from "chalk";
 
-const AUTH_CLI_URL = "https://nodeguardians.io/auth/cli";
+const AUTH_CLI_URL = {
+    "prod": "https://nodeguardians.io/auth/cli",
+    "preprod": "https://preprod.nodeguardians.com/auth/cli",
+    "staging": "https://staging.nodeguardians.com/auth/cli"
+};
+
+/**
+ * Get the expected token path for the given environment
+ */
+function getTokenPath(environment) {
+  if (environment == "prod") {
+    return mainPath() + "/.cache/token.jwt";
+  }
+
+  return mainPath() + `/.cache/${environment}-token.jwt`;
+}
 
 /**
  * Get the local stored in the local cache
  */
-async function getLocalToken() {
-  if (fs.existsSync(mainPath() + "/.cache/token.jwt")) {
-    return fs.readFileSync(mainPath() + "/.cache/token.jwt").toString();
+async function getLocalToken(environment) {
+  const tokenPath = getTokenPath(environment);
+
+  if (fs.existsSync(tokenPath)) {
+    return fs.readFileSync(tokenPath).toString();
   } else {
     return null;
   }
@@ -21,8 +38,9 @@ async function getLocalToken() {
 /**
  * Store the token in the local cache
  */
-function storeLocalToken(token) {
-  fs.writeFileSync(mainPath() + "/.cache/token.jwt", token);
+function storeLocalToken(token, environment) {
+  const tokenPath = getTokenPath(environment);
+  fs.writeFileSync(tokenPath, token);
 }
 
 /**
@@ -30,14 +48,14 @@ function storeLocalToken(token) {
  * they private key and get the signature back for later auth with
  * the notification microservice
  */
-async function getNewToken() {
+async function getNewToken(environment) {
   return new Promise((resolve, reject) => {
     const app = express();
     let shutdownManager;
 
     app.get("/", (req, res) => {
       res.set("Connection", "close");
-      res.redirect(AUTH_CLI_URL + "?success=true");
+      res.redirect(AUTH_CLI_URL[environment] + "?success=true");
       res.send();
       shutdownManager.terminate();
       resolve(req.query.token);
@@ -48,7 +66,7 @@ async function getNewToken() {
       console.log(
         chalk.yellow(
           "Please log into nodeguardians.io to authenticate yourself: ",
-          chalk.underline(AUTH_CLI_URL + `?port=${port}\n`),
+          chalk.underline(AUTH_CLI_URL[environment] + `?port=${port}\n`),
           "You will only need to do this once."
         )
       );
@@ -69,13 +87,14 @@ async function verifyToken(token) {
 
 /**
  * Get the token from the local cache or get a new one
+ * @param {string} environment : The environment to use ("prod" | "preprod" | "staging") 
  * @returns {Promise<string>} The token
  */
-export async function getToken() {
+export async function getToken(environment) {
   let token;
   let renew = false;
 
-  token = await getLocalToken();
+  token = await getLocalToken(environment);
 
   if (token == null) {
     console.log(chalk.yellow("No token found."));
@@ -91,11 +110,11 @@ export async function getToken() {
   }
 
   if (renew) {
-    token = await getNewToken();
+    token = await getNewToken(environment);
   }
 
   await verifyToken(token);
-  storeLocalToken(token);
+  storeLocalToken(token, environment);
 
   return token;
 }

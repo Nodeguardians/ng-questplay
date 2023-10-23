@@ -26,7 +26,7 @@ import {
 
 const git = simpleGit();
 
-export async function submitQuest(isSetUpstream, isListening) {
+export async function submitQuest(isSetUpstream, isListening, environment) {
   try {
     navigateToQuestDirectory();
   } catch (error) {
@@ -75,10 +75,10 @@ export async function submitQuest(isSetUpstream, isListening) {
   try {
 
     if (isListening) {
-      const token = await getToken();
+      const token = await getToken(environment);
       startSpinner(spinner, "Connecting to Questplay");
 
-      client = await getWsClient(token);
+      client = await getWsClient(token, environment);
       await waitTopicMessage(client, "connect");
 
       succeedSpinner(spinner, "Connected to Questplay");
