@@ -202,8 +202,8 @@ export function localNargoVersion() {
 }
 
 export function checkNargoVersion() {
-  const localVersion = localScarbVersion(); 
-  const remoteVersion = remoteScarbVersion();
+  const localVersion = localNargoVersion(); 
+  const remoteVersion = remoteNargoVersion();
   
   if (localVersion == "") {
     console.log(INSTALL_NARGO_MESSAGE(remoteVersion.nargo));
