@@ -4,6 +4,7 @@ import path from 'path';
 import { BaseQuest } from './baseQuest.js';
 import { mainPath } from '../utils/navigation.js';
 import { checkNargoVersion } from '../utils/versions.js';
+import { execSync } from 'child_process';
 
 let hre;
 
@@ -66,14 +67,11 @@ async function runJSTests(partIndex) {
 
     } else {
 
-        const mochaCommand = `
-            npx mocha test --
-            --timeout ${MOCHA_TIMEOUT} 
-            --recursive
-            --grep "(Part ${partIndex})
-        `;
-        
-        execSync(mochaCommand, {stdio: 'inherit'});
+        const mochaCommand 
+            = `npx mocha test --timeout ${MOCHA_TIMEOUT} --recursive --grep "(Part ${partIndex})"`;
+        try {
+            execSync(mochaCommand, {stdio: 'inherit'});
+        } catch (error) { }
 
     }
 
