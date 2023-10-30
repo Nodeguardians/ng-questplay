@@ -99,7 +99,7 @@ export function UnexpectedContractsWarning(
 ) {
   let msg =
     chalk.yellow("WARNING: ") +
-    "Questplay has detected unexpectedly added/modified .sol files.\n\n";
+    "Questplay has detected unexpectedly added/modified files.\n\n";
 
   for (const newContract of newContracts)
     msg += chalk.bold(`     Added: ${newContract}\n`);
@@ -113,7 +113,7 @@ export function UnexpectedContractsWarning(
   if (filesToTestPath)
     msg += `\nSee ${chalk.bold(
       filesToTestPath
-    )} for the .sol files you can safely modify.`;
+    )} for the files you can safely modify.`;
 
   return chalk.gray(msg);
 }
