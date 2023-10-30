@@ -54,7 +54,7 @@ export async function updateQuestplay(newRemote = null) {
 
   try {
 
-    await git.add("./*");
+    await git.add("--all");
     await git.commit(`Update Questplay to ${await remoteVersion()}`);
     console.log(chalk.green("\nUpdate committed.\n"));
 
