@@ -109,6 +109,12 @@
                 "version": "0.1.0",
                 "type": "ctf",
                 "parts": 2
+            },
+            {
+                "name": "finding-ouroboros",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ] 
     },
