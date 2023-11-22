@@ -11,7 +11,7 @@ import inquirer from "inquirer";
 import { submitQuest } from "./src/submitQuest.js";
 import { updateQuestplay } from "./src/updateQuestplay.js";
 import { bridge } from "./src/bridge.js";
-import { Command } from "commander";
+import { Command, Option } from "commander";
 
 const program = new Command();
 
@@ -109,14 +109,20 @@ program
     await updateQuestplay(options.newRemote);
   });
 
+const envOption = new Option("--env <name>")
+  .choices(["prod", "preprod", "staging"])
+  .default("prod")
+  .hideHelp();
+
 program
   .command("submit")
   .description("Submit a quest to nodeguardians.io for verification.")
   .option("--set-upstream", "Push a new branch upstream")
   .option("--listen", "Listen for server response")
+  .addOption(envOption)
   .allowExcessArguments(false)
   .action(async (options) => {
-    await submitQuest(options.setUpstream, options.listen);
+    await submitQuest(options.setUpstream, options.listen, options.env);
   });
 
 if (process.argv.length == 2) {

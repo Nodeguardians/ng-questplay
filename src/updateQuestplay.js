@@ -42,12 +42,9 @@ export async function updateQuestplay(newRemote = null) {
   // (3) Pull update
   await pullUpdate();
 
-  // (4) If git hook not installed, install pre-commit hook
-  // Required for legacy reasons. Early versions of Questplay doesn't require installing our pre-commit hook.
-  if (!fs.existsSync("./.git/hooks/pre-commit")) {
-    const hookFile = path.join(process.cwd(), "hooks", "precommit.js");
-    fs.symlinkSync(hookFile, "./.git/hooks/pre-commit");
-  }
+  // (4) Update pre-commit hook
+  const hookFile = path.join(process.cwd(), "hooks", "pre-commit");
+  fs.copyFileSync(hookFile, "./.git/hooks/pre-commit");
 
   // (5) Install dependencies and forge-std submodule
   child_process.execSync('npm install');
@@ -57,7 +54,7 @@ export async function updateQuestplay(newRemote = null) {
 
   try {
 
-    await git.add("./*");
+    await git.add("--all");
     await git.commit(`Update Questplay to ${await remoteVersion()}`);
     console.log(chalk.green("\nUpdate committed.\n"));
 

@@ -1,0 +1,25 @@
+[
+    {
+        "name": "discovering-noir",
+        "quests": [
+            {
+                "name": "hello-noir",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "zk-dungeon",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "daggers-and-decoys",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            }
+        ]
+    }
+]

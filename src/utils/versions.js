@@ -11,13 +11,14 @@ import { mainPath, readSettings } from "./navigation.js";
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE ,
   INSTALL_FOUNDRY_MESSAGE,
+  INSTALL_NARGO_MESSAGE,
   INSTALL_SCARB_MESSAGE,
   INSTALL_FORGE_LIB_MESSAGE,
   UPDATE_FOUNDRY_MESSAGE,
   UPDATE_FORGE_LIB_MESSAGE,
   UPDATE_CAIRO_MESSAGE,
-  MISMATCH_SCARB_MESSAGE,
-  FORGE_VERSION_FAIL
+  MISMATCH_NARGO_MESSAGE,
+  MISMATCH_SCARB_MESSAGE
 } from "./messages.js";
 
 let _remoteVersion;
@@ -83,7 +84,7 @@ export function localForgeVersion() {
     const match = spawnSync("forge", ["--version"]).stdout
       .toString().match(versionPattern);
 
-    versions.forge = (match == null) ? "error" : match[0];
+    versions.forge = match[0];
   }
 
   const forgeLibPath = path.join(mainPath(), "lib", "forge-std", "package.json");
@@ -147,7 +148,7 @@ export function localScarbVersion() {
   const match = spawnSync("scarb", ["--version"]).stdout
     .toString().match(versionPattern);
 
-  versions.scarb = (match == null) ? "error" : match[0];
+  versions.scarb = match[0];
 
   const scarbTomlData = toml.parse(
     fs.readFileSync(path.join(process.cwd(), "./Scarb.toml"))
@@ -167,11 +168,6 @@ export function checkScarbVersion() {
     return false;
   };
 
-  if (localVersion == "error") {
-    console.log(SCARB_VERSION_FAIL);
-    return true;
-  }
-
   if (!semver.satisfies(localVersion.scarb, remoteVersion.scarb)) {
     console.log(MISMATCH_SCARB_MESSAGE(remoteVersion.scarb));
     return false;
@@ -179,6 +175,43 @@ export function checkScarbVersion() {
 
   if (!semver.satisfies(localVersion.cairo, remoteVersion.cairo)) {
     console.log(UPDATE_CAIRO_MESSAGE(localVersion.cairo, remoteVersion.cairo));
+    return false;
+  }
+
+  return true;
+}
+
+
+export function remoteNargoVersion() {
+    const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
+    return JSON.parse(packageFile).nargoDependencies;
+}
+
+export function localNargoVersion() {  
+  if (!commandExists.sync("nargo")) {
+    return ""
+  };
+
+  const versionPattern = /(?<=nargo )[0-9]+\.[0-9]+\.[0-9]+/;
+  const match = spawnSync("nargo", ["--version"]).stdout
+    .toString().match(versionPattern);
+
+  const nargo = match[0];
+
+  return { nargo };
+}
+
+export function checkNargoVersion() {
+  const localVersion = localNargoVersion(); 
+  const remoteVersion = remoteNargoVersion();
+  
+  if (localVersion == "") {
+    console.log(INSTALL_NARGO_MESSAGE(remoteVersion.nargo));
+    return false;
+  };
+
+  if (!semver.satisfies(localVersion.nargo, remoteVersion.nargo)) {
+    console.log(MISMATCH_NARGO_MESSAGE(remoteVersion.nargo));
     return false;
   }
 

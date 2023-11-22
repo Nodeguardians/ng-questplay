@@ -1,14 +1,19 @@
 import { io } from "socket.io-client";
 
-const WEBSOCKET_URL = "https://notification.nodeguardians.io";
+const WEBSOCKET_URL = {
+    "prod": "https://notification.nodeguardians.io",
+    "preprod": "https://preprod.notification.nodeguardians.com",
+    "staging": "https://staging.notification.nodeguardians.com"
+};
 
 /**
  *  Get the websocket client for the notification microservice
  * @param {String} token : the web3 token
+ * @param {String} environment : the environment to connect to ("prod" | "preprod" | "staging")
  * @returns the websocket client
  */
-export async function getWsClient(token) {
-  const client = io(WEBSOCKET_URL, {
+export async function getWsClient(token, environment) {
+  const client = io(WEBSOCKET_URL[environment], {
     auth: { token: String(token) },
   });
 
