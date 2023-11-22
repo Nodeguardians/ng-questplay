@@ -52,6 +52,6 @@
     "cairo": "2.2.0"
   },
   "nargoDependencies": {
-    "nargo": "0.15.0"
+    "nargo": "0.19.2"
   }
 }

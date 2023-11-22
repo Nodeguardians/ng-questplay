@@ -4,19 +4,19 @@
         "quests": [
             {
                 "name": "hello-noir",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 3
             },
             {
                 "name": "zk-dungeon",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 3
             },
             {
                 "name": "daggers-and-decoys",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "build",
                 "parts": 3
             }
