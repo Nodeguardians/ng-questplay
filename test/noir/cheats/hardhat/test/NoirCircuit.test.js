@@ -1,4 +1,4 @@
-describe("Noir Circuit (Part 1)", function() {
+describe("Noir Circuit (Part 2)", function() {
 
   describe("Public Test 1", function() {
 

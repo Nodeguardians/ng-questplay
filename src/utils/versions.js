@@ -192,7 +192,8 @@ export function localNargoVersion() {
     return ""
   };
 
-  const versionPattern = /(?<=nargo )[0-9]+\.[0-9]+\.[0-9]+/;
+  const versionPattern = /(?<=nargo version = )[0-9]+\.[0-9]+\.[0-9]+/;
+
   const match = spawnSync("nargo", ["--version"]).stdout
     .toString().match(versionPattern);
 

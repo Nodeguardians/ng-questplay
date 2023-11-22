@@ -94,13 +94,11 @@ describe("Noir Quests (Mocha)", function() {
             const part2Regex = "== Testing Part 2 =="
                 + "(.|\n)*Is Safe Path \\(Part 2\\)";
 
-            try {
-                execSync(`cd ${TEST_QUEST_PATH} && quest test 1`);
-                throw "QUEST_SHOULD_FAIL";
-            } catch(error) {
-                assertRegex(error.stdout.toString(), part1Regex);
-                assertNoRegex(error.stdout.toString(), part2Regex);
-            }
+            const stdout = execSync(`cd ${TEST_QUEST_PATH} && quest test 1`);
+
+            assertRegex(stdout.toString(), part1Regex);
+            assertNoRegex(stdout.toString(), part2Regex);
+            
         });
 
         it("Loading cheats...", async function() {     
@@ -156,10 +154,10 @@ describe("Noir Quests (Mocha)", function() {
 
 });
 
-describe("Noir Quests (HardhatX)", function() {
+describe("Noir Quests (Hardhat)", function() {
 
     const TEST_CAMPAIGN_SLUG = "discovering-noir";
-    const TEST_QUEST_SLUG = "noir-tornado";
+    const TEST_QUEST_SLUG = "daggers-and-decoys";
     const TEST_QUEST_PATH = path.join(
         mainPath(), "campaigns", TEST_CAMPAIGN_SLUG, TEST_QUEST_SLUG);
 
@@ -211,20 +209,20 @@ describe("Noir Quests (HardhatX)", function() {
     describe("quest test", async function() {
         
         it("Should test single part (unsolved)", async function() {
-            const part1Regex = "== Testing Part 1 =="
-                + "(.|\n)*Noir Circuit \\(Part 1\\)"
+            const part2Regex = "== Testing Part 2 =="
+                + "(.|\n)*Noir Circuit \\(Part 2\\)"
                 + "(.|\n)*2 failing"
                 + "(.|\n)*";
 
-            const part2Regex = "== Testing Part 2 =="
-                + "(.|\n)*Shrouded Dagger \\(Part 2\\)";
+            const part3Regex = "== Testing Part 3 =="
+                + "(.|\n)*Dagger Spell \\(Part 3\\)";
 
             try {
-                execSync(`cd ${TEST_QUEST_PATH} && quest test 1`);
+                execSync(`cd ${TEST_QUEST_PATH} && quest test 2`);
                 throw "QUEST_SHOULD_FAIL";
             } catch(error) {
-                assertRegex(error.stdout.toString(), part1Regex);
-                assertNoRegex(error.stdout.toString(), part2Regex);
+                assertRegex(error.stdout.toString(), part2Regex);
+                assertNoRegex(error.stdout.toString(), part3Regex);
             }
         });
 
@@ -234,26 +232,26 @@ describe("Noir Quests (HardhatX)", function() {
         });
         
         it("Should test single part (solved)", async function() {
-            const part1Regex = "== Testing Part 2 =="
-                + "(.|\n)*Shrouded Dagger \\(Part 2\\)"
+            const part3Regex = "== Testing Part 3 =="
+                + "(.|\n)*Dagger Spell \\(Part 3\\)"
                 + "(.|\n)*1 passing"
                 + "(.|\n)*";
 
             const part2Regex = "== Testing Part 2 =="
-                + "(.|\n)*Noir Circuit \\(Part 1\\)"
+                + "(.|\n)*Noir Circuit \\(Part 2\\)"
                 + "(.|\n)*";
 
-            const resultString = execSync(`cd ${TEST_QUEST_PATH} && quest test 2`).toString();
-            assertRegex(resultString, part1Regex);
+            const resultString = execSync(`cd ${TEST_QUEST_PATH} && quest test 3`).toString();
+            assertRegex(resultString, part3Regex);
             assertNoRegex(resultString, part2Regex);
         });
 
         it("Should test all parts (solved)", async function() {
-            const allPartsRegex =  "== Testing Part 1 =="
-                + "(.|\n)*Noir Circuit \\(Part 1\\)"
+            const allPartsRegex =  "== Testing Part 2 =="
+                + "(.|\n)*Noir Circuit \\(Part 2\\)"
                 + "(.|\n)*1 passing"
-                + "(.|\n)*== Testing Part 2 =="
-                + "(.|\n)*Shrouded Dagger \\(Part 2\\)"
+                + "(.|\n)*== Testing Part 3 =="
+                + "(.|\n)*Dagger Spell \\(Part 3\\)"
                 + "(.|\n)*1 passing"
                 + "(.|\n)*";
 
