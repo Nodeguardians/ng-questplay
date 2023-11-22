@@ -72,15 +72,15 @@ export class QuestDownloader {
         continue;
       }
 
-      var dirname = path.dirname(file.name);
-      if (!fs.existsSync(dirname)) {
-        fs.mkdirSync(dirname, { recursive: true });
-      }
-      
       if (depth > 0) {
         file.name = file.name.split('/').slice(depth).join('/');
       }
       
+      var dirname = path.dirname(file.name);
+      if (!fs.existsSync(dirname)) {
+        fs.mkdirSync(dirname, { recursive: true });
+      }
+
       fs.writeFileSync(file.name, await file.async("nodebuffer"));
     }
   }
