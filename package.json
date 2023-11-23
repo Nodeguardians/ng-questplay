@@ -48,8 +48,8 @@
     "forgeStd": ">=1.5.0"
   },
   "cairoDependencies": {
-    "scarb": "^0.7.0",
-    "cairo": "2.2.0"
+    "scarb": "^2.3.1",
+    "cairo": "2.3.1"
   },
   "nargoDependencies": {
     "nargo": "0.19.2"
