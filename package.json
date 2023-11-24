@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ng-questplay",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "",
   "type": "module",
   "scripts": {
@@ -48,7 +48,10 @@
     "forgeStd": ">=1.5.0"
   },
   "cairoDependencies": {
-    "scarb": "^0.7.0",
-    "cairo": "2.2.0"
+    "scarb": "^2.3.1",
+    "cairo": "2.3.1"
+  },
+  "nargoDependencies": {
+    "nargo": "0.19.2"
   }
 }

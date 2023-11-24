@@ -2,6 +2,7 @@ import path from "path";
 
 import { SolidityQuest } from "./solQuest.js";
 import { CairoQuest } from "./cairoQuest.js";
+import { NoirQuest } from "./noirQuest.js";
 import { campaignPath } from "../utils/navigation.js";
 
 export function getQuest(questName) {
@@ -13,6 +14,10 @@ export function getQuest(questName) {
     const cairoQuest = CairoQuest.find(questName);
     if (cairoQuest != null) return cairoQuest;
 
+    // 3. Find in Noir directory
+    const noirQuest = NoirQuest.find(questName);
+    if (noirQuest != null) return noirQuest;
+    
     return null;
 }
 

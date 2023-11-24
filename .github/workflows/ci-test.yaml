@@ -28,7 +28,11 @@ jobs:
     - name: Install Scarb
       uses: software-mansion/setup-scarb@v1
       with:
-        scarb-version: "0.7.0"
+        scarb-version: "2.3.1"
+    - name: Install Nargo
+      uses: noir-lang/noirup@v0.1.2
+      with:
+        toolchain: 0.19.2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
