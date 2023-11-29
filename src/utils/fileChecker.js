@@ -25,6 +25,11 @@ export async function checkFilesToTest() {
   const fileToTestData = fs.readFileSync('./files-to-test.json');
   const filesToTest = JSON.parse(fileToTestData);
 
+  if (fs.existsSync('./whitelist.json')) {
+    const otherWhitelistedFiles = JSON.parse(fs.readFileSync('./whitelist.json'));
+    filesToTest.push(...otherWhitelistedFiles);
+  }
+
   const unexpectedNewContracts = not_added.concat(created)
     .filter(isContract)
     .map(filepath => path.relative(questPath, filepath))
