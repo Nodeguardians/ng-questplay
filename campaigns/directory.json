@@ -10,7 +10,7 @@
             },
             {
                 "name": "merkle-proofs",
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "type": "build",
                 "parts": 2
             },
@@ -82,7 +82,7 @@
             },
             {
                 "name": "elliptic-curve",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "build",
                 "parts": 3
             },
@@ -115,6 +115,12 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
+            },
+            {
+                "name": "quadratic-public-goods",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ] 
     },
@@ -129,7 +135,7 @@
             },
             {
                 "name": "storage-efficiency",
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "type": "build",
                 "parts": 2
             }
@@ -146,7 +152,7 @@
             },
             {
                 "name": "chainlink-vrf",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "ctf",
                 "parts": 2
             }
@@ -169,7 +175,7 @@
             },
             {
                 "name": "openzeppelin-upgrades",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "build",
                 "parts": 2
             }
@@ -281,23 +287,6 @@
                 "version": "1.0.2",
                 "type": "ctf",
                 "parts": 1
-            }
-        ]
-    },
-    {
-        "name": "test-campaign",
-        "quests": [
-            {
-                "name": "test-build-quest",
-                "version": "1.0.0",
-                "type": "build",
-                "parts": 2
-            },
-            {
-                "name": "test-ctf-quest",
-                "version": "1.0.0",
-                "type": "ctf",
-                "parts": 0
             }
         ]
     }
