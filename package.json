@@ -21,6 +21,7 @@
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@octokit/rest": "^19.0.13",
     "@openzeppelin/contracts": "^4.8.2",
     "@solidity-parser/parser": "^0.16.0",
     "command-exists": "^1.2.9",
