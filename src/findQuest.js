@@ -6,7 +6,8 @@ import { mainPath, navigateToMainDirectory, readSettings } from './utils/navigat
 import { QuestDownloader } from './utils/downloader.js';
 import { getQuest } from './quest/index.js';
 
-import {
+import { 
+  CREDENTIALS_NOT_FOUND_MESSAGE, 
   BAD_TOKEN_MESSAGE,
   NavigateToQuestMessage, 
   QUEST_ALREADY_EXISTS_MESSAGE, 
@@ -95,19 +96,18 @@ async function queryAndPullQuest(quest) {
 
   dotenv.config({ path: './.env' });
   const token = process.env.GITHUB_TOKEN;
-  
-  let options = {};
-  if (token != undefined) {
-    options.github = { auth: token };
+  if (token == undefined) {
+    console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
+    process.exit(1);
   }
 
-  const authDownloader = new QuestDownloader(options);
+  const authDownloader = new QuestDownloader({
+    github: { auth: token }
+  });
 
   try {
-    await authDownloader.downloadQuest(
-        'NodeGuardians', 
-        quest.fromRepository, 
-        quest.downloadPath()
+    await authDownloader.downloadDirectory(
+        'NodeGuardians', quest.fromRepository, quest.downloadPath()
     );
     } catch (err) {
         if (err.status == 401) {
