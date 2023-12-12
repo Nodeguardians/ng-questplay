@@ -166,7 +166,7 @@ export function MISMATCH_SCARB_MESSAGE(remoteVersion) {
 
 export function UPDATE_CAIRO_MESSAGE(localVersion, remoteVersion) {
     let changes = `${chalk.bgRed(chalk.strikethrough(localVersion))} ${chalk.bgGreenBright(remoteVersion)}`;
-    return chalk.yellow("We have migrated to cairo 2.2.0! Migrate your quest by making the following changes to Scarb.toml:\n")
+    return chalk.yellow(`We have migrated to cairo ${remoteVersion}! Migrate your quest by making the following changes to Scarb.toml:\n`)
     + chalk.grey(`\n    cairo-version = ${changes}`)
     + chalk.grey(`\n    starknet-version = ${changes} [if applicable]\n`)
 }
