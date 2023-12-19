@@ -85,7 +85,7 @@ async function pullUpdate() {
   const remoteBranch = readSettings().remote;
   const options = remoteBranch == undefined ? {} : { sha: remoteBranch };
 
-  await authDownloader.downloadDirectory('NodeGuardians', 'ng-questplay', "", options);
+  await authDownloader.downloadQuestplay(options);
 
   console.log(chalk.green("\nInstalling Questplay..."));
   await authDownloader.installSubpackage();
