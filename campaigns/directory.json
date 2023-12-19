@@ -121,6 +121,12 @@
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 2
+            },
+            {
+                "name": "static-call-detection",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ] 
     },

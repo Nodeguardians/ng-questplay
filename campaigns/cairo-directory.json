@@ -4,19 +4,19 @@
         "quests":[
             {
                 "name": "sparring-sorcerers",
-                "version": "1.1.0",
+                "version": "1.2.0",
                 "type": "build",
                 "parts": 3
             },
             {
                 "name": "puzzling-pyramids",
-                "version": "1.1.0",
+                "version": "1.2.0",
                 "type": "build",
                 "parts": 2
             },
             {
                 "name": "racing-riverboats",
-                "version": "1.1.0",
+                "version": "1.2.0",
                 "type": "build",
                 "parts": 2
             }
@@ -27,7 +27,7 @@
         "quests": [
             {
                 "name": "brainfuck",
-                "version": "1.1.0",
+                "version": "1.2.0",
                 "type": "build",
                 "parts": 2
             },
@@ -85,7 +85,7 @@
         "quests": [
             {
                 "name": "build-tutorial-cairo",
-                "version": "1.1.0",
+                "version": "1.2.0",
                 "type": "build",
                 "parts": 4
             },
