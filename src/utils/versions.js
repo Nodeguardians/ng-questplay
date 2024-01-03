@@ -11,14 +11,16 @@ import { mainPath, readSettings } from "./navigation.js";
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE ,
   INSTALL_FOUNDRY_MESSAGE,
+  INSTALL_HUFFC_MESSAGE,
   INSTALL_NARGO_MESSAGE,
   INSTALL_SCARB_MESSAGE,
   INSTALL_FORGE_LIB_MESSAGE,
   UPDATE_FOUNDRY_MESSAGE,
   UPDATE_FORGE_LIB_MESSAGE,
   UPDATE_CAIRO_MESSAGE,
+  MISMATCH_HUFFC_MESSAGE,
   MISMATCH_NARGO_MESSAGE,
-  MISMATCH_SCARB_MESSAGE
+  MISMATCH_SCARB_MESSAGE,
 } from "./messages.js";
 
 let _remoteVersion;
@@ -233,7 +235,7 @@ export function localHuffCVersion() {
     return ""
   };
 
-  const versionPattern = /(?<=huffc)[0-9]+\.[0-9]+\.[0-9]+/;
+  const versionPattern = /(?<=huffc )[0-9]+\.[0-9]+\.[0-9]+/;
 
   const match = spawnSync("huffc", ["--version"]).stdout
     .toString().match(versionPattern);

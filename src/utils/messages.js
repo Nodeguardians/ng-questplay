@@ -156,7 +156,7 @@ export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(
 export function INSTALL_SCARB_MESSAGE(remoteVersion) {
     return chalk.yellow(
       `Cairo quests require the installation of Scarb ${remoteVersion}. To install Scarb, check out`,
-      chalk.underline("https://docs.swmansion.com/scarb/")
+      chalk.underline("https://docs.swmansion.com/scarb/\n")
     );
 }
 
@@ -181,7 +181,7 @@ export const UPDATE_SCARB_VERSION_FAIL =
 export function INSTALL_NARGO_MESSAGE(remoteVersion) {
   return chalk.yellow(
     `Noir quests require the installation of Nargo ${remoteVersion}. To install Nargo, check out`,
-    chalk.underline("https://noir-lang.org/getting_started/nargo_installation/")
+    chalk.underline("https://noir-lang.org/getting_started/nargo_installation/\n")
   );
 }
 
@@ -192,7 +192,7 @@ export function MISMATCH_NARGO_MESSAGE(remoteVersion) {
 export function INSTALL_HUFFC_MESSAGE(remoteVersion) {
   return chalk.yellow(
     `Huff quests require the installation of huffc ${remoteVersion}. To install huffc, check out`,
-    chalk.underline("https://docs.huff.sh/get-started/installing/")
+    chalk.underline("https://docs.huff.sh/get-started/installing/\n")
   );
 }
 
