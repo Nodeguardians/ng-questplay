@@ -13,6 +13,8 @@ cache
 
 target
 
+Scarb.lock
+
 Prover.toml
 Verifier.toml
 crs
