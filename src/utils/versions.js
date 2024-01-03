@@ -70,7 +70,8 @@ async function pullRemoteVersion() {
 
 export function remoteForgeVersion() {
   const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-  return JSON.parse(packageFile).foundryDependencies;
+  const { forge, forgeStd } = JSON.parse(packageFile).externalDependencies;
+  return { forge, forgeStd };
 }
 
 export function localForgeVersion() {
@@ -131,7 +132,8 @@ export function checkForgeVersion() {
   
 export function remoteScarbVersion() {
     const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-    return JSON.parse(packageFile).cairoDependencies;
+    const { scarb, cairo } = JSON.parse(packageFile).externalDependencies;
+    return { scarb, cairo };
 }
 
 export function localScarbVersion() {  
@@ -184,7 +186,8 @@ export function checkScarbVersion() {
 
 export function remoteNargoVersion() {
     const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-    return JSON.parse(packageFile).nargoDependencies;
+    const { nargo } = JSON.parse(packageFile).externalDependencies;
+    return { nargo };
 }
 
 export function localNargoVersion() {  
@@ -213,6 +216,44 @@ export function checkNargoVersion() {
 
   if (!semver.satisfies(localVersion.nargo, remoteVersion.nargo)) {
     console.log(MISMATCH_NARGO_MESSAGE(remoteVersion.nargo));
+    return false;
+  }
+
+  return true;
+}
+
+export function remoteHuffCVersion() {
+  const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
+  const { huffc } = JSON.parse(packageFile).externalDependencies;
+  return { huffc };
+}
+
+export function localHuffCVersion() {  
+  if (!commandExists.sync("huffc")) {
+    return ""
+  };
+
+  const versionPattern = /(?<=huffc)[0-9]+\.[0-9]+\.[0-9]+/;
+
+  const match = spawnSync("huffc", ["--version"]).stdout
+    .toString().match(versionPattern);
+
+  const huffc = match[0];
+
+  return { huffc };
+}
+
+export function checkHuffCVersion() {
+  const localVersion = localHuffCVersion(); 
+  const remoteVersion = remoteHuffCVersion();
+
+  if (localVersion == "") {
+    console.log(INSTALL_HUFFC_MESSAGE(remoteVersion.huffc));
+    return false;
+  };
+
+  if (!semver.satisfies(localVersion.huffc, remoteVersion.huffc)) {
+    console.log(MISMATCH_HUFFC_MESSAGE(remoteVersion.huffc));
     return false;
   }
 

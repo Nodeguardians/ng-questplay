@@ -3,7 +3,7 @@ import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
 import { mainPath } from '../utils/navigation.js';
-import { checkForgeVersion } from '../utils/versions.js';
+import { checkForgeVersion, checkHuffCVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
 
 export class HuffQuest extends BaseQuest {
@@ -48,6 +48,7 @@ async function runFoundryTests(partIndex) {
   
   console.log();
   if (!checkForgeVersion()) process.exit(1);
+  if (!checkHuffCVersion()) process.exit(1);
 
   const forgeParams = [
     "test",

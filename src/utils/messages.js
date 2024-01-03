@@ -189,6 +189,17 @@ export function MISMATCH_NARGO_MESSAGE(remoteVersion) {
   return chalk.yellow(`Incompatible nargo version detected. Please use nargo ${remoteVersion}!\n`);
 }
 
+export function INSTALL_HUFFC_MESSAGE(remoteVersion) {
+  return chalk.yellow(
+    `Huff quests require the installation of huffc ${remoteVersion}. To install huffc, check out`,
+    chalk.underline("https://docs.huff.sh/get-started/installing/")
+  );
+}
+
+export function MISMATCH_HUFFC_MESSAGE(remoteVersion) {
+  return chalk.yellow(`Incompatible huffc version detected. Please use huffc ${remoteVersion}!\n`);
+}
+
 export const SUBMISSION_ERROR_BANNER = chalk.yellow(
   "\nWARNING: An error occured during the verification of your submission.\n",
   "Consider reporting this on Discord if this is not linked to your implementation.\n",

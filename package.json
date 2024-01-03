@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ng-questplay",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "",
   "type": "module",
   "scripts": {
@@ -44,15 +44,12 @@
   "workspaces": [
     "campaigns/**"
   ],
-  "foundryDependencies": {
+  "externalDependencies": {
     "forge": ">=0.2.0",
-    "forgeStd": ">=1.5.0"
-  },
-  "cairoDependencies": {
+    "forgeStd": ">=1.5.0",
     "scarb": "^2.3.1",
-    "cairo": "2.3.1"
-  },
-  "nargoDependencies": {
-    "nargo": "0.19.2"
+    "cairo": "2.3.1",
+    "nargo": "0.19.2",
+    "huffc": "0.3.2"
   }
 }
