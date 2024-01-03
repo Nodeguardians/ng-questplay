@@ -38,9 +38,6 @@
     "socket.io-client": "^4.7.1",
     "toml": "^3.0.0"
   },
-  "overrides": {
-    "undici": ">=5.19.1"
-  },
   "workspaces": [
     "campaigns/**"
   ],
