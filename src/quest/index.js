@@ -4,6 +4,7 @@ import { SolidityQuest } from "./solQuest.js";
 import { CairoQuest } from "./cairoQuest.js";
 import { NoirQuest } from "./noirQuest.js";
 import { campaignPath } from "../utils/navigation.js";
+import { HuffQuest } from "./huffQuest.js";
 
 export function getQuest(questName) {
     // 1. Find in Solidity directory
@@ -18,6 +19,10 @@ export function getQuest(questName) {
     const noirQuest = NoirQuest.find(questName);
     if (noirQuest != null) return noirQuest;
     
+    // 3. Find in Huff directory
+    const huffQuest = HuffQuest.find(questName);
+    if (huffQuest != null) return huffQuest;
+
     return null;
 }
 
