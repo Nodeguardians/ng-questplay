@@ -4,7 +4,7 @@
         "quests":[
             {
                 "name": "low-level-calls",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 2
             },
@@ -28,7 +28,7 @@
             },
             {
                 "name": "bypassing-extcodesize",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
@@ -52,7 +52,7 @@
             },
             {
                 "name": "changing-bytecode",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
@@ -64,7 +64,7 @@
             },
             {
                 "name": "price-oracle-attack",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
@@ -88,13 +88,13 @@
             },
             {
                 "name": "emergency-governance",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "flashloan-counterexploit",
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "type": "ctf",
                 "parts": 1
             },
@@ -106,13 +106,13 @@
             },
             {
                 "name": "interactive-fraud-proofs",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 2
             },
             {
                 "name": "finding-ouroboros",
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "type": "ctf",
                 "parts": 1
             },
@@ -125,8 +125,14 @@
             {
                 "name": "static-call-detection",
                 "version": "1.0.0",
-                "type": "ctf",
+                "type": "build",
                 "parts": 1
+            },
+            {
+                "name": "state-channels",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ] 
     },
@@ -135,7 +141,7 @@
         "quests": [
             {
                 "name": "storage-layout",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 3
             },
@@ -152,13 +158,13 @@
         "quests": [
             {
                 "name": "breaking-rng",
-                "version": "1.0.2",
+                "version": "1.1.2",
                 "type": "ctf",
                 "parts": 2
             },
             {
                 "name": "chainlink-vrf",
-                "version": "1.0.2",
+                "version": "1.1.2",
                 "type": "ctf",
                 "parts": 2
             }
@@ -175,7 +181,7 @@
             },
             {
                 "name": "proxy-security",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 4
             },
@@ -204,7 +210,7 @@
             },
             {
                 "name": "using-diamonds",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 4
             }
@@ -267,7 +273,7 @@
             },
             {
                 "name": "ctf-tutorial",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             }
@@ -278,19 +284,19 @@
         "quests": [
             {
                 "name": "cream-rekt",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "poly-rekt",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "wintermute-rekt",
-                "version": "1.0.2",
+                "version": "1.1.2",
                 "type": "ctf",
                 "parts": 1
             }
