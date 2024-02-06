@@ -34,7 +34,7 @@
             },
             {
                 "name": "clone-factories",
-                "version": "2.0.0",
+                "version": "3.0.0",
                 "type": "build",
                 "parts": 2
             },
@@ -49,12 +49,6 @@
                 "version": "2.0.0",
                 "type": "build",
                 "parts": 2
-            },
-            {
-                "name": "changing-bytecode",
-                "version": "1.1.1",
-                "type": "ctf",
-                "parts": 1
             },
             {
                 "name": "delegate-call-detection",
@@ -181,9 +175,9 @@
             },
             {
                 "name": "proxy-security",
-                "version": "1.1.1",
+                "version": "2.0.0",
                 "type": "ctf",
-                "parts": 4
+                "parts": 3
             },
             {
                 "name": "openzeppelin-upgrades",
@@ -296,7 +290,7 @@
             },
             {
                 "name": "wintermute-rekt",
-                "version": "1.1.2",
+                "version": "2.0.0",
                 "type": "ctf",
                 "parts": 1
             }
