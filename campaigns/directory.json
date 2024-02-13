@@ -119,7 +119,7 @@
             {
                 "name": "static-call-detection",
                 "version": "1.0.0",
-                "type": "build",
+                "type": "ctf",
                 "parts": 1
             },
             {
