@@ -1,0 +1,31 @@
+[
+    {
+        "name": "unveiling-huff",
+        "quests": [
+            {
+                "name": "huff-fundamentals",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "decoding-arrays",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "optimized-dispatchers",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "the-final-duel",
+                "version": "0.1.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
+    }
+]

@@ -11,14 +11,16 @@ import { mainPath, readSettings } from "./navigation.js";
 import { 
   CREDENTIALS_NOT_FOUND_MESSAGE ,
   INSTALL_FOUNDRY_MESSAGE,
+  INSTALL_HUFFC_MESSAGE,
   INSTALL_NARGO_MESSAGE,
   INSTALL_SCARB_MESSAGE,
   INSTALL_FORGE_LIB_MESSAGE,
   UPDATE_FOUNDRY_MESSAGE,
   UPDATE_FORGE_LIB_MESSAGE,
   UPDATE_CAIRO_MESSAGE,
+  MISMATCH_HUFFC_MESSAGE,
   MISMATCH_NARGO_MESSAGE,
-  MISMATCH_SCARB_MESSAGE
+  MISMATCH_SCARB_MESSAGE,
 } from "./messages.js";
 
 let _remoteVersion;
@@ -70,7 +72,8 @@ async function pullRemoteVersion() {
 
 export function remoteForgeVersion() {
   const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-  return JSON.parse(packageFile).foundryDependencies;
+  const { forge, forgeStd } = JSON.parse(packageFile).externalDependencies;
+  return { forge, forgeStd };
 }
 
 export function localForgeVersion() {
@@ -131,7 +134,8 @@ export function checkForgeVersion() {
   
 export function remoteScarbVersion() {
     const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-    return JSON.parse(packageFile).cairoDependencies;
+    const { scarb, cairo } = JSON.parse(packageFile).externalDependencies;
+    return { scarb, cairo };
 }
 
 export function localScarbVersion() {  
@@ -184,7 +188,8 @@ export function checkScarbVersion() {
 
 export function remoteNargoVersion() {
     const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
-    return JSON.parse(packageFile).nargoDependencies;
+    const { nargo } = JSON.parse(packageFile).externalDependencies;
+    return { nargo };
 }
 
 export function localNargoVersion() {  
@@ -213,6 +218,44 @@ export function checkNargoVersion() {
 
   if (!semver.satisfies(localVersion.nargo, remoteVersion.nargo)) {
     console.log(MISMATCH_NARGO_MESSAGE(remoteVersion.nargo));
+    return false;
+  }
+
+  return true;
+}
+
+export function remoteHuffCVersion() {
+  const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
+  const { huffc } = JSON.parse(packageFile).externalDependencies;
+  return { huffc };
+}
+
+export function localHuffCVersion() {  
+  if (!commandExists.sync("huffc")) {
+    return ""
+  };
+
+  const versionPattern = /(?<=huffc )[0-9]+\.[0-9]+\.[0-9]+/;
+
+  const match = spawnSync("huffc", ["--version"]).stdout
+    .toString().match(versionPattern);
+
+  const huffc = match[0];
+
+  return { huffc };
+}
+
+export function checkHuffCVersion() {
+  const localVersion = localHuffCVersion(); 
+  const remoteVersion = remoteHuffCVersion();
+
+  if (localVersion == "") {
+    console.log(INSTALL_HUFFC_MESSAGE(remoteVersion.huffc));
+    return false;
+  };
+
+  if (!semver.satisfies(localVersion.huffc, remoteVersion.huffc)) {
+    console.log(MISMATCH_HUFFC_MESSAGE(remoteVersion.huffc));
     return false;
   }
 

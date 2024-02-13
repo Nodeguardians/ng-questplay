@@ -4,7 +4,7 @@
         "quests":[
             {
                 "name": "low-level-calls",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 2
             },
@@ -28,13 +28,13 @@
             },
             {
                 "name": "bypassing-extcodesize",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "clone-factories",
-                "version": "2.0.0",
+                "version": "3.0.0",
                 "type": "build",
                 "parts": 2
             },
@@ -51,12 +51,6 @@
                 "parts": 2
             },
             {
-                "name": "changing-bytecode",
-                "version": "1.0.1",
-                "type": "ctf",
-                "parts": 1
-            },
-            {
                 "name": "delegate-call-detection",
                 "version": "2.0.0",
                 "type": "build",
@@ -64,7 +58,7 @@
             },
             {
                 "name": "price-oracle-attack",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
@@ -88,13 +82,13 @@
             },
             {
                 "name": "emergency-governance",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "flashloan-counterexploit",
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "type": "ctf",
                 "parts": 1
             },
@@ -106,13 +100,13 @@
             },
             {
                 "name": "interactive-fraud-proofs",
-                "version": "0.1.0",
+                "version": "1.0.0",
                 "type": "ctf",
                 "parts": 2
             },
             {
                 "name": "finding-ouroboros",
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "type": "ctf",
                 "parts": 1
             },
@@ -127,6 +121,12 @@
                 "version": "1.0.0",
                 "type": "ctf",
                 "parts": 1
+            },
+            {
+                "name": "state-channels",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ] 
     },
@@ -135,7 +135,7 @@
         "quests": [
             {
                 "name": "storage-layout",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 3
             },
@@ -152,13 +152,13 @@
         "quests": [
             {
                 "name": "breaking-rng",
-                "version": "1.0.2",
+                "version": "1.1.2",
                 "type": "ctf",
                 "parts": 2
             },
             {
                 "name": "chainlink-vrf",
-                "version": "1.0.2",
+                "version": "1.1.2",
                 "type": "ctf",
                 "parts": 2
             }
@@ -175,9 +175,9 @@
             },
             {
                 "name": "proxy-security",
-                "version": "1.0.1",
+                "version": "2.0.0",
                 "type": "ctf",
-                "parts": 4
+                "parts": 3
             },
             {
                 "name": "openzeppelin-upgrades",
@@ -204,7 +204,7 @@
             },
             {
                 "name": "using-diamonds",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 4
             }
@@ -267,7 +267,7 @@
             },
             {
                 "name": "ctf-tutorial",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             }
@@ -278,19 +278,19 @@
         "quests": [
             {
                 "name": "cream-rekt",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "poly-rekt",
-                "version": "1.0.1",
+                "version": "1.1.1",
                 "type": "ctf",
                 "parts": 1
             },
             {
                 "name": "wintermute-rekt",
-                "version": "1.0.2",
+                "version": "2.0.0",
                 "type": "ctf",
                 "parts": 1
             }
