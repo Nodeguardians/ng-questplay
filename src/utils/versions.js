@@ -1,6 +1,5 @@
 'use strict';
 import commandExists from 'command-exists';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import toml from 'toml';
@@ -8,8 +7,7 @@ import semver from 'semver';
 import { Octokit } from '@octokit/rest';
 import { spawnSync } from 'child_process';
 import { mainPath, readSettings } from "./navigation.js";
-import { 
-  CREDENTIALS_NOT_FOUND_MESSAGE ,
+import {
   INSTALL_FOUNDRY_MESSAGE,
   INSTALL_HUFFC_MESSAGE,
   INSTALL_NARGO_MESSAGE,
@@ -42,14 +40,7 @@ export async function isLatestVersion() {
 
 async function pullRemoteVersion() {
 
-  dotenv.config({ path: path.join(mainPath(), '.env') });
-  const token = process.env.GITHUB_TOKEN;
-  if (token == undefined) {
-    console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit(1);
-  }
-
-  const octokit = new Octokit({ auth: token });
+  const octokit = new Octokit();
   const options = {
     owner: "NodeGuardians",
     repo: "ng-questplay",

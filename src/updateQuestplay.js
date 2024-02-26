@@ -1,14 +1,12 @@
 import chalk from 'chalk';
 import child_process from 'child_process';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { navigateToMainDirectory, readSettings, writeSettings } from './utils/navigation.js';
 import { QuestDownloader } from './utils/downloader.js';
 import { simpleGit } from 'simple-git';
 
-import { 
-  CREDENTIALS_NOT_FOUND_MESSAGE, 
+import {
   UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE
 } from './utils/messages.js';
 import { isLatestVersion, remoteVersion } from './utils/versions.js';
@@ -71,16 +69,7 @@ async function pullUpdate() {
 
   console.log(chalk.green("\nUpdating Questplay..."));
 
-  dotenv.config({ path: './.env' });
-  const token = process.env.GITHUB_TOKEN;
-  if (token == undefined) {
-    console.log(CREDENTIALS_NOT_FOUND_MESSAGE);
-    process.exit(1);
-  }
-
-  const authDownloader = new QuestDownloader({
-    github: { auth: token }
-  });
+  const authDownloader = new QuestDownloader();
 
   const remoteBranch = readSettings().remote;
   const options = remoteBranch == undefined ? {} : { sha: remoteBranch };
