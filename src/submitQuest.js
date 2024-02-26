@@ -8,6 +8,7 @@ import {
   SUBMISSION_ERROR_BANNER,
   SUBMISSION_FAILED_BANNER,
   UNCOMMITTED_FILES_MESSAGE,
+  BREAKING_CHANGE_MESSAGE
 } from "./utils/messages.js";
 import { getToken } from "./utils/token.js";
 import {
@@ -43,6 +44,14 @@ export async function submitQuest(isSetUpstream, isListening, environment) {
       chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n")
     );
     process.exit(0);
+  }
+
+  const remoteMajorVersion = quest.info.version.match(/^[0-9]+(?=\.)/g);
+  const localMajorVersion = quest.localVersion().match(/^[0-9]+(?=\.)/g);
+
+  if (remoteMajorVersion > localMajorVersion) {
+    console.log(BREAKING_CHANGE_MESSAGE);
+    process.exit(1);
   }
 
   const statusSummary = await git.status();

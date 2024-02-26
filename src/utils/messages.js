@@ -73,6 +73,12 @@ export const UPDATE_REMINDER_MESSAGE = chalk.yellow(
     "Run `quest update` to download update.\n"
 );
 
+export const BREAKING_CHANGE_MESSAGE = chalk.yellow(
+  "Deprecated version of quest detected in local repo. New version introduces breaking changes.\n" +
+  "Run `quest update` to download breaking update.\n") +
+  chalk.bgBlackBright("Any of your existing work will be overwritten\n");
+
+
 export function NoUpstreamBranchMessage(branchName) {
   return (
     chalk.red(`Current branch : ${branchName} doesn't exist in remote\n`) +
