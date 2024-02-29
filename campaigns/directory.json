@@ -127,6 +127,24 @@
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 2
+            },
+            {
+                "name": "wtf-imps",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "setting-up",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "vanity-theft",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 1
             }
         ] 
     },
@@ -257,23 +275,6 @@
         ]
     },
     {
-        "name": "tutorial",
-        "quests": [
-            {
-                "name": "build-tutorial",
-                "version": "2.0.0",
-                "type": "build",
-                "parts": 4
-            },
-            {
-                "name": "ctf-tutorial",
-                "version": "1.1.1",
-                "type": "ctf",
-                "parts": 1
-            }
-        ]
-    },
-    {
         "name": "get-rekt",
         "quests": [
             {
@@ -293,6 +294,23 @@
                 "version": "2.0.0",
                 "type": "ctf",
                 "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "token-standards",
+        "quests": [
+            {
+                "name": "building-erc-20",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 5
+            },
+            {
+                "name": "building-erc-721",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
             }
         ]
     }
