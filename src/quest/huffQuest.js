@@ -2,14 +2,13 @@ import fs from 'fs';
 import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
-import { mainPath } from '../utils/navigation.js';
 import { checkForgeVersion, checkHuffCVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
 
 export class HuffQuest extends BaseQuest {
 
-  static find(questName) {
-    const directoryPath = path.join(mainPath(), "campaigns/huff-directory.json");
+  static async find(questName) {
+    const directoryPath = await BaseQuest.getDirectory("huff");
     const campaigns = JSON.parse(fs.readFileSync(directoryPath));
 
     for (const campaign of campaigns) {

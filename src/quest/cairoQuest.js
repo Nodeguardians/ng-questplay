@@ -4,13 +4,12 @@ import toml from 'toml';
 
 import { BaseQuest } from './baseQuest.js';
 import { checkScarbVersion } from '../utils/versions.js';
-import { mainPath } from '../utils/navigation.js';
 import { spawnSync } from 'child_process';
 
 export class CairoQuest extends BaseQuest {
 
-    static find(questName) {
-        const directoryPath = path.join(mainPath(), "campaigns/cairo-directory.json");
+    static async find(questName) {
+        const directoryPath = await BaseQuest.getDirectory("cairo");
         const campaigns = JSON.parse(fs.readFileSync(directoryPath));
 
         for (const campaign of campaigns) {

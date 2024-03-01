@@ -2,6 +2,8 @@ import chalk from 'chalk';
 import path from 'path';
 import { mainPath } from '../utils/navigation.js';
 
+import { QuestDownloader } from '../utils/downloader.js';
+
 export class BaseQuest {
 
     constructor(language, campaignName, questInfo, runTests) {
@@ -45,6 +47,19 @@ export class BaseQuest {
             await this.runTests(i);
         }
 
+    }
+
+    static async getDirectory(language) {
+        var downPath = "";
+        if (language === "solidity") {
+            downPath = `campaigns/directory.json`;
+        } else {
+            downPath = `campaigns/${language}-directory.json`;
+        }
+        const qdown = new QuestDownloader();
+        await qdown.downloadFile("Nodeguardians", "ng-questplay", downPath);
+
+        return path.join(process.cwd(), downPath);
     }
 
 }

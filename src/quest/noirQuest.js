@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
-import { mainPath } from '../utils/navigation.js';
 import { checkNargoVersion } from '../utils/versions.js';
 import { execSync } from 'child_process';
 
@@ -12,8 +11,8 @@ const MOCHA_TIMEOUT = 10000
 
 export class NoirQuest extends BaseQuest {
 
-    static find(questName) {
-        const directoryPath = path.join(mainPath(), "campaigns/noir-directory.json");
+    static async find(questName) {
+        const directoryPath = await BaseQuest.getDirectory("noir");
         const campaigns = JSON.parse(fs.readFileSync(directoryPath));
 
         for (const campaign of campaigns) {
