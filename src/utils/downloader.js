@@ -88,7 +88,7 @@ export class QuestDownloader {
   async downloadFile(owner, repo, filePath, options = {}) {
 
     const rootPath = options.rootPath == undefined
-      ? cwd()
+      ? process.cwd()
       : options.rootPath;
 
     const file = await this._octokit.repos.getContent({

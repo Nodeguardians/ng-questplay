@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
-import { mainPath, readSettings } from '../utils/navigation.js';
+import { readSettings } from '../utils/navigation.js';
 import { checkForgeVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
 
@@ -11,8 +11,8 @@ let hre;
 
 export class SolidityQuest extends BaseQuest {
 
-    static find(questName) {
-        const directoryPath = path.join(mainPath(), "campaigns/directory.json");
+    static async find(questName) {
+        const directoryPath = await BaseQuest.getDirectory("solidity");
         const campaigns = JSON.parse(fs.readFileSync(directoryPath));
 
         for (const campaign of campaigns) {
