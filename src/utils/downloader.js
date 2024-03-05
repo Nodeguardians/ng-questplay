@@ -99,7 +99,12 @@ export class QuestDownloader {
     });
 
     const decodedContent = Buffer.from(file.data.content, file.data.encoding);
-    fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+
+    if(!options.tempFile) {
+      fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+    }
+    
+    return decodedContent;
   }
 
   async installSubpackage() {

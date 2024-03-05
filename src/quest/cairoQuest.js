@@ -5,18 +5,23 @@ import toml from 'toml';
 import { BaseQuest } from './baseQuest.js';
 import { checkScarbVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
+import { QuestDownloader } from '../utils/downloader.js';
 
 export class CairoQuest extends BaseQuest {
 
     static async find(questName) {
-        const directoryPath = await BaseQuest.getDirectory("cairo");
-        const campaigns = JSON.parse(fs.readFileSync(directoryPath));
+        const qdown = new QuestDownloader();
+        const campaigns = JSON.parse(await qdown.downloadFile(
+            "Nodeguardians",
+            "ng-cairo-quests-public",
+            "campaigns/directory.json",
+            {tempFile: true}));
 
         for (const campaign of campaigns) {
             for (const quest of campaign.quests) {
-              if (quest.name != questName) continue;
-      
-              return new CairoQuest(campaign.name, quest);
+                if (quest.name != questName) continue;
+
+                return new CairoQuest(campaign.name, quest);
             }
         }
 
@@ -50,7 +55,7 @@ async function runCairoTests(partIndex) {
         "test", "-f", `test_${partIndex}`
     ];
 
-    spawnSync("scarb", cairoTestParams, {stdio: "inherit"});
+    spawnSync("scarb", cairoTestParams, { stdio: "inherit" });
     console.log();
-    
+
 }
