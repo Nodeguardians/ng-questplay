@@ -8,7 +8,11 @@ import {
   SUBMISSION_ERROR_BANNER,
   SUBMISSION_FAILED_BANNER,
   UNCOMMITTED_FILES_MESSAGE,
+<<<<<<< HEAD
   BreakingChangeMessage
+=======
+  BREAKING_CHANGE_MESSAGE
+>>>>>>> fa9a0b6666b66d517d2390af4863ca422e87d49e
 } from "./utils/messages.js";
 import { getToken } from "./utils/token.js";
 import {
