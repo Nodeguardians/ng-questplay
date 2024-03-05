@@ -8,7 +8,7 @@ import {
   SUBMISSION_ERROR_BANNER,
   SUBMISSION_FAILED_BANNER,
   UNCOMMITTED_FILES_MESSAGE,
-  BREAKING_CHANGE_MESSAGE
+  BreakingChangeMessage
 } from "./utils/messages.js";
 import { getToken } from "./utils/token.js";
 import {
@@ -50,7 +50,7 @@ export async function submitQuest(isSetUpstream, isListening, environment) {
   const localMajorVersion = quest.localVersion().match(/^[0-9]+(?=\.)/g);
 
   if (remoteMajorVersion > localMajorVersion) {
-    console.log(BREAKING_CHANGE_MESSAGE);
+    console.log(BreakingChangeMessage(quest.info.name));
     process.exit(1);
   }
 
