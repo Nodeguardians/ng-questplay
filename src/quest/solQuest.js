@@ -6,20 +6,25 @@ import { BaseQuest } from './baseQuest.js';
 import { readSettings } from '../utils/navigation.js';
 import { checkForgeVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
+import { QuestDownloader } from '../utils/downloader.js';
 
 let hre;
 
 export class SolidityQuest extends BaseQuest {
 
     static async find(questName) {
-        const directoryPath = await BaseQuest.getDirectory("solidity");
-        const campaigns = JSON.parse(fs.readFileSync(directoryPath));
+        const qdown = new QuestDownloader();
+        const campaigns = JSON.parse(await qdown.downloadFile(
+            "Nodeguardians",
+            "ng-quests-public",
+            "campaigns/directory.json",
+            { tempFile: true }));
 
         for (const campaign of campaigns) {
             for (const quest of campaign.quests) {
-              if (quest.name != questName) continue;
-      
-              return new SolidityQuest(campaign.name, quest);
+                if (quest.name != questName) continue;
+
+                return new SolidityQuest(campaign.name, quest);
             }
         }
 
@@ -61,9 +66,9 @@ async function runHardhatTests(partIndex) {
     await hre.default.run("test", { grep: `Part ${partIndex}` });
 
 }
-  
+
 async function runFoundryTests(partIndex) {
-  
+
     console.log();
     if (!checkForgeVersion()) process.exit(1);
 
@@ -73,7 +78,7 @@ async function runFoundryTests(partIndex) {
         `*\.${partIndex}\.t\.sol`
     ];
 
-    spawnSync("forge", forgeParams, {stdio: "inherit"});
+    spawnSync("forge", forgeParams, { stdio: "inherit" });
     console.log();
-  
+
 }
