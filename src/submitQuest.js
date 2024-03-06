@@ -8,11 +8,7 @@ import {
   SUBMISSION_ERROR_BANNER,
   SUBMISSION_FAILED_BANNER,
   UNCOMMITTED_FILES_MESSAGE,
-<<<<<<< HEAD
   BreakingChangeMessage
-=======
-  BREAKING_CHANGE_MESSAGE
->>>>>>> fa9a0b6666b66d517d2390af4863ca422e87d49e
 } from "./utils/messages.js";
 import { getToken } from "./utils/token.js";
 import {
@@ -28,6 +24,7 @@ import {
   stopSpinner,
   succeedSpinner,
 } from "./utils/spinner.js";
+import semver from "semver";
 
 const git = simpleGit();
 
@@ -50,10 +47,9 @@ export async function submitQuest(isSetUpstream, isListening, environment) {
     process.exit(0);
   }
 
-  const remoteMajorVersion = quest.info.version.match(/^[0-9]+(?=\.)/g);
-  const localMajorVersion = quest.localVersion().match(/^[0-9]+(?=\.)/g);
+  const diff = semver.diff(quest.info.version, quest.localVersion());
 
-  if (remoteMajorVersion > localMajorVersion) {
+  if (diff == "major" || diff == "premajor") {
     console.log(BreakingChangeMessage(quest.info.name));
     process.exit(1);
   }
