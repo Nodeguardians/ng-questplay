@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import { navigateToQuestDirectory } from "./utils/navigation.js";
-import { ProgressBar } from "./utils/progressbar.js";
 import { simpleGit } from "simple-git";
 import { currentWorkingQuest } from "./quest/index.js";
 import {
