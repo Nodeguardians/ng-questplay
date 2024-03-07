@@ -18,7 +18,7 @@ export class QuestDownloader {
   async downloadQuest(owner, repo, directoryPath, options = {}) {
     const zipFilePath = `${directoryPath}.zip`;
 
-    this.progressBar.start();
+    const startAnimation = this.progressBar.start();
     try {
 
       const file = await this._octokit.repos.getContent({
@@ -36,10 +36,12 @@ export class QuestDownloader {
       await this.unzip(decodedContent);
 
     } catch (err) {
+      await startAnimation; // Wait for initial animation to finish
       this.progressBar.fail("Download failed");
       throw err;
     }
 
+    await startAnimation; // Wait for initial animation to finish
     await this.progressBar.stop("Download finished");
   }
 
