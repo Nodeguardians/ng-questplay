@@ -2,20 +2,24 @@ import fs from 'fs';
 import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
-import { mainPath } from '../utils/navigation.js';
 import { checkForgeVersion, checkHuffCVersion } from '../utils/versions.js';
 import { spawnSync } from 'child_process';
+import { QuestDownloader } from '../utils/downloader.js';
 
 export class HuffQuest extends BaseQuest {
 
-  static find(questName) {
-    const directoryPath = path.join(mainPath(), "campaigns/huff-directory.json");
-    const campaigns = JSON.parse(fs.readFileSync(directoryPath));
+  static async find(questName) {
+    const qdown = new QuestDownloader();
+    const campaigns = JSON.parse(await qdown.downloadFile(
+      "Nodeguardians",
+      "ng-huff-quests-public",
+      `campaigns/huff-directory.json`,
+      {tempFile: true}));
 
     for (const campaign of campaigns) {
       for (const quest of campaign.quests) {
         if (quest.name != questName) continue;
-  
+
         return new HuffQuest(campaign.name, quest);
       }
     }
@@ -43,9 +47,9 @@ export class HuffQuest extends BaseQuest {
   }
 
 }
-  
+
 async function runFoundryTests(partIndex) {
-  
+
   console.log();
   if (!checkForgeVersion()) process.exit(1);
   if (!checkHuffCVersion()) process.exit(1);
@@ -56,7 +60,7 @@ async function runFoundryTests(partIndex) {
     `*\.${partIndex}\.t\.sol`
   ];
 
-  spawnSync("forge", forgeParams, {stdio: "inherit"});
+  spawnSync("forge", forgeParams, { stdio: "inherit" });
   console.log();
-  
+
 }

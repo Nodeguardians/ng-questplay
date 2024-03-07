@@ -88,7 +88,7 @@ export class QuestDownloader {
   async downloadFile(owner, repo, filePath, options = {}) {
 
     const rootPath = options.rootPath == undefined
-      ? cwd()
+      ? process.cwd()
       : options.rootPath;
 
     const file = await this._octokit.repos.getContent({
@@ -99,7 +99,12 @@ export class QuestDownloader {
     });
 
     const decodedContent = Buffer.from(file.data.content, file.data.encoding);
-    fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+
+    if(!options.tempFile) {
+      fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+    }
+    
+    return decodedContent;
   }
 
   async installSubpackage() {

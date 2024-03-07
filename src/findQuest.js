@@ -30,7 +30,7 @@ export async function findQuest(questName) {
     process.exit(1);
   }
 
-  const quest = getQuest(questName);
+  const quest = await getQuest(questName);
   if (quest == null) {
     // Quest not found
     console.log(QUEST_NOT_FOUND_MESSAGE);

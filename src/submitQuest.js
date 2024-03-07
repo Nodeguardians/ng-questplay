@@ -8,6 +8,7 @@ import {
   SUBMISSION_ERROR_BANNER,
   SUBMISSION_FAILED_BANNER,
   UNCOMMITTED_FILES_MESSAGE,
+  BreakingChangeMessage
 } from "./utils/messages.js";
 import { getToken } from "./utils/token.js";
 import {
@@ -23,6 +24,7 @@ import {
   stopSpinner,
   succeedSpinner,
 } from "./utils/spinner.js";
+import semver from "semver";
 
 const git = simpleGit();
 
@@ -43,6 +45,13 @@ export async function submitQuest(isSetUpstream, isListening, environment) {
       chalk.yellow("Quest is a CTF quest. No need to submit via Questplay.\n")
     );
     process.exit(0);
+  }
+
+  const diff = semver.diff(quest.info.version, quest.localVersion());
+
+  if (diff == "major" || diff == "premajor") {
+    console.log(BreakingChangeMessage(quest.info.name));
+    process.exit(1);
   }
 
   const statusSummary = await git.status();
