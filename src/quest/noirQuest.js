@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 import { BaseQuest } from './baseQuest.js';
-import { mainPath } from '../utils/navigation.js';
 import { checkNargoVersion } from '../utils/versions.js';
 import { execSync } from 'child_process';
+import { QuestDownloader } from '../utils/downloader.js';
 
 let hre;
 
@@ -12,15 +12,19 @@ const MOCHA_TIMEOUT = 10000
 
 export class NoirQuest extends BaseQuest {
 
-    static find(questName) {
-        const directoryPath = path.join(mainPath(), "campaigns/noir-directory.json");
-        const campaigns = JSON.parse(fs.readFileSync(directoryPath));
+    static async find(questName) {
+        const qdown = new QuestDownloader();
+        const campaigns = JSON.parse(await qdown.downloadFile(
+            "Nodeguardians",
+            "ng-noir-quests-public",
+            `campaigns/noir-directory.json`,
+            {tempFile: true}));
 
         for (const campaign of campaigns) {
             for (const quest of campaign.quests) {
-              if (quest.name != questName) continue;
+                if (quest.name != questName) continue;
 
-              return new NoirQuest(campaign.name, quest);
+                return new NoirQuest(campaign.name, quest);
             }
         }
 
@@ -67,10 +71,10 @@ async function runJSTests(partIndex) {
 
     } else {
 
-        const mochaCommand 
+        const mochaCommand
             = `npx mocha test --timeout ${MOCHA_TIMEOUT} --recursive --grep "(Part ${partIndex})"`;
         try {
-            execSync(mochaCommand, {stdio: 'inherit'});
+            execSync(mochaCommand, { stdio: 'inherit' });
         } catch (error) { }
 
     }

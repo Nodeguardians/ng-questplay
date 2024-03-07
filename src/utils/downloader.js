@@ -18,7 +18,7 @@ export class QuestDownloader {
   async downloadQuest(owner, repo, directoryPath, options = {}) {
     const zipFilePath = `${directoryPath}.zip`;
 
-    this.progressBar.start();
+    const startAnimation = this.progressBar.start();
     try {
 
       const file = await this._octokit.repos.getContent({
@@ -36,10 +36,12 @@ export class QuestDownloader {
       await this.unzip(decodedContent);
 
     } catch (err) {
+      await startAnimation; // Wait for initial animation to finish
       this.progressBar.fail("Download failed");
       throw err;
     }
 
+    await startAnimation; // Wait for initial animation to finish
     await this.progressBar.stop("Download finished");
   }
 
@@ -88,7 +90,7 @@ export class QuestDownloader {
   async downloadFile(owner, repo, filePath, options = {}) {
 
     const rootPath = options.rootPath == undefined
-      ? cwd()
+      ? process.cwd()
       : options.rootPath;
 
     const file = await this._octokit.repos.getContent({
@@ -99,7 +101,12 @@ export class QuestDownloader {
     });
 
     const decodedContent = Buffer.from(file.data.content, file.data.encoding);
-    fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+
+    if(!options.tempFile) {
+      fs.writeFileSync(path.join(rootPath, filePath), decodedContent);
+    }
+    
+    return decodedContent;
   }
 
   async installSubpackage() {

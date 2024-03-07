@@ -46,5 +46,4 @@ export class BaseQuest {
         }
 
     }
-
 }

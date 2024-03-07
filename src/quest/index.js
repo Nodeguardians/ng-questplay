@@ -6,21 +6,21 @@ import { NoirQuest } from "./noirQuest.js";
 import { campaignPath } from "../utils/navigation.js";
 import { HuffQuest } from "./huffQuest.js";
 
-export function getQuest(questName) {
+export async function getQuest(questName) {
     // 1. Find in Solidity directory
-    const solidityQuest = SolidityQuest.find(questName);
+    const solidityQuest = await SolidityQuest.find(questName);
     if (solidityQuest != null) return solidityQuest;
 
     // 2. Find in Cairo directory
-    const cairoQuest = CairoQuest.find(questName);
+    const cairoQuest = await CairoQuest.find(questName);
     if (cairoQuest != null) return cairoQuest;
 
     // 3. Find in Noir directory
-    const noirQuest = NoirQuest.find(questName);
+    const noirQuest = await NoirQuest.find(questName);
     if (noirQuest != null) return noirQuest;
     
     // 3. Find in Huff directory
-    const huffQuest = HuffQuest.find(questName);
+    const huffQuest = await HuffQuest.find(questName);
     if (huffQuest != null) return huffQuest;
 
     return null;

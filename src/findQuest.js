@@ -30,7 +30,7 @@ export async function findQuest(questName) {
     process.exit(1);
   }
 
-  const quest = getQuest(questName);
+  const quest = await getQuest(questName);
   if (quest == null) {
     // Quest not found
     console.log(QUEST_NOT_FOUND_MESSAGE);
@@ -120,10 +120,7 @@ async function queryAndPullQuest(quest) {
 
   // (3) Install Quest
   console.log(chalk.green("\nInstalling quest..."));
-  if (quest.lang == "solidity") {
-    // TODO: Refactor this to be multi-protocol friendly
-    await authDownloader.installSubpackage();
-  }
+  await authDownloader.installSubpackage();
 
   // (4) Commit new changes (Skip if dev mode)
   try {

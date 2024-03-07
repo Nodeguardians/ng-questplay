@@ -32,7 +32,12 @@ export const WRONG_DIRECTORY_MESSAGE = chalk.red(
 
 export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
   "\nQuest not found. Did you enter the correct name?\n" +
-    "Check the name again or run `quest update` to fetch the latest directory of released quests.\n"
+  "Check the name again to be sure.\n"
+);
+
+// TODO: Add link to FAQ page
+export const CREDENTIALS_NOT_FOUND_MESSAGE = chalk.red(
+  "\nGithub token not found."
 );
 
 export const BAD_TOKEN_MESSAGE = chalk.red(
@@ -49,24 +54,32 @@ export const QUEST_ALREADY_EXISTS_MESSAGE = chalk.yellow(
 
 export const UNCOMMITTED_FILES_MESSAGE = chalk.yellow(
   "Uncommitted files detected. Questplay is unable to push to remote.\n" +
-    "Try committing or stashing all changes with git first.\n"
+  "Try committing or stashing all changes with git first.\n"
 );
 
 export const UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE = chalk.yellow(
   "Questplay is unable to update when there are still uncommitted files in the repository.\n" +
-    "Try committing or stashing all changes with git first.\n"
+  "Try committing or stashing all changes with git first.\n"
 );
 
 export const UNCOMMITTED_FILES_BEFORE_DOWNLOAD_MESSAGE = chalk.yellow(
   "Questplay is unable to download a quest when there are still uncommitted files in the repository.\n" +
-    "Try committing or stashing all changes with git first.\n"
+  "Try committing or stashing all changes with git first.\n"
 );
 
 export const UPDATE_REMINDER_MESSAGE = chalk.yellow(
   chalk.bold("\nIMPORTANT:"),
   "New version of Questplay available.\n" +
-    "Run `quest update` to download update.\n"
+  "Run `quest update` to download update.\n"
 );
+
+export function BreakingChangeMessage(questName) {
+  return (
+    chalk.yellow("Deprecated version of quest detected in local repo. New version introduces breaking changes.\n" +
+    `Run "quest find ${questName}" to download breaking update.\n`) +
+    chalk.bgBlackBright("Any of your existing work will be overwritten\n")
+  );
+}
 
 export function NoUpstreamBranchMessage(branchName) {
   return (
@@ -149,10 +162,10 @@ export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(
 );
 
 export function INSTALL_SCARB_MESSAGE(remoteVersion) {
-    return chalk.yellow(
-      `Cairo quests require the installation of Scarb ${remoteVersion}. To install Scarb, check out`,
-      chalk.underline("https://docs.swmansion.com/scarb/\n")
-    );
+  return chalk.yellow(
+    `Cairo quests require the installation of Scarb ${remoteVersion}. To install Scarb, check out`,
+    chalk.underline("https://docs.swmansion.com/scarb/\n")
+  );
 }
 
 export function MISMATCH_SCARB_MESSAGE(remoteVersion) {
@@ -160,13 +173,13 @@ export function MISMATCH_SCARB_MESSAGE(remoteVersion) {
 }
 
 export function UPDATE_CAIRO_MESSAGE(localVersion, remoteVersion) {
-    let changes = `${chalk.bgRed(chalk.strikethrough(localVersion))} ${chalk.bgGreenBright(remoteVersion)}`;
-    return chalk.yellow(`We have migrated to cairo ${remoteVersion}! Migrate your quest by making the following changes to Scarb.toml:\n`)
+  let changes = `${chalk.bgRed(chalk.strikethrough(localVersion))} ${chalk.bgGreenBright(remoteVersion)}`;
+  return chalk.yellow(`We have migrated to cairo ${remoteVersion}! Migrate your quest by making the following changes to Scarb.toml:\n`)
     + chalk.grey(`\n    cairo-version = ${changes}`)
     + chalk.grey(`\n    starknet-version = ${changes} [if applicable]\n`)
 }
 
-export const UPDATE_SCARB_VERSION_FAIL = 
+export const UPDATE_SCARB_VERSION_FAIL =
   chalk.yellow(
     "WARNING: Failed to detect Scarb version.\n",
     "Consider reporting this on Discord!\n",
@@ -204,5 +217,5 @@ export const SUBMISSION_ERROR_BANNER = chalk.yellow(
 export const SUBMISSION_FAILED_BANNER = chalk.red(
   "\nERROR: We couldn't validate your submission due to the following error\n",
   "Please report this error on Discord: " +
-    chalk.underline("https://discord.gg/EyGQEEzmjx\n")
+  chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );
