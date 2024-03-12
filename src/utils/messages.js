@@ -141,7 +141,7 @@ export const UPDATE_FOUNDRY_MESSAGE = chalk.yellow(
 
 export const UPDATE_FORGE_LIB_MESSAGE = chalk.yellow(
   "Outdated version of forge-std detected. To update, run:\n",
-  chalk.bold("    git submodule update --remote --merge\n")
+  chalk.bold("    git submodule update --remote --recursive\n")
 );
 
 export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(

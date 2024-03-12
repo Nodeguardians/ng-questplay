@@ -43,7 +43,7 @@
   ],
   "externalDependencies": {
     "forge": ">=0.2.0",
-    "forgeStd": ">=1.5.0",
+    "forgeStd": ">=1.7.1",
     "scarb": "2.5.3",
     "cairo": "2.5.3",
     "nargo": "0.22.0",
