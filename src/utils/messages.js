@@ -35,11 +35,6 @@ export const QUEST_NOT_FOUND_MESSAGE = chalk.yellow(
     "Check the name again or run `quest update` to fetch the latest directory of released quests.\n"
 );
 
-// TODO: Add link to FAQ page
-export const CREDENTIALS_NOT_FOUND_MESSAGE = chalk.red(
-  "\nGithub token not found."
-);
-
 export const BAD_TOKEN_MESSAGE = chalk.red(
   "\nBad Github token.\n"
 );
@@ -146,7 +141,7 @@ export const UPDATE_FOUNDRY_MESSAGE = chalk.yellow(
 
 export const UPDATE_FORGE_LIB_MESSAGE = chalk.yellow(
   "Outdated version of forge-std detected. To update, run:\n",
-  chalk.bold("    git submodule update --remote --merge\n")
+  chalk.bold("    git submodule update --remote --recursive\n")
 );
 
 export const FOUNDRY_NOT_SUPPORTED_MESSAGE = chalk.yellow(
