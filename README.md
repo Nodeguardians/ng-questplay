@@ -6,48 +6,34 @@ Welcome guardian. The road out will be treacherous, but remember, fortune favors
 
 ## Getting Started
 
-We **highly recommend** that you set up Questplay by following [our tutorial](https://nodeguardians.io/dev-hub?s=devhub-campaigns&sc=tutorial). But here are the brief steps anyways.
+We **highly recommend** that you set up Questplay by following [our tutorial](https://nodeguardians.io/quests/setting-up?s=devhub-quests). But here are the brief steps anyways.
 
-1. Create a new private repository `ng-questplay` on Github and leave it empty for now. Then, install [our Github application](https://github.com/apps/node-guardians) on it.
+1. From this repository's file list, select **Use this template** > **Create a new repository**.
 
-    > ⚠ Your repository must be private!
+![Using the template](./media/setting_up_01.png)
 
-2. Download this repository onto your local device, and push it to the Github repository you have created.
+2. Name your repository `ng-questplay` and mark it as private. Once done, select **Create repository**.
 
-    - **If Using GitHub HTTPS:**
+![Creating the repository](./media/setting_up_02.png)
 
-        ```
-        git clone https://github.com/Nodeguardians/ng-questplay.git
-        cd ng-questplay
-        git remote set-url origin https://github.com/{GITHUB_USERNAME}/ng-questplay.git
-        git push -u origin main
-        ```
+3. Next, visit and install [our Github application](https://github.com/apps/node-guardians/installations/select_target). When prompted where to install, select your profile, then **only selected repositories** > **ng-questplay**
 
-    - **If Using Github SSH**
+![Installing Github application](./media//setting_up_03.png)
 
-        ```
-        git clone git@github.com:github.com/Nodeguardians/ng-questplay.git
-        cd ng-questplay
-        git remote set-url origin git@github.com:{GITHUB_USERNAME}/ng-questplay.git
-        git push -u origin main
-        ```
+4. Download your newly created repository onto your local machine.
+
+    ```
+    git clone https://github.com/{GITHUB_USERNAME}/ng-questplay.git
+    ```
 
     > 💡 Replace `{GITHUB_USERNAME}` with your Github username!
 
-3. Next, run the following command to install the required dependencies.
+5. Next, run the following command to install the required dependencies.
 
     ```
+    cd ng-questplay
     npm run start-adventure
     ```
-
-4. Create a [Github authentication token](https://nodeguardians.io/?s=home-faq&sf=devhub--why-and-how-do-i-create-a-github-token) with **public repo access**. Then, create a `.env` file in your root folder and add a `GITHUB_TOKEN` variable:
-
-    ```bash
-    # In .env file
-    GITHUB_TOKEN = "ghp_..." # Add token here
-    ```
-
-    > ⚠️ Take care to not share / upload your `.env` file to anyone or anywhere.
 
 ## Finding a Quest
 
