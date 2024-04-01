@@ -24,6 +24,7 @@
     "@octokit/rest": "^19.0.13",
     "@openzeppelin/contracts": "^4.8.2",
     "@solidity-parser/parser": "^0.16.0",
+    "asciichart": "^1.5.25",
     "command-exists": "^1.2.9",
     "commander": "^11.0.0",
     "dotenv": "^16.0.3",
