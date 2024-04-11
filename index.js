@@ -12,6 +12,7 @@ import { submitQuest } from "./src/submitQuest.js";
 import { updateQuestplay } from "./src/updateQuestplay.js";
 import { bridge } from "./src/bridge.js";
 import { Command, Option } from "commander";
+import { runGolf } from "./src/runGolf.js";
 
 const program = new Command();
 
@@ -123,6 +124,14 @@ program
   .allowExcessArguments(false)
   .action(async (options) => {
     await submitQuest(options.setUpstream, options.listen, options.env);
+  });
+
+program
+  .command("golf")
+  .description("Run golfing tests.")
+  .allowExcessArguments(false)
+  .action(async () => {
+    await runGolf();
   });
 
 if (process.argv.length == 2) {
