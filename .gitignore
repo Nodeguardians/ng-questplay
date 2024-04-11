@@ -18,3 +18,6 @@ Scarb.lock
 Prover.toml
 Verifier.toml
 crs
+
+history.json
+metrics.json

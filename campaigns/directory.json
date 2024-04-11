@@ -313,5 +313,34 @@
                 "parts": 4
             }
         ]
+    },
+    {
+        "name": "gas-golfing-s1",
+        "quests": [
+            {
+                "name": "remove-duplicates",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "roman-numerals",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "changing-base",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            },
+            {
+                "name": "internal-representation",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 1
+            }
+        ]
     }
 ]
