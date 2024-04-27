@@ -120,7 +120,7 @@ async function queryAndPullQuest(quest) {
 
   // (3) Install Quest
   console.log(chalk.green("\nInstalling quest..."));
-  if (quest.lang == "solidity") {
+  if (quest.language == "solidity") {
     // TODO: Refactor this to be multi-protocol friendly
     await authDownloader.installSubpackage();
   }
