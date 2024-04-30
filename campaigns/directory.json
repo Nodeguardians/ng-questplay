@@ -112,7 +112,7 @@
             },
             {
                 "name": "quadratic-public-goods",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "type": "build",
                 "parts": 2
             },
@@ -129,8 +129,14 @@
                 "parts": 2
             },
             {
-                "name": "wtf-imps",
+                "name": "celestia-blobstream",
                 "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "wtf-imps",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 1
             },
@@ -308,7 +314,7 @@
             },
             {
                 "name": "building-erc-721",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 4
             }
