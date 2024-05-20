@@ -23,12 +23,16 @@ export async function updateQuestplay(newRemote = null) {
     settings.remote = newRemote;
     writeSettings(settings);
   }
+
+  const devMode = readSettings().devMode;
   
   // (1) Ensure all changes saved
-  const statusSummary = await git.status()
-  if (statusSummary.files.length) {
-    console.log(UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE);
-    process.exit(1);
+  if (!devMode) {
+    const statusSummary = await git.status()
+    if (statusSummary.files.length) {
+      console.log(UNCOMMITTED_FILES_BEFORE_UPDATE_MESSAGE);
+      process.exit(1);
+    }
   }
 
   // (2) Look for update
@@ -45,16 +49,17 @@ export async function updateQuestplay(newRemote = null) {
   fs.copyFileSync(hookFile, "./.git/hooks/pre-commit");
 
   // (5) Install dependencies and forge-std submodule
-  child_process.execSync('npm install');
   await git.submoduleUpdate(["--init", "--recursive"]);
 
   console.log();
 
   try {
-
-    await git.add("--all");
-    await git.commit(`Update Questplay to ${await remoteVersion()}`);
-    console.log(chalk.green("\nUpdate committed.\n"));
+    
+    if (!devMode) {
+      await git.add("--all");
+      await git.commit(`Update Questplay to ${await remoteVersion()}`);
+      console.log(chalk.green("\nUpdate committed.\n"));
+    }
 
   } catch (err) {
 

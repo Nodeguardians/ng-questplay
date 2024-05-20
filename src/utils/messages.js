@@ -218,3 +218,6 @@ export const SUBMISSION_FAILED_BANNER = chalk.red(
   "Please report this error on Discord: " +
     chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );
+
+export const UPDATE_ABORTED_MESSAGE = chalk.red("\nUpdate aborted.\n") 
+  + chalk.red("To continue with update, run `npm install`\n");
