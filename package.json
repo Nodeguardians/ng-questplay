@@ -43,6 +43,7 @@
     "campaigns/**"
   ],
   "externalDependencies": {
+    "node": ">=18.0.0",
     "forge": ">=0.2.0",
     "forgeStd": ">=1.7.1",
     "scarb": "2.5.3",

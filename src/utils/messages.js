@@ -195,8 +195,20 @@ export function MISMATCH_HUFFC_MESSAGE(remoteVersion) {
   return chalk.yellow(`Incompatible huffc version detected. Please use huffc ${remoteVersion}!\n`);
 }
 
+export function MISMATCH_NODE_MESSAGE(remoteVersion) {
+  const CEILING = "\n╒══════════════════════════════════════════════════════════════════════════════╕\n";
+  const FLOOR = "╘══════════════════════════════════════════════════════════════════════════════╛\n";
+
+  return chalk.yellow(
+    CEILING
+    + `  Incompatible node version detected. Please use node ${remoteVersion}!\n`
+    + `  If you're using nvm, you can run 'nvm use' to switch to the correct version.\n`
+    + FLOOR
+  );
+}
+
 export const SUBMISSION_ERROR_BANNER = chalk.yellow(
-  "\nWARNING: An error occured during the verification of your submission.\n",
+  "\nWARNING: An error occurred during the verification of your submission.\n",
   "Consider reporting this on Discord if this is not linked to your implementation.\n",
   chalk.underline("https://discord.gg/EyGQEEzmjx\n")
 );

@@ -13,6 +13,7 @@ import { updateQuestplay } from "./src/updateQuestplay.js";
 import { bridge } from "./src/bridge.js";
 import { Command, Option } from "commander";
 import { runGolf } from "./src/runGolf.js";
+import { checkNodeVersion } from "./src/utils/versions.js";
 
 const program = new Command();
 
@@ -24,6 +25,8 @@ function myParseInt(value, dummyPrevious) {
     }
     return parsedValue;
   }
+
+checkNodeVersion();
 
 if (!process.cwd().startsWith(mainPath())) {
   console.log(TITLE);
