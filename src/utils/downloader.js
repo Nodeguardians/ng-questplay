@@ -2,11 +2,13 @@
 
 import fs from 'fs';
 import path from 'path';
+import chalk from 'chalk';
 import child_process from 'child_process';
 
 import JSZip from 'jszip';
 import { Octokit } from '@octokit/rest';
 import { ProgressBar } from './progressbar.js'
+import { UPDATE_ABORTED_MESSAGE } from './messages.js';
 
 export class QuestDownloader {
 
@@ -103,9 +105,18 @@ export class QuestDownloader {
   }
 
   async installSubpackage() {
-    await this.progressBar.start()
-      .then(() => child_process.execSync('npm install'))
-      .then(() => this.progressBar.stop("Installation finished"));
+
+    process.on('SIGINT', () => {});
+
+    try {
+      await this.progressBar.start()
+        .then(() => child_process.execSync('npm install'))
+        .then(() => this.progressBar.stop("Installation finished"));
+    } catch (err) {
+      console.log(UPDATE_ABORTED_MESSAGE);
+      console.log(chalk.grey("Exiting..."));
+    }
+    
   }
 
 }

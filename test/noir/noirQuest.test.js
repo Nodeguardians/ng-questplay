@@ -149,7 +149,7 @@ describe("Noir Quests (Mocha)", function() {
         if (isDev) { return; }
 
         await git.checkout(currentBranch);
-        await git.deleteLocalBranch("temp/test-solidity", true);
+        await git.deleteLocalBranch("temp/test-noir", true);
     });
 
 });
