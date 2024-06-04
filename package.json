@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ng-questplay",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "",
   "type": "module",
   "scripts": {
@@ -43,6 +43,7 @@
     "campaigns/**"
   ],
   "externalDependencies": {
+    "node": ">=18.0.0",
     "forge": ">=0.2.0",
     "forgeStd": ">=1.7.1",
     "scarb": "2.5.3",

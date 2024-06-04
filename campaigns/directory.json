@@ -182,7 +182,7 @@
             },
             {
                 "name": "chainlink-vrf",
-                "version": "1.1.2",
+                "version": "1.2.0",
                 "type": "ctf",
                 "parts": 2
             }
@@ -308,7 +308,7 @@
         "quests": [
             {
                 "name": "building-erc-20",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "type": "build",
                 "parts": 5
             },
@@ -346,6 +346,29 @@
                 "version": "1.0.0",
                 "type": "build",
                 "parts": 1
+            }
+        ]
+    },
+    {
+        "name": "building-on-zksync",
+        "quests": [
+            {
+                "name": "zksync-contracts",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "zksync-accounts",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "zksync-paymasters",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
             }
         ]
     }

@@ -19,6 +19,7 @@ import {
   MISMATCH_HUFFC_MESSAGE,
   MISMATCH_NARGO_MESSAGE,
   MISMATCH_SCARB_MESSAGE,
+  MISMATCH_NODE_MESSAGE,
 } from "./messages.js";
 
 let _remoteVersion;
@@ -267,4 +268,16 @@ export function localQuestVersion(questPath) {
 
   const scarbTomlPath = path.join(questPath, "Scarb.toml");
   return toml.parse(fs.readFileSync(scarbTomlPath)).package.version;
+}
+
+export function checkNodeVersion() {
+    
+  const packageFile = fs.readFileSync(path.join(mainPath(), './package.json'));
+  const { node: remoteVersion } = JSON.parse(packageFile).externalDependencies;
+
+  const localVersion = process.versions.node;
+  if (!semver.satisfies(localVersion, remoteVersion)) {
+    console.log(MISMATCH_NODE_MESSAGE(remoteVersion));
+  }
+  
 }
