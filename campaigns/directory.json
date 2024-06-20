@@ -371,5 +371,22 @@
                 "parts": 2
             }
         ]
+    },
+    {
+        "name": "playing-with-op-stack",
+        "quests": [
+            {
+                "name": "cross-layer-secrets",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            },
+            {
+                "name": "create-op-rollup",
+                "version": "1.0.0",
+                "type": "ctf",
+                "parts": 2
+            }
+        ]
     }
 ]
