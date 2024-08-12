@@ -160,10 +160,16 @@ export function MISMATCH_SCARB_MESSAGE(remoteVersion) {
 }
 
 export function UPDATE_CAIRO_MESSAGE(localVersion, remoteVersion) {
-    let changes = `${chalk.bgRed(chalk.strikethrough(localVersion))} ${chalk.bgGreenBright(remoteVersion)}`;
+    let removeChange = chalk.bgRed(chalk.strikethrough(`"${localVersion}"`));
+    let addChange = chalk.bgGreenBright(`"${remoteVersion}"`);
+
     return chalk.yellow(`We have migrated to cairo ${remoteVersion}! Migrate your quest by making the following changes to Scarb.toml:\n`)
-    + chalk.grey(`\n    cairo-version = ${changes}`)
-    + chalk.grey(`\n    starknet-version = ${changes} [if applicable]\n`)
+    + chalk.grey(`\n    cairo-version = ${removeChange} ${addChange}`)
+    + chalk.grey(`\n\n    [dependencies]`)
+    + "\n    " + chalk.bgGreen(`cairo_test = "${remoteVersion}"`)
+    + chalk.grey(`\n    starknet = ${removeChange} ${addChange} [if applicable]\n`)
+    + chalk.yellow("\nOR delete and re-install the quest! (Remember to save your progress elsewhere first)\n");
+
 }
 
 export const UPDATE_SCARB_VERSION_FAIL = 
