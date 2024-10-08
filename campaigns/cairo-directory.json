@@ -119,5 +119,40 @@
                 "parts": 1
             }
         ]
+    },
+    {
+        "name": "entering-cairo",
+        "quests": [
+            {
+                "name": "acquiring-the-basics",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 4
+            },
+            {
+                "name": "beyond-simple-types",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "conquering-ownership",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            },
+            {
+                "name": "defining-structs",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 3
+            },
+            {
+                "name": "enums-and-matching",
+                "version": "1.0.0",
+                "type": "build",
+                "parts": 2
+            }
+        ]
     }
 ]
